@@ -2,7 +2,7 @@
   "tabWidth": 2,
   "vueIndentScriptAndStyle": true,
   "singleAttributePerLine": true,
-  "printWidth": 110,
+  "printWidth": 40,
   "semi": true,
   "doubleQuote": true,
   "useTabs": false,
