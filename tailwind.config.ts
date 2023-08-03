@@ -44,7 +44,12 @@ module.exports = {
       "9xl": ["4.5rem", { lineHeight: "5rem", letterSpacing: "0%" }],
     },
     extend: {
-      spacing: {},
+      maxWidth: {
+        "120": "1920px",
+      },
+      spacing: {
+        "18": "4.5rem",
+      },
       borderRadius: {},
     },
   },
