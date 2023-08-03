@@ -2,11 +2,13 @@
   "tabWidth": 2,
   "vueIndentScriptAndStyle": true,
   "singleAttributePerLine": true,
-  "printWidth": 110,
+  "printWidth": 70,
   "semi": true,
   "doubleQuote": true,
   "useTabs": false,
   "bracketSpacing": true,
   "bracketSameLine": false,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ]
 }
