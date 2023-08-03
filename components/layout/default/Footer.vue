@@ -46,11 +46,7 @@
     <div class="my-18 h-[1px] bg-dark-jungle-green bg-opacity-30"></div>
     <div class="grid grid-cols-2 items-center gap-y-6 sm:grid-cols-3">
       <span class="text-corduroy">&copy; Copyright 2023</span>
-      <img
-        src="~/assets/images/logo.svg"
-        alt="Find24"
-        class="justify-self-end sm:justify-self-center"
-      />
+      <IconsFind24 class="justify-self-end sm:justify-self-center" />
       <div class="flex gap-6 sm:justify-self-end">
         <IconsTwitter />
         <IconsLinkedIn />
