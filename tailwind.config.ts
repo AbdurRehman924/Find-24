@@ -30,12 +30,18 @@ module.exports = {
     fontSize: {
       xxs: ["0.625rem", { lineHeight: "1rem", letterSpacing: "0%" }],
       xs: ["0.75rem", { lineHeight: "1rem", letterSpacing: "0%" }],
-      sm: ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0%" }],
+      sm: [
+        "0.875rem",
+        { lineHeight: "1.25rem", letterSpacing: "0%" },
+      ],
       base: ["1rem", { lineHeight: "1.5rem", letterSpacing: "0%" }],
       lg: ["1.125rem", { lineHeight: "1.5rem", letterSpacing: "0%" }],
       xl: ["1.25rem", { lineHeight: "1.5rem", letterSpacing: "0%" }],
       "2xl": ["1.5rem", { lineHeight: "2rem", letterSpacing: "0%" }],
-      "3xl": ["1.75rem", { lineHeight: "2.5rem", letterSpacing: "0%" }],
+      "3xl": [
+        "1.75rem",
+        { lineHeight: "2.5rem", letterSpacing: "0%" },
+      ],
       "4xl": ["2rem", { lineHeight: "2.5rem", letterSpacing: "0%" }],
       "5xl": ["2.5rem", { lineHeight: "3rem", letterSpacing: "0%" }],
       "6xl": ["3rem", { lineHeight: "3.5rem", letterSpacing: "0%" }],
@@ -45,7 +51,7 @@ module.exports = {
     },
     extend: {
       maxWidth: {
-        "120": "1920px",
+        "1920": "1920px",
       },
       spacing: {
         "18": "4.5rem",
