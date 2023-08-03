@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="px-4 py-16 text-xs text-corduroy sm:px-8 lg:px-16">
+  <div class="max-w-120 px-4 py-16 text-xs text-corduroy sm:px-8 lg:px-16">
     <div class="grid gap-6 sm:grid-cols-3 lg:grid-cols-4">
       <div>
         <h4 class="mb-6 text-sm font-medium text-dark-jungle-green">Support</h4>
