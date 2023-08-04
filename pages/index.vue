@@ -10,6 +10,7 @@
         Discover top-rated service providers ready to serve
       </p>
     </div>
+    <Search />
   </div>
 </template>
 

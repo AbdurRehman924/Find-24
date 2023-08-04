@@ -56,7 +56,16 @@ module.exports = {
       spacing: {
         "18": "4.5rem",
       },
-      borderRadius: {},
+      boxShadow: {
+        variant1: "0px 3px 10px 0px rgba(223, 228, 223, 0.25);",
+        variant2: "0px 2px 2px 0px rgba(0, 0, 0, 0.05);",
+      },
+      borderWidth: {
+        "0.5": "0.5px",
+      },
+      borderRadius: {
+        "4xl": "3.125rem",
+      },
     },
   },
 };
