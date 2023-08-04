@@ -23,7 +23,7 @@
         <SearchCategoriesAutoComplete />
       </div>
       <div>
-        <input type="text" class="rounded-lg" />
+        <SearchLocationAutoComplete />
       </div>
     </div>
   </div>
