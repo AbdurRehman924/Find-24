@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-  console.log("Hello");
 </script>
 
 <style lang="postcss" scoped></style>

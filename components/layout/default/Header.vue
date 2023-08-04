@@ -3,7 +3,9 @@
     <div
       class="relative mx-auto flex h-20 max-w-[1920px] justify-between px-4 py-6 sm:px-8 lg:px-16"
     >
-      <IconsFind24 />
+      <NuxtLink to="/">
+        <IconsFind24 />
+      </NuxtLink>
       <div class="hidden items-center gap-x-8 lg:flex">
         <a
           href="#"
@@ -78,6 +80,6 @@
     @apply w-full text-center font-medium text-corduroy;
   }
   .desk_nav_links {
-    @apply text-corduroy hover:text-palma text-sm font-medium;
+    @apply text-sm font-medium text-corduroy hover:text-palma;
   }
 </style>
