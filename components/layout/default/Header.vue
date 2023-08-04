@@ -58,15 +58,45 @@
       </div>
       <div
         v-if="mobileUIOpen"
-        class="absolute left-0 top-[80px] z-10 w-full bg-white py-7"
+        class="absolute left-0 top-[80px] z-10 w-full bg-white px-4 py-7"
       >
         <div class="flex flex-col items-center gap-y-9">
-          <div class="mobile_nav_links">Services</div>
-          <div class="mobile_nav_links">Find Provider</div>
-          <div class="mobile_nav_links">Features</div>
-          <div class="mobile_nav_links">About Us</div>
-          <div class="mobile_nav_links">Signup</div>
-          <div class="mobile_nav_links">Log In</div>
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >Services</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >Find Provider</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >Features</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >About Us</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >Signup</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            >Log In</NuxtLink
+          >
+          <NuxtLink
+            to="/"
+            class="w-full rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green sm:hidden"
+          >
+            Provide Services
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -77,7 +107,7 @@
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {
-    @apply w-full text-center font-medium text-corduroy;
+    @apply w-full text-center font-medium text-corduroy hover:text-palma;
   }
   .desk_nav_links {
     @apply text-sm font-medium text-corduroy hover:text-palma;
