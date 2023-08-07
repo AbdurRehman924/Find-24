@@ -53,14 +53,19 @@
           v-for="feature in places?.features"
           :key="feature.id"
           :value="feature"
-          class="flex cursor-pointer items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
-          :class="{
-            'bg-frostee font-medium text-palma':
-              selected?.id === feature.id,
-          }"
+          v-slot="{ selected, active }"
         >
-          <IconsPin />
-          <span>{{ feature.place_name }}</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma sm:border-none"
+            :class="{
+              'bg-frostee font-medium text-palma': selected,
+              'bg-frostee': active,
+            }"
+          >
+            <IconsPin />
+
+            <span>{{ feature.place_name }}</span>
+          </li>
         </ComboboxOption>
       </ComboboxOptions>
     </div>

@@ -56,13 +56,18 @@
           v-for="category in filteredCategories"
           :value="category"
           :key="category.id"
-          class="cursor-pointer border-b-0.5 border-chinese-white p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
-          :class="{
-            'bg-frostee font-medium text-palma':
-              selected?.id === category.id,
-          }"
-          >{{ category.name }}</ComboboxOption
+          v-slot="{ selected, active }"
         >
+          <li
+            class="cursor-pointer border-b-0.5 border-chinese-white p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
+            :class="{
+              'bg-frostee font-medium text-palma': selected,
+              'bg-frostee': active,
+            }"
+          >
+            {{ category.name }}
+          </li>
+        </ComboboxOption>
       </ComboboxOptions>
     </div>
   </Combobox>
