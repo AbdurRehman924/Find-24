@@ -8,7 +8,7 @@
 
 <template>
   <div
-    class="relative rounded-4xl border-0.5 border-chinese-white shadow-variant1"
+    class="relative rounded-4xl border-0.5 border-chinese-white shadow-variant1 sm:hidden"
   >
     <button
       class="flex w-full items-center justify-between py-3 pl-8 pr-2"

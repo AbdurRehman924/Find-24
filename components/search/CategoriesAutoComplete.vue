@@ -35,7 +35,7 @@
 
 <template>
   <Combobox as="template" v-model="selected">
-    <div class="flex items-center px-6 py-3">
+    <div class="flex items-center px-6 py-3 sm:p-0">
       <div class="grow text-sm text-corduroy">
         <h4 class="font-semibold text-dark-jungle-green">Type</h4>
         <ComboboxInput

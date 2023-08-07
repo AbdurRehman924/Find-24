@@ -2,6 +2,7 @@
 
 <template>
   <SearchMobileBar />
+  <SearchBar />
 </template>
 
 <style scoped></style>
