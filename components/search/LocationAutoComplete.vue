@@ -1,4 +1,11 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+  import {
+    Combobox,
+    ComboboxInput,
+    ComboboxOptions,
+    ComboboxOption,
+  } from "@headlessui/vue";
+
   const query = ref("");
 
   function handleReset() {
@@ -7,30 +14,25 @@
 </script>
 
 <template>
-  <div class="flex items-center justify-between px-6 py-3 text-sm">
-    <div class="text-sm text-corduroy">
-      <h4 class="font-semibold text-dark-jungle-green">Location</h4>
-      <label for="search location" class="sr-only"
-        >Search your prefered location
-      </label>
-      <input
-        type="search"
-        name="search location"
-        placeholder="Type prefered location..."
-        v-model="query"
-      />
+  <Combobox as="template">
+    <div class="flex items-center justify-between px-6 py-3">
+      <div class="text-sm text-corduroy">
+        <h4 class="font-semibold text-dark-jungle-green">Location</h4>
+        <ComboboxInput
+          placeholder="Enter prefered address..."
+          @change="query = $event.target.value"
+          autocomplete="off"
+        />
+      </div>
+      <button role="reset" v-if="query" @click="handleReset">
+        <IconsCross />
+      </button>
+      <ComboboxOptions
+        class="absolute inset-x-0 top-56 max-h-80 overflow-auto"
+      >
+      </ComboboxOptions>
     </div>
-    <button role="reset" v-if="query" @click="handleReset">
-      <IconsCross />
-    </button>
-  </div>
+  </Combobox>
 </template>
 
-<style scoped>
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
-    display: none;
-  }
-</style>
+<style scoped></style>

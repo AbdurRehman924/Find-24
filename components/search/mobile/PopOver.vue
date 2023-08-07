@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class="absolute inset-0 z-10 bg-white px-4 py-6">
+  <div class="absolute inset-0 z-10 bg-penache px-4 py-6">
     <button
       class="rounded-full border border-chinese-white p-2 shadow-variant2"
       @click="handleClose"
@@ -17,7 +17,7 @@
       <IconsCross class="h-3 w-3" />
     </button>
     <div
-      class="mt-6 rounded-lg border-0.5 border-chinese-white shadow-variant1"
+      class="mt-6 rounded-lg border-0.5 border-chinese-white bg-white shadow-variant1"
     >
       <div class="border-b-0.5 border-b-chinese-white">
         <SearchCategoriesAutoComplete />
