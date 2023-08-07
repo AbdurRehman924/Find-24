@@ -11,6 +11,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/mapbox-gl": "^2.7.12",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
     "prettier": "^3.0.0",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.15",
     "@vueuse/core": "^10.3.0",
-    "@vueuse/nuxt": "^10.3.0"
+    "@vueuse/nuxt": "^10.3.0",
+    "mapbox-gl": "^2.15.0"
   }
 }
