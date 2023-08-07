@@ -54,6 +54,7 @@
           :key="feature.id"
           :value="feature"
           v-slot="{ selected, active }"
+          as="template"
         >
           <li
             class="flex cursor-pointer items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma sm:border-none"

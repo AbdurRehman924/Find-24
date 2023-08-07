@@ -57,6 +57,7 @@
           :value="category"
           :key="category.id"
           v-slot="{ selected, active }"
+          as="template"
         >
           <li
             class="cursor-pointer border-b-0.5 border-chinese-white p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
