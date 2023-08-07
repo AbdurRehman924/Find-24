@@ -47,7 +47,7 @@
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 max-h-80 overflow-auto"
+        class="absolute inset-x-0 top-56 max-h-64 overflow-auto sm:max-h-80"
       >
         <ComboboxOption
           v-for="feature in places?.features"

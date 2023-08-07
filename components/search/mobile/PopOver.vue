@@ -26,6 +26,19 @@
         <SearchLocationAutoComplete />
       </div>
     </div>
+    <div
+      class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
+    >
+      <button class="font-medium text-corduroy underline">
+        Clear All
+      </button>
+      <button
+        class="flex items-center gap-2 rounded-4xl bg-palma px-4 py-3.5 font-semibold text-white"
+      >
+        <IconsSearch />
+        <span>Find Providers</span>
+      </button>
+    </div>
   </div>
 </template>
 
