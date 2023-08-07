@@ -3,7 +3,7 @@
 <template>
   <SearchMobileBar />
   <SearchBar />
-  <div>
+  <div class="mt-14">
     <SearchResultsList />
   </div>
 </template>

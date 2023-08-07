@@ -11,6 +11,7 @@ module.exports = {
       "dark-jungle-green": "#1E231E",
       penache: "#FAFDFA",
       corduroy: "#676967",
+      dark_corduroy: "#6A6E6A",
       tara: "#E8F9E9",
       malachite: "#14C425",
       "ripe-lemon": "#EDDC0C",
@@ -26,6 +27,7 @@ module.exports = {
       "gray-asparagus": "#4D514D",
       "heavy-metal": "#212621",
       grenadier: "#E02C00",
+      tonal_dark_mercury: "#E9E9E9",
     },
     fontSize: {
       xxs: ["0.625rem", { lineHeight: "1rem", letterSpacing: "0%" }],
@@ -60,7 +62,7 @@ module.exports = {
         variant1: "0px 3px 10px 0px rgba(223, 228, 223, 0.25);",
         variant2: "0px 2px 2px 0px rgba(0, 0, 0, 0.05);",
         variant3: "0px 3px 10px 0px rgba(29, 184, 18, 0.10);",
-        variant4: " 0px 16px 32px 0px rgba(0, 0, 0, 0.05);",
+        variant4: "0px 8px 16px -8px rgba(0, 0, 0, 0.05);",
       },
       borderWidth: {
         "0.5": "0.5px",

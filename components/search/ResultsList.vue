@@ -4,12 +4,10 @@
 </script>
 
 <template>
-  <div>
-    <SearchResultCard
-      v-for="service in services"
-      :key="service.id"
-      :service="service"
-    />
+  <div class="flex flex-wrap items-center justify-center gap-6">
+    <div v-for="service in services" :key="service.id">
+      <SearchResultCard :service="service" />
+    </div>
   </div>
 </template>
 
