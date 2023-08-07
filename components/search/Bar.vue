@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="mx-auto hidden max-w-4xl rounded-4xl border-0.5 border-chinese-white py-3 pl-8 pr-3 shadow-variant1 sm:flex sm:items-center sm:gap-6"
+    class="relative mx-auto hidden max-w-4xl rounded-4xl border-0.5 border-chinese-white py-3 pl-8 pr-3 shadow-variant1 sm:flex sm:items-center sm:gap-6"
   >
     <SearchCategoriesAutoComplete class="grow" />
     <span class="h-11 w-[0.5px] bg-chinese-white"></span>

@@ -36,8 +36,8 @@
 <template>
   <Combobox as="template" v-model="selected">
     <div class="flex items-center px-6 py-3 sm:p-0">
-      <div class="grow text-sm text-corduroy">
-        <h4 class="font-semibold text-dark-jungle-green">Type</h4>
+      <div class="rounded- grow text-sm">
+        <h4 class="font-semibold">Type</h4>
         <ComboboxInput
           class="w-full"
           placeholder="What service do you need..."
@@ -50,13 +50,13 @@
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 max-h-80 overflow-auto"
+        class="absolute inset-x-0 top-56 max-h-80 overflow-auto bg-white text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
       >
         <ComboboxOption
           v-for="category in filteredCategories"
           :value="category"
           :key="category.id"
-          class="border-b-0.5 border-chinese-white p-4"
+          class="cursor-pointer border-b-0.5 border-chinese-white p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
           :class="{
             'bg-frostee font-medium text-palma':
               selected?.id === category.id,

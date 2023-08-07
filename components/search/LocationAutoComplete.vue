@@ -31,8 +31,8 @@
 <template>
   <Combobox as="template" v-model="selected">
     <div class="flex items-center px-6 py-3 sm:p-0">
-      <div class="grow text-sm text-corduroy">
-        <h4 class="font-semibold text-dark-jungle-green">Location</h4>
+      <div class="grow text-sm">
+        <h4 class="font-semibold">Location</h4>
         <ComboboxInput
           class="w-full"
           placeholder="Enter prefered address..."
@@ -47,13 +47,13 @@
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 max-h-64 overflow-auto sm:max-h-80"
+        class="absolute inset-x-0 top-56 max-h-64 overflow-auto bg-white sm:left-[40%] sm:right-[20%] sm:top-20 sm:max-h-80 sm:rounded-2xl sm:shadow-variant4"
       >
         <ComboboxOption
           v-for="feature in places?.features"
           :key="feature.id"
           :value="feature"
-          class="flex items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy"
+          class="flex cursor-pointer items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
           :class="{
             'bg-frostee font-medium text-palma':
               selected?.id === feature.id,
