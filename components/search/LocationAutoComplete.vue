@@ -30,10 +30,11 @@
 
 <template>
   <Combobox as="template" v-model="selected">
-    <div class="flex items-center justify-between px-6 py-3">
-      <div class="text-sm text-corduroy">
+    <div class="flex items-center px-6 py-3">
+      <div class="grow text-sm text-corduroy">
         <h4 class="font-semibold text-dark-jungle-green">Location</h4>
         <ComboboxInput
+          class="w-full"
           placeholder="Enter prefered address..."
           @change="query = $event.target.value"
           :display-value="
