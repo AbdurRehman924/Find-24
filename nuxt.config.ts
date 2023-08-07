@@ -7,6 +7,11 @@ export default defineNuxtConfig({
         token: process.env.MAPBOX_TOKEN,
       },
     },
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: process.env.ALGOLIA_INDEX_NAME,
+    },
   },
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
   tailwindcss: {
