@@ -19,10 +19,12 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.15",
+    "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0",
     "algoliasearch": "^4.19.1",
     "algoliasearch-helper": "^3.14.0",
-    "mapbox-gl": "^2.15.0"
+    "mapbox-gl": "^2.15.0",
+    "pinia": "^2.1.6"
   }
 }

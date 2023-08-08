@@ -13,7 +13,16 @@ export default defineNuxtConfig({
       indexName: process.env.ALGOLIA_INDEX_NAME,
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: ["defineStore"],
+      },
+    ],
+  ],
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
   },
