@@ -1,3 +1,15 @@
 body {
   @apply font-Inter text-dark-jungle-green;
 }
+.formkit-inner {
+  @apply relative;
+}
+.formkit-input {
+  @apply w-full rounded-lg border border-chinese-white p-4 outline-none;
+}
+.formkit-suffix-icon {
+  @apply absolute right-3 top-4 block h-6 w-6;
+}
+button[type="submit"] {
+  @apply bg-palma text-white rounded-[50px];
+}

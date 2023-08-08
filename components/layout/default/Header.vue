@@ -14,9 +14,19 @@
       </div>
       <div class="flex items-center justify-end">
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
-          <a href="#" class="desk_nav_links">Sign up</a>
-          <a href="#" class="desk_nav_links">Log in</a>
+          <button class="desk_nav_links">Sign up</button>
+          <button
+            class="desk_nav_links"
+            @click="loginModalController.open"
+          >
+            Log in
+          </button>
         </div>
+        <SharedModal :controller="loginModalController">
+          <div>
+            <AuthLoginModal @close="loginModalController.close" />
+          </div>
+        </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
         >
@@ -37,36 +47,26 @@
         class="absolute left-0 top-[80px] z-10 h-screen w-full bg-white px-4 py-7"
       >
         <div class="flex flex-col items-center gap-y-9">
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Services</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Find Provider</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Features</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >About Us</NuxtLink
           >
+          <NuxtLink to="/" class="mobile_nav_links">Signup</NuxtLink>
           <NuxtLink
             to="/"
             class="mobile_nav_links"
-            >Signup</NuxtLink
+            @click="showLoginModal"
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
-            >Log In</NuxtLink
-          >
+            Log In
+          </NuxtLink>
           <NuxtLink
             to="/"
             class="w-full rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green sm:hidden"
@@ -79,7 +79,14 @@
   </div>
 </template>
 <script setup>
+  import { useModal } from "@/composables/useModal.ts";
   const mobileUIOpen = ref(false);
+  const loginModalController = useModal();
+
+  const showLoginModal = () => {
+    // controller.value.open();
+    // mobileUIOpen.value = false;
+  };
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {

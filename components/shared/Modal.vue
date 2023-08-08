@@ -28,12 +28,12 @@
     >
       <div
         v-show="isOpen"
-        class="bg-black fixed inset-0 z-10 overflow-y-auto bg-opacity-50"
+        class="bg-black backdrop-blur-sm fixed inset-0 z-10 overflow-y-auto bg-opacity-50"
       >
         <div class="lg:-mt-3% flex min-h-screen items-center justify-center text-center">
           <Transition
             enter-active-class="transition ease-out duration-500 transform "
-            enter-from-class="opacity-0 translate-y-10 scale-95"
+            enter-from-class="opacity-0 -translate-y-10 scale-95"
             enter-to-class="opacity-100 translate-y-0 scale-100"
             leave-active-class="ease-in duration-200"
             leave-from-class="opacity-100 translate-y-0 scale-100"
@@ -43,7 +43,7 @@
               v-if="isOpen"
               id="modal-content"
               ref="modalContentElement"
-              class="overflow-hidden rounded-lg bg-white p-8 text-left shadow-xl"
+              class="overflow-hidden rounded-lg bg-white text-left shadow-xl"
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"
