@@ -19,7 +19,7 @@
     v-if="!loading"
   >
     <div v-for="service in services" :key="service.id">
-      <SearchResultCard :service="service" />
+      <SearchResultCard :service="service" v-show="service" />
     </div>
   </div>
 

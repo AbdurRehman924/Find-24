@@ -4,8 +4,7 @@
   <SearchMobileBar />
   <SearchBar />
   <div class="mt-14">
-    <SearchResultsList v-show="false" />
-    <SearchMap />
+    <SearchResultsList />
   </div>
 </template>
 
