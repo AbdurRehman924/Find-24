@@ -7,16 +7,50 @@
   } from "mapbox-gl";
   import "mapbox-gl/dist/mapbox-gl.css";
   import { storeToRefs } from "pinia";
+  import Service from "~/types/service";
   import useServicesStore from "~/stores/services";
+  import SearchResultCard from "./ResultCard.vue";
 
   const { token } = useRuntimeConfig().public.mapbox;
 
   const servicesStore = useServicesStore();
+  const currentService = ref<Service | null>(null);
 
   const { coordinates } = storeToRefs(servicesStore);
 
   let map: Map | null = null;
   const markers: Marker[] = [];
+  const popUpEl = ref<typeof SearchResultCard>();
+
+  const popup: Popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+    offset: 12,
+    maxWidth: "320px",
+  });
+
+  function flyToMarker(marker: Marker) {
+    map?.flyTo({
+      center: marker.getLngLat(),
+      zoom: 15,
+      offset: [0, -100],
+    });
+  }
+
+  function updatePopUp(marker: Marker) {
+    if (popUpEl.value) {
+      popup
+        .setLngLat(marker.getLngLat())
+        .setDOMContent(popUpEl.value.$el)
+        .addTo(map!);
+    }
+  }
+
+  function removePopup() {
+    popup.remove();
+    map?.zoomTo(1, { duration: 5000 });
+    currentService.value = null;
+  }
 
   function addMarkers() {
     if (coordinates.value.length == 0) return;
@@ -31,13 +65,35 @@
         .setLngLat(coords)
         .addTo(map!);
 
+      el.addEventListener("click", () =>
+        onMarkerClick(marker, coordinates),
+      );
+
       markers.push(marker);
       markerBounds.extend(coords);
     });
+    map?.fitBounds(markerBounds, {
+      padding: 100,
+      maxZoom: 15,
+      linear: true,
+    });
+  }
+
+  function onMarkerClick(
+    marker: Marker,
+    coordinates: { lat: number; lng: number },
+  ) {
+    currentService.value = servicesStore.getServiceByCoords(
+      coordinates,
+    ) as Service;
+
+    flyToMarker(marker);
+    updatePopUp(marker);
   }
 
   watch(coordinates, () => {
     if (map) {
+      popup.remove();
       markers.forEach((marker) => marker.remove());
       addMarkers();
     }
@@ -52,15 +108,6 @@
       scrollZoom: true,
     });
     map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-        showAccuracyCircle: false,
-      }),
-    );
-    map.addControl(
       new mapboxgl.NavigationControl({ showCompass: false }),
       "bottom-right",
     );
@@ -71,9 +118,26 @@
 
 <template>
   <div id="map" class="h-screen"></div>
+  <ClientOnly>
+    <SearchResultCard
+      ref="popUpEl"
+      v-show="currentService"
+      :service="currentService"
+    >
+      <button
+        class="absolute left-1.5 top-1.5 rounded-full bg-white"
+        @click="removePopup"
+      >
+        <IconsCross class="h-4 w-4" />
+      </button>
+    </SearchResultCard>
+  </ClientOnly>
 </template>
 
 <style lang="postcss">
+  .mapboxgl-popup-content {
+    @apply rounded-2xl p-0;
+  }
   .marker {
     @apply h-10 w-10 cursor-pointer;
   }
