@@ -2,6 +2,8 @@ import Service from "~/types/service";
 
 export default defineStore("services", () => {
   const services = ref<Service[] | null>(null);
+  const page = ref(0);
+  const totalPages = ref(0);
 
   const { fetchServices } = useServices();
 
@@ -33,7 +35,10 @@ export default defineStore("services", () => {
     services: computed(() => services.value),
     coordinates,
     fetchServices: async () => {
-      services.value = await fetchServices();
+      const response = await fetchServices();
+      services.value = response.services;
+      page.value = response.page;
+      totalPages.value = response.totalPages;
     },
     getServiceByCoords,
   };

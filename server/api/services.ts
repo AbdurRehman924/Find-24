@@ -6,7 +6,11 @@ export default defineEventHandler((event) => {
   helper.search();
   return new Promise((resolve, reject) => {
     helper.on("result", (results) => {
-      resolve(results.results.hits);
+      resolve({
+        services: results.results.hits,
+        page: results.results.page,
+        totalPages: results.results.nbPages,
+      });
     });
     helper.on("error", (error) => {
       reject(error);
