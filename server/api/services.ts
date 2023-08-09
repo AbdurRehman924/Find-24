@@ -1,9 +1,16 @@
 import algoliaSearch from "algoliasearch/lite";
 import algoliaSearchHelper from "algoliasearch-helper";
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event);
   const helper = algoliaHelper();
+
+  if (body.page) {
+    helper.setPage(body.page);
+  }
+
   helper.search();
+
   return new Promise((resolve, reject) => {
     helper.on("result", (results) => {
       resolve({

@@ -12,13 +12,13 @@
   <div class="mt-14">
     <SearchResultsList v-if="!showMap" />
     <SearchMap v-if="showMap" />
-    <button
+    <!-- <button
       class="sticky bottom-2 left-calc mt-2 rounded-lg bg-palma px-4 py-3 text-white"
       @click="toggleMap"
     >
       <span v-show="!showMap"> Show Map </span>
       <span v-show="showMap"> Show List </span>
-    </button>
+    </button> -->
   </div>
 </template>
 

@@ -5,7 +5,31 @@ export default defineStore("services", () => {
   const page = ref(0);
   const totalPages = ref(0);
 
-  const { fetchServices } = useServices();
+  const { fetchServices: _fetchServices } = useServices();
+
+  async function fetchServices({ page: number } = { page: 0 }) {
+    services.value = null;
+    const response = await _fetchServices({ page: number });
+    services.value = response.services;
+    page.value = response.page;
+    totalPages.value = response.totalPages;
+  }
+
+  function prevPage() {
+    if (page.value > 0) {
+      return fetchServices({ page: page.value - 1 });
+    }
+  }
+
+  function nextPage() {
+    if (page.value < totalPages.value) {
+      return fetchServices({ page: page.value + 1 });
+    }
+  }
+
+  function goToPage(page: number) {
+    return fetchServices({ page });
+  }
 
   function getServiceByCoords({
     lat,
@@ -33,13 +57,13 @@ export default defineStore("services", () => {
 
   return {
     services: computed(() => services.value),
+    page: computed(() => page.value),
+    totalPages: computed(() => totalPages.value),
     coordinates,
-    fetchServices: async () => {
-      const response = await fetchServices();
-      services.value = response.services;
-      page.value = response.page;
-      totalPages.value = response.totalPages;
-    },
+    fetchServices,
     getServiceByCoords,
+    nextPage,
+    prevPage,
+    goToPage,
   };
 });
