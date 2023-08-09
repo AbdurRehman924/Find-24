@@ -8,7 +8,7 @@
     <span class="h-11 w-[0.5px] bg-chinese-white"></span>
     <SearchLocationAutoComplete class="grow" />
     <button
-      class="font-semi flex items-center gap-2 whitespace-nowrap rounded-4xl bg-palma px-4 py-3.5 text-sm text-white"
+      class="font-semi flex items-center gap-2 whitespace-nowrap rounded-4xl bg-palma px-4 py-3.5 text-sm text-white hover:bg-islamic-green focus:bg-islamic-green"
     >
       <IconsSearch />
       <span>Find Providers</span>

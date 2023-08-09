@@ -33,7 +33,7 @@
         Clear All
       </button>
       <button
-        class="flex items-center gap-2 rounded-4xl bg-palma px-4 py-3.5 font-semibold text-white shadow-variant3"
+        class="flex items-center gap-2 rounded-4xl bg-palma px-4 py-3.5 font-semibold text-white shadow-variant3 focus:bg-islamic-green"
       >
         <IconsSearch />
         <span>Find Providers</span>
