@@ -7,7 +7,7 @@ export default interface Service {
   charges_type: string;
   image: string;
   reviewsCount: number;
-  ratings: number;
+  rating: number;
   _geoloc: Geoloc;
   objectID: string;
   _highlightResult: any;

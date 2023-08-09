@@ -48,7 +48,7 @@
 
   function removePopup() {
     popup.remove();
-    map?.zoomTo(1, { duration: 5000 });
+    map?.zoomTo(6, { duration: 5000 });
     currentService.value = null;
   }
 
@@ -104,7 +104,7 @@
     map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
-      zoom: 1,
+      zoom: 2,
       scrollZoom: true,
     });
     map.addControl(

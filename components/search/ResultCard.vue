@@ -30,7 +30,7 @@
       <p class="text-palma">{{ service.category }}</p>
       <p class="flex items-center gap-1 text-base font-medium">
         <span class="flex items-center gap-1">
-          <IconsStar /> {{ service.ratings }}
+          <IconsStar /> {{ service.rating }}
         </span>
         <span class="h-0.5 w-0.5 bg-dark-jungle-green"></span>
         <span class="text-dark_corduroy"
