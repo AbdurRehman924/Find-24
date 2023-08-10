@@ -1,9 +1,12 @@
+import { SearchResults } from "algoliasearch-helper";
 import Service from "~/types/service";
 
 export default defineStore("services", () => {
   const services = ref<Service[] | null>(null);
   const page = ref(0);
   const totalPages = ref(0);
+  const categoryFacets = ref<SearchResults.FacetValue[] | null>(null);
+  const ratingFacets = ref<SearchResults.FacetValue[] | null>(null);
 
   const { fetchServices: _fetchServices } = useServices();
 
@@ -13,6 +16,8 @@ export default defineStore("services", () => {
     services.value = response.services;
     page.value = response.page;
     totalPages.value = response.totalPages;
+    categoryFacets.value = response.categoryFacets;
+    ratingFacets.value = response.ratingFacets;
   }
 
   function prevPage() {
@@ -59,6 +64,8 @@ export default defineStore("services", () => {
     services: computed(() => services.value),
     page: computed(() => page.value),
     totalPages: computed(() => totalPages.value),
+    categoryFacets: computed(() => categoryFacets.value),
+    ratingFacets: computed(() => ratingFacets.value),
     coordinates,
     fetchServices,
     getServiceByCoords,

@@ -34,7 +34,7 @@
       <div class="grow text-sm">
         <h4 class="font-semibold">Location</h4>
         <ComboboxInput
-          class="w-full"
+          class="w-full border-none p-0"
           placeholder="Enter prefered address..."
           @change="query = $event.target.value"
           :display-value="

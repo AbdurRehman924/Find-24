@@ -39,7 +39,7 @@
       <div class="rounded- grow text-sm">
         <h4 class="font-semibold">Type</h4>
         <ComboboxInput
-          class="w-full"
+          class="w-full border-none p-0"
           placeholder="What service do you need..."
           @change="query = $event.target.value"
           :display-value="() => (selected ? selected.name : query)"
