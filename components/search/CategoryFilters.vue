@@ -18,28 +18,41 @@
   function handleShowLess() {
     maxFacets.value = 4;
   }
+
+  function handleCategoryFilter(categoryValue: string) {
+    servicesStore.toggleCategoryFacets({
+      name: "category",
+      value: categoryValue,
+    });
+  }
 </script>
 
 <template>
-  <div class="flex flex-col gap-5 py-6 text-sm text-dark_corduroy">
-    <h4 class="font-medium text-dark-jungle-green">Service Type</h4>
-    <div
-      v-for="facet in categoryFacets?.slice(0, maxFacets)"
-      class="flex items-center gap-3"
-    >
-      <input
-        type="checkbox"
-        :id="facet.name"
-        class="h-6 w-6 rounded border border-chinese-white text-palma"
-      />
-      <label :for="facet.name" class="grow">
-        <span>{{ facet.name }}</span>
-        <span class="float-right">{{ facet.count }}</span>
-      </label>
-    </div>
+  <div class="py-6 text-sm text-dark_corduroy">
+    <h4 class="mb-5 font-medium text-dark-jungle-green">
+      Service Type
+    </h4>
+    <ul class="flex flex-col gap-5">
+      <li
+        v-for="facet in categoryFacets?.slice(0, maxFacets)"
+        class="flex items-center gap-3"
+      >
+        <input
+          type="checkbox"
+          :id="facet.name"
+          class="h-6 w-6 rounded border border-chinese-white text-palma"
+          @change="handleCategoryFilter(facet.name)"
+          v-model="facet.isRefined"
+        />
+        <label :for="facet.name" class="grow">
+          <span>{{ facet.name }}</span>
+          <span class="float-right">{{ facet.count }}</span>
+        </label>
+      </li>
+    </ul>
     <button
       v-show="showMore"
-      class="max-w-fit underline"
+      class="mt-5 max-w-fit underline"
       @click="handleShowMore"
     >
       Show more

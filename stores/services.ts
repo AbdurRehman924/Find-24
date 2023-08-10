@@ -3,37 +3,49 @@ import Service from "~/types/service";
 
 export default defineStore("services", () => {
   const services = ref<Service[] | null>(null);
-  const page = ref(0);
+  const _page = ref(0);
   const totalPages = ref(0);
   const categoryFacets = ref<SearchResults.FacetValue[] | null>(null);
   const ratingFacets = ref<SearchResults.FacetValue[] | null>(null);
 
-  const { fetchServices: _fetchServices } = useServices();
+  const { fetchServices: _fetchServices, applyFacet } = useServices();
 
-  async function fetchServices({ page: number } = { page: 0 }) {
+  async function fetchServices(page = 0) {
     services.value = null;
-    const response = await _fetchServices({ page: number });
+    const response = await _fetchServices(page);
     services.value = response.services;
-    page.value = response.page;
+    _page.value = response.page;
     totalPages.value = response.totalPages;
     categoryFacets.value = response.categoryFacets;
     ratingFacets.value = response.ratingFacets;
   }
 
   function prevPage() {
-    if (page.value > 0) {
-      return fetchServices({ page: page.value - 1 });
+    if (_page.value > 0) {
+      return fetchServices(_page.value - 1);
     }
   }
 
   function nextPage() {
-    if (page.value < totalPages.value) {
-      return fetchServices({ page: page.value + 1 });
+    if (_page.value < totalPages.value) {
+      return fetchServices(_page.value + 1);
     }
   }
 
   function goToPage(page: number) {
-    return fetchServices({ page });
+    return fetchServices(page);
+  }
+
+  async function toggleCategoryFacets(facet: {
+    name: string;
+    value: string;
+  }) {
+    const response = await applyFacet(facet);
+    services.value = response.services;
+    _page.value = response.page;
+    totalPages.value = response.totalPages;
+    categoryFacets.value = response.categoryFacets;
+    ratingFacets.value = response.ratingFacets;
   }
 
   function getServiceByCoords({
@@ -62,7 +74,7 @@ export default defineStore("services", () => {
 
   return {
     services: computed(() => services.value),
-    page: computed(() => page.value),
+    page: computed(() => _page.value),
     totalPages: computed(() => totalPages.value),
     categoryFacets: computed(() => categoryFacets.value),
     ratingFacets: computed(() => ratingFacets.value),
@@ -72,5 +84,6 @@ export default defineStore("services", () => {
     nextPage,
     prevPage,
     goToPage,
+    toggleCategoryFacets,
   };
 });

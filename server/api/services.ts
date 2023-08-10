@@ -1,12 +1,31 @@
 import algoliaSearch from "algoliasearch/lite";
-import algoliaSearchHelper from "algoliasearch-helper";
+import algoliaSearchHelper, {
+  SearchResults,
+} from "algoliasearch-helper";
+
+const { appId, apiKey, indexName } = useRuntimeConfig().algolia;
+
+const options = {
+  hitsPerPage: 10,
+  disjunctiveFacets: ["category", "rating"],
+  maxValuesPerFacet: 20,
+};
+
+const searchClient = algoliaSearch(appId, apiKey);
+
+const helper = algoliaSearchHelper(searchClient, indexName, options);
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const helper = algoliaHelper();
+
+  if (body.facet) {
+    helper.toggleFacetRefinement(body.facet.name, body.facet.value);
+  }
 
   if (body.page) {
     helper.setPage(body.page);
+  } else {
+    helper.setPage(0);
   }
 
   helper.search();
@@ -15,9 +34,7 @@ export default defineEventHandler(async (event) => {
     helper.on("result", (results) => {
       const categoryFacets = results.results.getFacetValues(
         "category",
-        {
-          sortBy: ["count:desc"],
-        },
+        {},
       );
       const ratingFacets = results.results.getFacetValues("rating", {
         sortBy: ["name:asc"],
@@ -36,22 +53,3 @@ export default defineEventHandler(async (event) => {
     });
   });
 });
-
-function algoliaHelper() {
-  const { appId, apiKey, indexName } = useRuntimeConfig().algolia;
-
-  const options = {
-    hitsPerPage: 10,
-    disjunctiveFacets: ["category", "rating"],
-    maxValuesPerFacet: 20,
-  };
-
-  const searchClient = algoliaSearch(appId, apiKey);
-
-  const helper = algoliaSearchHelper(
-    searchClient,
-    indexName,
-    options,
-  );
-  return helper;
-}
