@@ -28,6 +28,7 @@ module.exports = {
       "heavy-metal": "#212621",
       grenadier: "#E02C00",
       tonal_dark_mercury: "#E9E9E9",
+      ripe_lemon: "#EDDCOC",
     },
     fontSize: {
       xxs: ["0.625rem", { lineHeight: "1rem", letterSpacing: "0%" }],

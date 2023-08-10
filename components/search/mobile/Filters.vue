@@ -19,6 +19,7 @@
     </h3>
     <div class="px-4">
       <SearchCategoryFilters />
+      <SearchRatingFilters />
       <div
         class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
       >
