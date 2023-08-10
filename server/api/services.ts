@@ -13,10 +13,22 @@ export default defineEventHandler(async (event) => {
 
   return new Promise((resolve, reject) => {
     helper.on("result", (results) => {
+      const categoryFacets = results.results.getFacetValues(
+        "category",
+        {
+          sortBy: ["count:desc"],
+        },
+      );
+      const ratingFacets = results.results.getFacetValues("rating", {
+        sortBy: ["name:asc"],
+      });
+
       resolve({
         services: results.results.hits,
         page: results.results.page,
         totalPages: results.results.nbPages,
+        categoryFacets,
+        ratingFacets,
       });
     });
     helper.on("error", (error) => {
@@ -30,13 +42,7 @@ function algoliaHelper() {
 
   const options = {
     hitsPerPage: 10,
-    disjunctiveFacets: [
-      "category",
-      "charges",
-      "charges_type",
-      "ratings",
-      "reviewsCount",
-    ],
+    disjunctiveFacets: ["category", "rating"],
     maxValuesPerFacet: 20,
   };
 
