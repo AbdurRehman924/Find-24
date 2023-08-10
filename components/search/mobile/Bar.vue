@@ -1,9 +1,6 @@
 <script lang="ts" setup>
   const showPopOver = ref(false);
-
-  function handleSearchPopOver() {
-    showPopOver.value = true;
-  }
+  const showFilters = ref(false);
 </script>
 
 <template>
@@ -12,7 +9,7 @@
   >
     <button
       class="flex w-full items-center justify-between py-3 pl-8 pr-2"
-      @click="handleSearchPopOver"
+      @click="showPopOver = true"
     >
       <div class="text-xs">
         <h4 class="text-left font-semibold">Type</h4>
@@ -21,7 +18,10 @@
         >
       </div>
     </button>
-    <button class="absolute right-2 top-1">
+    <button
+      class="absolute right-2 top-1"
+      @click="showFilters = true"
+    >
       <IconsFilters />
     </button>
   </div>
@@ -37,6 +37,10 @@
       <SearchMobilePopOver
         v-if="showPopOver"
         @close="showPopOver = false"
+      />
+      <SearchMobileFilters
+        v-else-if="showFilters"
+        @close="showFilters = false"
       />
     </Transition>
   </Teleport>
