@@ -43,9 +43,9 @@
     </h3>
     <div class="px-4">
       <SearchCategoryFilter />
-      <SearchRatingFilter />
       <SearchPriceFilter @changed="handlePriceChange" />
-      <div class="flex items-center justify-between text-sm">
+      <SearchRatingFilter />
+      <div class="flex items-center justify-between py-6 text-sm">
         <button class="font-medium text-corduroy underline">
           Clear All
         </button>

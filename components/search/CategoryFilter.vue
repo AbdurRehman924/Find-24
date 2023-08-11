@@ -60,7 +60,7 @@
     </button>
     <button
       v-show="!showMore"
-      class="max-w-fit underline"
+      class="mt-5 max-w-fit underline"
       @click="handleShowLess"
     >
       Show less
