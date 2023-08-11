@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
+  import constants from "~/constants";
 
   const servicesStore = useServicesStore();
 
@@ -21,7 +22,7 @@
 
   function handleCategoryFilter(categoryValue: string) {
     servicesStore.toggleFacets({
-      name: "category",
+      name: constants.CATEGORY_FACET,
       value: categoryValue,
     });
   }

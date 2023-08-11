@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import useServicesStore from "~/stores/services";
+  import constants from "~/constants";
 
   const emits = defineEmits<{
     (e: "close"): void;
@@ -22,7 +23,7 @@
 
   async function handleApplyFilters() {
     await servicesStore.numericFacet({
-      name: "charges",
+      name: constants.PRICE_FACET,
       range: priceRange.value,
     });
     emits("close");
