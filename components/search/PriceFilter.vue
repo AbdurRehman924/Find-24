@@ -9,18 +9,29 @@
 
   const servicesStore = useServicesStore();
 
-  const { minPrice, maxPrice } = storeToRefs(servicesStore);
+  const { overAllMinPrice, overAllMaxPrice, minPrice, maxPrice } =
+    storeToRefs(servicesStore);
 
   const maximumPriceGap = ref(100);
-  const leftPercent = ref((minPrice.value / maxPrice.value) * 100);
-  const rightPercent = ref(0);
+  const leftPercent = ref(
+    (minPrice.value / overAllMaxPrice.value) * 100,
+  );
+
+  const rightPercent = ref(
+    100 - (maxPrice.value / overAllMaxPrice.value) * 100,
+  );
+  console.log(minPrice.value, maxPrice.value, overAllMaxPrice.value);
+
   const minInput = ref<HTMLInputElement>();
   const min = ref(minPrice.value);
   const max = ref(maxPrice.value);
 
   function handleRangeInput(event: Event) {
-    if (min.value < minPrice.value) {
-      min.value = minPrice.value;
+    if (min.value < overAllMinPrice.value) {
+      min.value = overAllMinPrice.value;
+    }
+    if (max.value > overAllMaxPrice.value) {
+      max.value = overAllMaxPrice.value;
     }
     if (max.value - min.value < maximumPriceGap.value) {
       if (event.target == minInput.value) {
@@ -29,8 +40,9 @@
         max.value = min.value + maximumPriceGap.value;
       }
     } else {
-      leftPercent.value = (min.value / maxPrice.value) * 100;
-      rightPercent.value = 100 - (max.value / maxPrice.value) * 100;
+      leftPercent.value = (min.value / overAllMaxPrice.value) * 100;
+      rightPercent.value =
+        100 - (max.value / overAllMaxPrice.value) * 100;
     }
     if (min.value != minPrice.value || max.value != maxPrice.value) {
       emits("changed", { min: min.value, max: max.value });
@@ -62,7 +74,7 @@
           class="range-min"
           name="min-price"
           :min="0"
-          :max="maxPrice"
+          :max="overAllMaxPrice"
           v-model="min"
           ref="minInput"
           @input="handleRangeInput"
@@ -73,13 +85,13 @@
           class="range-max"
           name="max-price"
           :min="0"
-          :max="maxPrice"
+          :max="overAllMaxPrice"
           v-model="max"
           @input="handleRangeInput"
         />
       </div>
       <div class="mt-5 flex justify-between">
-        <span>$ 0</span> <span>$ {{ maxPrice }}</span>
+        <span>$ 0</span> <span>$ {{ overAllMaxPrice }}</span>
       </div>
     </div>
   </div>

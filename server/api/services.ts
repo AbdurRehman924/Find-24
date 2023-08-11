@@ -64,15 +64,26 @@ export default defineEventHandler(async (event) => {
           sortBy: ["name:asc"],
         },
       );
+      const services = results.results.hits;
 
+      const minPrice = Math.min(
+        ...services.map((service) => service.charges),
+      );
+      const maxPrice = Math.max(
+        ...services.map((service) => service.charges),
+      );
       resolve({
-        services: results.results.hits,
+        services,
         page: results.results.page,
         totalPages: results.results.nbPages,
-        minPrice: results.results.getFacetStats(constants.PRICE_FACET)
-          .min,
-        maxPrice: results.results.getFacetStats(constants.PRICE_FACET)
-          .max,
+        overAllMinPrice: results.results.getFacetStats(
+          constants.PRICE_FACET,
+        ).min,
+        overAllMaxPrice: results.results.getFacetStats(
+          constants.PRICE_FACET,
+        ).max,
+        minPrice,
+        maxPrice,
         categoryFacets,
         ratingFacets,
       });
