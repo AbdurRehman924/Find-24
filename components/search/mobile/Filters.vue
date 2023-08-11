@@ -1,3 +1,4 @@
+le
 <script setup lang="ts">
   const emits = defineEmits<{
     (e: "close"): void;
@@ -18,8 +19,8 @@
       Filters
     </h3>
     <div class="px-4">
-      <SearchCategoryFilters />
-      <SearchRatingFilters />
+      <SearchCategoryFilter />
+      <SearchRatingFilter />
       <div
         class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
       >
