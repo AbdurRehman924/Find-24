@@ -7,7 +7,7 @@
   const { ratingFacets } = storeToRefs(servicesStore);
 
   function handleCategoryFilter(rating: string) {
-    servicesStore.toggleCategoryFacets({
+    servicesStore.toggleFacets({
       name: "rating",
       value: rating,
     });

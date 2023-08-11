@@ -20,7 +20,7 @@
   }
 
   function handleCategoryFilter(categoryValue: string) {
-    servicesStore.toggleCategoryFacets({
+    servicesStore.toggleFacets({
       name: "category",
       value: categoryValue,
     });

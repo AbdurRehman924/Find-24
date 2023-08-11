@@ -1,4 +1,5 @@
 import { SearchResults } from "algoliasearch-helper";
+import { ServicesResponse } from "~/types/APIResponse";
 import Service from "~/types/service";
 
 export default defineStore("services", () => {
@@ -12,9 +13,7 @@ export default defineStore("services", () => {
 
   const { fetchServices: _fetchServices, applyFacet } = useServices();
 
-  async function fetchServices(page = 0) {
-    services.value = null;
-    const response = await _fetchServices(page);
+  function setState(response: ServicesResponse) {
     services.value = response.services;
     _page.value = response.page;
     totalPages.value = response.totalPages;
@@ -22,6 +21,11 @@ export default defineStore("services", () => {
     maxPrice.value = response.maxPrice;
     categoryFacets.value = response.categoryFacets;
     ratingFacets.value = response.ratingFacets;
+  }
+
+  async function fetchServices(page = 0) {
+    const response = await _fetchServices(page);
+    setState(response);
   }
 
   function prevPage() {
@@ -40,16 +44,12 @@ export default defineStore("services", () => {
     return fetchServices(page);
   }
 
-  async function toggleCategoryFacets(facet: {
+  async function toggleFacets(facet: {
     name: string;
     value: string;
   }) {
     const response = await applyFacet(facet);
-    services.value = response.services;
-    _page.value = response.page;
-    totalPages.value = response.totalPages;
-    categoryFacets.value = response.categoryFacets;
-    ratingFacets.value = response.ratingFacets;
+    setState(response);
   }
 
   function getServiceByCoords({
@@ -90,6 +90,6 @@ export default defineStore("services", () => {
     nextPage,
     prevPage,
     goToPage,
-    toggleCategoryFacets,
+    toggleFacets,
   };
 });

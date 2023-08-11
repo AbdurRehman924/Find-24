@@ -12,7 +12,12 @@
     <h4 class="mb-5 font-medium text-dark-jungle-green">
       Price Range
     </h4>
-    <div>$ {{ minPrice }} $ {{ maxPrice }}</div>
+    <div>
+      <div class="h-1 rounded-2xl bg-chinese-white"></div>
+      <div class="mt-5 flex justify-between">
+        <span>$ {{ minPrice }}</span> <span>$ {{ maxPrice }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
