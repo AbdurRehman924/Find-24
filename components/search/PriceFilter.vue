@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
+  import constants from "~/constants";
 
   const emits = defineEmits<{
     (e: "changed", range: { min: number; max: number }): void;
@@ -35,13 +36,18 @@
       emits("changed", { min: min.value, max: max.value });
     }
   }
+
+  async function handleReset() {
+    await servicesStore.removeFacet(constants.PRICE_FACET, true);
+  }
 </script>
 
 <template>
   <div class="py-6 text-sm text-dark_corduroy">
-    <h4 class="mb-5 font-medium text-dark-jungle-green">
-      Price Range
-    </h4>
+    <div class="mb-5 flex justify-between">
+      <h4 class="font-medium text-dark-jungle-green">Price Range</h4>
+      <button class="text-xs" @click="handleReset">Reset</button>
+    </div>
     <div>
       <div class="relative h-1 rounded-2xl bg-chinese-white">
         <div

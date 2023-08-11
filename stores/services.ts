@@ -15,7 +15,7 @@ export default defineStore("services", () => {
     fetchServices: _fetchServices,
     applyFacet,
     removeFacet: _removeFacet,
-    applyNumericFacets,
+    applyNumericFacet,
   } = useServices();
 
   function setState(response: ServicesResponse) {
@@ -61,12 +61,12 @@ export default defineStore("services", () => {
     name: string;
     range: { min: number; max: number };
   }) {
-    const response = await applyNumericFacets(facet);
+    const response = await applyNumericFacet(facet);
     setState(response);
   }
 
-  async function removeFacet(facetName: string) {
-    const response = await _removeFacet(facetName);
+  async function removeFacet(facetName: string, isNumeric = false) {
+    const response = await _removeFacet(facetName, isNumeric);
     setState(response);
   }
 

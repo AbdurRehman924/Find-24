@@ -19,13 +19,19 @@ const helper = algoliaSearchHelper(searchClient, indexName, options);
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
-  if (body.resetSingleFacet && body.facetName) {
+  if (body.resetSingleFacet && body.facetName && !body.isNumeric) {
     helper.removeDisjunctiveFacetRefinement(body.facetName);
+  } else if (
+    body.resetSingleFacet &&
+    body.facetName &&
+    body.isNumeric
+  ) {
+    helper.removeNumericRefinement(body.facetName);
   }
 
   if (body.facet && !body.isNumeric) {
     helper.toggleFacetRefinement(body.facet.name, body.facet.value);
-  } else if (body.isNumeric) {
+  } else if (body.facet && body.isNumeric) {
     helper.addNumericRefinement(
       body.facet.name,
       ">=",
