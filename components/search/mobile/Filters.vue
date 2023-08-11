@@ -22,10 +22,12 @@
   }
 
   async function handleApplyFilters() {
-    await servicesStore.numericFacet({
-      name: constants.PRICE_FACET,
-      range: priceRange.value,
-    });
+    if (priceRange.value.min && priceRange.value.max) {
+      await servicesStore.numericFacet({
+        name: constants.PRICE_FACET,
+        range: priceRange.value,
+      });
+    }
     emits("close");
   }
 </script>
