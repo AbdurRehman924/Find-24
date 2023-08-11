@@ -26,13 +26,18 @@
       value: categoryValue,
     });
   }
+
+  async function handleReset() {
+    await servicesStore.removeFacet(constants.CATEGORY_FACET);
+  }
 </script>
 
 <template>
   <div class="py-6 text-sm text-dark_corduroy">
-    <h4 class="mb-5 font-medium text-dark-jungle-green">
-      Service Type
-    </h4>
+    <div class="mb-5 flex justify-between">
+      <h4 class="font-medium text-dark-jungle-green">Service Type</h4>
+      <button class="text-xs" @click="handleReset">Reset</button>
+    </div>
     <ul class="flex flex-col gap-5">
       <li
         v-for="facet in categoryFacets?.slice(0, maxFacets)"

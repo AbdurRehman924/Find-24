@@ -14,6 +14,7 @@ export default defineStore("services", () => {
   const {
     fetchServices: _fetchServices,
     applyFacet,
+    removeFacet: _removeFacet,
     applyNumericFacets,
   } = useServices();
 
@@ -64,6 +65,11 @@ export default defineStore("services", () => {
     setState(response);
   }
 
+  async function removeFacet(facetName: string) {
+    const response = await _removeFacet(facetName);
+    setState(response);
+  }
+
   function getServiceByCoords({
     lat,
     lng,
@@ -104,5 +110,6 @@ export default defineStore("services", () => {
     goToPage,
     toggleFacets,
     numericFacet,
+    removeFacet,
   };
 });

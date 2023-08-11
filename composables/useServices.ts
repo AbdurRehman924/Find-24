@@ -16,6 +16,13 @@ export const useServices = () => {
     });
   }
 
+  async function removeFacet(facetName: string) {
+    return $fetch<ServicesResponse>("/api/services", {
+      method: "POST",
+      body: { facetName, resetSingleFacet: true },
+    });
+  }
+
   async function applyNumericFacets(facet: {
     name: string;
     range: { min: number; max: number };
@@ -26,5 +33,10 @@ export const useServices = () => {
     });
   }
 
-  return { fetchServices, applyFacet, applyNumericFacets };
+  return {
+    fetchServices,
+    applyFacet,
+    removeFacet,
+    applyNumericFacets,
+  };
 };

@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
+  import constants from "~/constants";
 
   const servicesStore = useServicesStore();
 
@@ -8,15 +9,22 @@
 
   function handleCategoryFilter(rating: string) {
     servicesStore.toggleFacets({
-      name: "rating",
+      name: constants.RATING_FACET,
       value: rating,
     });
+  }
+
+  async function handleReset() {
+    await servicesStore.removeFacet(constants.RATING_FACET);
   }
 </script>
 
 <template>
   <div class="py-6 text-sm text-dark_corduroy">
-    <h4 class="mb-5 font-medium text-dark-jungle-green">Rating</h4>
+    <div class="mb-5 flex justify-between">
+      <h4 class="font-medium text-dark-jungle-green">Rating</h4>
+      <button class="text-xs" @click="handleReset">Reset</button>
+    </div>
     <ul class="flex gap-3">
       <li
         v-for="facet in ratingFacets"
