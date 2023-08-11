@@ -2,6 +2,10 @@
   import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
 
+  const emits = defineEmits<{
+    (e: "changed", range: { min: number; max: number }): void;
+  }>();
+
   const servicesStore = useServicesStore();
 
   const { minPrice, maxPrice } = storeToRefs(servicesStore);
@@ -26,6 +30,9 @@
     } else {
       leftPercent.value = (min.value / maxPrice.value) * 100;
       rightPercent.value = 100 - (max.value / maxPrice.value) * 100;
+    }
+    if (min.value != minPrice.value || max.value != maxPrice.value) {
+      emits("changed", { min: min.value, max: max.value });
     }
   }
 </script>

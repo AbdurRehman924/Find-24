@@ -11,7 +11,11 @@ export default defineStore("services", () => {
   const categoryFacets = ref<SearchResults.FacetValue[] | null>(null);
   const ratingFacets = ref<SearchResults.FacetValue[] | null>(null);
 
-  const { fetchServices: _fetchServices, applyFacet } = useServices();
+  const {
+    fetchServices: _fetchServices,
+    applyFacet,
+    applyNumericFacets,
+  } = useServices();
 
   function setState(response: ServicesResponse) {
     services.value = response.services;
@@ -49,6 +53,14 @@ export default defineStore("services", () => {
     value: string;
   }) {
     const response = await applyFacet(facet);
+    setState(response);
+  }
+
+  async function numericFacet(facet: {
+    name: string;
+    range: { min: number; max: number };
+  }) {
+    const response = await applyNumericFacets(facet);
     setState(response);
   }
 
@@ -91,5 +103,6 @@ export default defineStore("services", () => {
     prevPage,
     goToPage,
     toggleFacets,
+    numericFacet,
   };
 });

@@ -16,5 +16,15 @@ export const useServices = () => {
     });
   }
 
-  return { fetchServices, applyFacet };
+  async function applyNumericFacets(facet: {
+    name: string;
+    range: { min: number; max: number };
+  }) {
+    return $fetch<ServicesResponse>("/api/services", {
+      method: "POST",
+      body: { facet, isNumeric: true },
+    });
+  }
+
+  return { fetchServices, applyFacet, applyNumericFacets };
 };
