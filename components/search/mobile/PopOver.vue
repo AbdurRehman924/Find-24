@@ -9,7 +9,9 @@
 </script>
 
 <template>
-  <div class="absolute inset-0 z-10 bg-penache px-4 py-6">
+  <div
+    class="absolute inset-x-0 z-10 min-h-screen bg-penache px-4 py-6"
+  >
     <button
       class="rounded-full border border-chinese-white p-2 shadow-variant2"
       @click="handleClose"

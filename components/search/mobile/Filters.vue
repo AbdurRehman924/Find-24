@@ -9,7 +9,7 @@ le
   }
 </script>
 <template>
-  <div class="absolute inset-0 z-10 bg-penache py-6">
+  <div class="absolute inset-x-0 z-10 min-h-screen bg-penache py-6">
     <button class="absolute left-6" @click="handleClose">
       <IconsCross />
     </button>
@@ -22,9 +22,7 @@ le
       <SearchCategoryFilter />
       <SearchRatingFilter />
       <SearchPriceFilter />
-      <div
-        class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
-      >
+      <div class="flex items-center justify-between text-sm">
         <button class="font-medium text-corduroy underline">
           Clear All
         </button>
