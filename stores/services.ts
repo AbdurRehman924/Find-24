@@ -5,6 +5,8 @@ export default defineStore("services", () => {
   const services = ref<Service[] | null>(null);
   const _page = ref(0);
   const totalPages = ref(0);
+  const minPrice = ref(0);
+  const maxPrice = ref(0);
   const categoryFacets = ref<SearchResults.FacetValue[] | null>(null);
   const ratingFacets = ref<SearchResults.FacetValue[] | null>(null);
 
@@ -16,6 +18,8 @@ export default defineStore("services", () => {
     services.value = response.services;
     _page.value = response.page;
     totalPages.value = response.totalPages;
+    minPrice.value = response.minPrice;
+    maxPrice.value = response.maxPrice;
     categoryFacets.value = response.categoryFacets;
     ratingFacets.value = response.ratingFacets;
   }
@@ -76,6 +80,8 @@ export default defineStore("services", () => {
     services: computed(() => services.value),
     page: computed(() => _page.value),
     totalPages: computed(() => totalPages.value),
+    minPrice: computed(() => minPrice.value),
+    maxPrice: computed(() => maxPrice.value),
     categoryFacets: computed(() => categoryFacets.value),
     ratingFacets: computed(() => ratingFacets.value),
     coordinates,

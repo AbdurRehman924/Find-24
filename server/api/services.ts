@@ -7,7 +7,7 @@ const { appId, apiKey, indexName } = useRuntimeConfig().algolia;
 
 const options = {
   hitsPerPage: 10,
-  disjunctiveFacets: ["category", "rating"],
+  disjunctiveFacets: ["category", "rating", "charges"],
   maxValuesPerFacet: 20,
 };
 
@@ -44,6 +44,8 @@ export default defineEventHandler(async (event) => {
         services: results.results.hits,
         page: results.results.page,
         totalPages: results.results.nbPages,
+        minPrice: results.results.getFacetStats("charges").min,
+        maxPrice: results.results.getFacetStats("charges").max,
         categoryFacets,
         ratingFacets,
       });
