@@ -12,15 +12,15 @@
 </script>
 
 <template>
-  <div>
-    <div
+  <div class="py-2">
+    <ol
       class="flex flex-wrap items-center justify-center gap-6"
       v-if="services"
     >
-      <div v-for="service in services" :key="service.id">
+      <li v-for="service in services" :key="service.id">
         <SearchResultCard :service="service" v-show="service" />
-      </div>
-    </div>
+      </li>
+    </ol>
     <SearchPagination v-show="services" />
   </div>
 

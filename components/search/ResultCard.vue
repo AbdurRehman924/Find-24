@@ -10,7 +10,7 @@
 <template>
   <nuxt-link
     to="/"
-    class="flex flex-col gap-8 rounded-2xl border-0.5 border-tonal_dark_mercury p-4 shadow-variant4"
+    class="flex flex-col gap-8 rounded-2xl border-0.5 border-tonal_dark_mercury bg-white p-4 shadow-variant4"
     v-if="service"
   >
     <nuxt-img
