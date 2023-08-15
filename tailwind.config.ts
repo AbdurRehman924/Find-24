@@ -26,6 +26,8 @@ module.exports = {
       "gray-asparagus": "#4D514D",
       "heavy-metal": "#212621",
       grenadier: "#E02C00",
+      mint_green: "#F8FCF8",
+      saltpan: "#F7FBF7",
     },
     fontSize: {
       xxs: ["0.625rem", { lineHeight: "1rem", letterSpacing: "0%" }],
