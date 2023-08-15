@@ -27,6 +27,8 @@ module.exports = {
       "gray-asparagus": "#4D514D",
       "heavy-metal": "#212621",
       grenadier: "#E02C00",
+      mint_green: "#F8FCF8",
+      saltpan: "#F7FBF7",
       tonal_dark_mercury: "#E9E9E9",
       ripe_lemon: "#EDDCOC",
     },
