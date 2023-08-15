@@ -14,7 +14,12 @@
       </div>
       <div class="flex items-center justify-end">
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
-          <button class="desk_nav_links">Sign up</button>
+          <button
+            class="desk_nav_links"
+            @click="signupModalController.open"
+          >
+            Sign up
+          </button>
           <button
             class="desk_nav_links"
             @click="loginModalController.open"
@@ -25,6 +30,11 @@
         <SharedModal :controller="loginModalController">
           <div>
             <AuthLoginModal @close="loginModalController.close" />
+          </div>
+        </SharedModal>
+        <SharedModal :controller="signupModalController">
+          <div>
+            <AuthSignupModal @close="signupModalController.close" />
           </div>
         </SharedModal>
         <button
@@ -82,11 +92,7 @@
   import { useModal } from "@/composables/useModal.ts";
   const mobileUIOpen = ref(false);
   const loginModalController = useModal();
-
-  const showLoginModal = () => {
-    // controller.value.open();
-    // mobileUIOpen.value = false;
-  };
+  const signupModalController = useModal();
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {

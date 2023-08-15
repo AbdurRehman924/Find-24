@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@formkit/nuxt": "^0.17.5",
+    "@headlessui/vue": "^1.7.15",
+    "@vuepic/vue-datepicker": "^5.4.0",
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0"
   }
