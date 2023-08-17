@@ -100,7 +100,7 @@
       </div>
     </div>
     <button
-      class="ml-auto block rounded bg-palma p-2 font-medium text-white"
+      class="ml-auto hidden rounded bg-palma p-2 font-medium text-white md:block"
       @click="handleApplyFilter"
     >
       Apply

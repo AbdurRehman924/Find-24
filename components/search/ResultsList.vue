@@ -12,7 +12,10 @@
 </script>
 
 <template>
-  <div class="col-span-8 md:col-span-6 xl:col-span-4">
+  <div
+    class="col-span-8 md:col-span-6 xl:col-span-4"
+    :class="{ 'xl:col-span-8': !services }"
+  >
     <ol
       class="flex flex-wrap items-center justify-center gap-8"
       v-if="services"

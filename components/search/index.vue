@@ -1,5 +1,12 @@
 <script lang="ts" setup>
+  import { storeToRefs } from "pinia";
+  import useServicesStore from "~/stores/services";
+
   const showMap = ref(false);
+
+  const servicesStore = useServicesStore();
+
+  const { services } = storeToRefs(servicesStore);
 
   function toggleMap() {
     showMap.value = !showMap.value;
@@ -10,8 +17,11 @@
   <SearchMobileBar />
   <SearchBar />
   <div class="mt-14 md:px-8 lg:px-16">
-    <div class="sm:grid sm:grid-cols-8 sm:gap-4" v-if="!showMap">
-      <SearchFilters />
+    <div
+      class="sm:grid sm:grid-cols-8 sm:justify-center sm:gap-4"
+      v-if="!showMap"
+    >
+      <SearchFilters v-if="services" />
       <SearchResultsList />
       <div class="col-span-2 hidden xl:sticky xl:top-2 xl:block">
         <SearchMap />
