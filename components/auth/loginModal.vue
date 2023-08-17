@@ -1,7 +1,12 @@
 <template>
-  <div class="w-[520px]">
+  <div class="relative w-[520px]">
     <div class="flex h-18 items-center border-b border-chinese-white">
-      <div class="cursor-pointer px-8" @click="$emit('close')">X</div>
+      <div
+        class="absolute top-7 cursor-pointer px-8 hover:font-medium"
+        @click="$emit('close')"
+      >
+        X
+      </div>
       <div class="w-full text-center text-xl font-semibold">
         Log in
       </div>
@@ -17,19 +22,21 @@
       <FormKit
         type="form"
         id="login-form"
-        @submit="submitHandler"
+        @submit="handleLogin"
         :actions="false"
       >
         <div class="mb-4">
           <div class="mb-2 text-sm font-medium">Email address</div>
-          <FormKit type="email" class="" />
+          <FormKit name="email" type="email" class="" />
         </div>
         <div class="mb-4">
           <div class="mb-2 text-sm font-medium">Password</div>
           <FormKit
+            name="password"
             type="password"
             suffix-icon="eyeClosed"
             @suffix-icon-click="handleIconClick"
+            suffix-icon-class="cursor-pointer"
           />
         </div>
         <div class="mb-8">Forget Password?</div>
@@ -49,6 +56,11 @@
       node.props.suffixIcon === "eye" ? "eyeClosed" : "eye";
     node.props.type =
       node.props.type === "password" ? "text" : "password";
+  };
+  const handleLogin = async (formData) => {
+    console.log("login submitted", formData);
+    const resp = await useLogin(formData.email, formData.password);
+    console.log("login resp", resp);
   };
 </script>
 <style lang="postcss" scoped></style>
