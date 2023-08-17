@@ -11,7 +11,7 @@
     class="flex flex-col gap-8 rounded-2xl border-0.5 border-tonal_dark_mercury bg-white p-4 shadow-variant4"
     v-if="service"
   >
-    <div class="aspect-h-7 aspect-w-9 min-w-sm md:min-w-xs">
+    <div class="aspect-h-7 aspect-w-9 z-0 min-w-sm xl:min-w-xs">
       <img
         :src="service.image"
         alt="Provider image"

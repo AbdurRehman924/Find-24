@@ -117,7 +117,7 @@
 </script>
 
 <template>
-  <div id="map" class="h-screen"></div>
+  <div id="map" class="h-screen rounded-2xl"></div>
   <ClientOnly>
     <SearchResultCard
       ref="popUpEl"

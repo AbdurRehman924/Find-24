@@ -25,7 +25,7 @@
       <h4 class="font-medium text-dark-jungle-green">Rating</h4>
       <button class="text-xs" @click="handleReset">Reset</button>
     </div>
-    <ul class="flex gap-3">
+    <ul class="flex flex-wrap gap-3">
       <li
         v-for="facet in ratingFacets"
         class="flex items-center gap-3"

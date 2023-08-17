@@ -5,6 +5,7 @@
 
   const emits = defineEmits<{
     (e: "changed", range: { min: number; max: number }): void;
+    (e: "applyFilter"): void;
   }>();
 
   const servicesStore = useServicesStore();
@@ -52,6 +53,10 @@
   async function handleReset() {
     await servicesStore.removeFacet(constants.PRICE_FACET, true);
   }
+
+  function handleApplyFilter() {
+    emits("applyFilter");
+  }
 </script>
 
 <template>
@@ -94,6 +99,12 @@
         <span>$ 0</span> <span>$ {{ overAllMaxPrice }}</span>
       </div>
     </div>
+    <button
+      class="ml-auto block rounded bg-palma p-2 font-medium text-white"
+      @click="handleApplyFilter"
+    >
+      Apply
+    </button>
   </div>
 </template>
 

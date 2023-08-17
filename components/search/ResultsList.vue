@@ -12,9 +12,9 @@
 </script>
 
 <template>
-  <div class="py-2">
+  <div class="col-span-8 md:col-span-6 xl:col-span-4">
     <ol
-      class="flex flex-wrap items-center justify-center gap-6"
+      class="flex flex-wrap items-center justify-center gap-8"
       v-if="services"
     >
       <li v-for="service in services" :key="service.id">
@@ -22,13 +22,12 @@
       </li>
     </ol>
     <SearchPagination v-show="services" />
-  </div>
-
-  <div
-    v-if="!services"
-    class="flex flex-wrap items-center justify-center gap-6"
-  >
-    <div v-for="i in 10"><SearchResultCardSkeleton /></div>
+    <div
+      v-if="!services"
+      class="flex flex-wrap items-center justify-center gap-6"
+    >
+      <div v-for="i in 10"><SearchResultCardSkeleton /></div>
+    </div>
   </div>
 </template>
 
