@@ -57,6 +57,11 @@ module.exports = {
     extend: {
       maxWidth: {
         "1920": "1920px",
+        sm: "18rem",
+      },
+      minWidth: {
+        sm: "18rem",
+        xs: "14rem",
       },
       spacing: {
         "18": "4.5rem",
@@ -73,10 +78,10 @@ module.exports = {
       borderRadius: {
         "4xl": "3.125rem",
       },
-      inset: {
-        calc: "calc(50% - 50px)",
-      },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };

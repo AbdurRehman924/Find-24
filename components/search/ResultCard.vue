@@ -3,8 +3,6 @@
   defineProps<{
     service: Service | null;
   }>();
-
-  const imgLoaded = ref(false);
 </script>
 
 <template>
@@ -13,18 +11,14 @@
     class="flex flex-col gap-8 rounded-2xl border-0.5 border-tonal_dark_mercury bg-white p-4 shadow-variant4"
     v-if="service"
   >
-    <nuxt-img
-      v-show="imgLoaded"
-      :src="service.image"
-      alt="Provider image"
-      class="rounded-lg"
-      loading="eager"
-      @load="imgLoaded = true"
-    />
-    <div
-      v-if="!imgLoaded"
-      class="h-[190px] w-[330px] animate-pulse rounded-lg bg-corduroy bg-opacity-50"
-    />
+    <div class="aspect-h-7 aspect-w-9 min-w-sm md:min-w-xs">
+      <img
+        :src="service.image"
+        alt="Provider image"
+        class="rounded-lg object-cover"
+        loading="eager"
+      />
+    </div>
     <div class="flex flex-col gap-2 text-lg font-medium">
       <h3>{{ service.firstName }} {{ service.lastName }}</h3>
       <p class="text-palma">{{ service.category }}</p>
