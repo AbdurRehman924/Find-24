@@ -23,11 +23,11 @@
     >
       <SearchFilters v-if="services" />
       <SearchResultsList />
-      <div class="col-span-2 hidden xl:sticky xl:top-2 xl:block">
+      <div class="sticky top-2 col-span-2 hidden h-2/5 xl:block">
         <SearchMap />
       </div>
     </div>
-    <SearchMap v-else />
+    <SearchMap :for-full-screen="true" v-else />
     <div
       class="sticky bottom-3 mt-3 font-medium text-white xl:hidden"
     >

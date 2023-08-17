@@ -43,7 +43,9 @@
     </h3>
     <div class="px-4">
       <SearchCategoryFilter />
+      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
       <SearchPriceFilter @changed="handlePriceChange" />
+      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
       <SearchRatingFilter />
       <div class="flex items-center justify-between py-6 text-sm">
         <button class="font-medium text-corduroy underline">

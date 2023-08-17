@@ -11,6 +11,10 @@
   import useServicesStore from "~/stores/services";
   import SearchResultCard from "./ResultCard.vue";
 
+  defineProps<{
+    forFullScreen?: boolean;
+  }>();
+
   const { token } = useRuntimeConfig().public.mapbox;
 
   const servicesStore = useServicesStore();
@@ -117,7 +121,10 @@
 </script>
 
 <template>
-  <div id="map" class="h-screen rounded-2xl"></div>
+  <div
+    id="map"
+    :class="[forFullScreen ? 'h-screen' : 'h-full', 'rounded-2xl']"
+  ></div>
   <ClientOnly>
     <SearchResultCard
       ref="popUpEl"

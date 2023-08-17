@@ -24,17 +24,19 @@
 </script>
 
 <template>
-  <div class="sticky top-2 col-span-2 hidden md:block">
+  <div class="sticky top-2 col-span-2 hidden bg-penache md:block">
     <div class="flex items-center justify-between">
       <h3 class="text-center font-semibold md:text-left">Filters</h3>
       <button class="text-xs text-dark_corduroy">Reset All</button>
     </div>
     <div>
       <SearchCategoryFilter />
+      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
       <SearchPriceFilter
         @changed="handlePriceChange"
         @apply-filter="handleApplyFilter"
       />
+      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
       <SearchRatingFilter />
     </div>
   </div>
