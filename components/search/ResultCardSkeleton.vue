@@ -3,7 +3,7 @@
     class="flex flex-col gap-8 rounded-2xl border-0.5 border-tonal_dark_mercury p-4 shadow-variant4"
   >
     <div
-      class="h-48 w-[330px] animate-pulse rounded-lg bg-corduroy bg-opacity-50"
+      class="h-48 w-[250px] animate-pulse rounded-lg bg-corduroy bg-opacity-50"
     />
     <div class="flex flex-col gap-2">
       <span

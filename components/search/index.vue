@@ -16,14 +16,17 @@
 <template>
   <SearchMobileBar />
   <SearchBar />
-  <div class="mt-14 md:px-8 lg:px-16">
+  <div class="mt-14 md:px-8 2xl:px-16">
     <div
-      class="sm:grid sm:grid-cols-8 sm:justify-center sm:gap-4"
+      class="grid grid-cols-4 md:grid-cols-8 xl:grid-cols-12"
       v-if="!showMap"
     >
       <SearchFilters v-if="services" />
       <SearchResultsList />
-      <div class="sticky top-2 col-span-2 hidden h-2/5 xl:block">
+      <div
+        class="sticky top-2 col-span-3 hidden h-2/5 xl:block 2xl:col-span-2"
+        v-if="services"
+      >
         <SearchMap />
       </div>
     </div>

@@ -24,7 +24,7 @@
 </script>
 
 <template>
-  <div class="sticky top-2 col-span-2 hidden bg-penache md:block">
+  <div class="sticky top-2 col-span-2 hidden bg-penache lg:block">
     <div class="flex items-center justify-between">
       <h3 class="text-center font-semibold md:text-left">Filters</h3>
       <button class="text-xs text-dark_corduroy">Reset All</button>

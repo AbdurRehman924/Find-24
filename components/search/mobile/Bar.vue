@@ -5,7 +5,7 @@
 
 <template>
   <div
-    class="relative mx-4 rounded-4xl border-0.5 border-chinese-white bg-white shadow-variant1 sm:mx-8 md:hidden"
+    class="relative mx-4 rounded-4xl border-0.5 border-chinese-white bg-white shadow-variant1 sm:mx-8 md:mx-16 lg:hidden"
   >
     <button
       class="flex w-full items-center justify-between py-3 pl-8 pr-2"
