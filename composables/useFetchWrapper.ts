@@ -15,34 +15,34 @@ export const useFetchWrapper = async <T>(url: string, options: any) => {
     },
   });
 
-  if (response.error.value?.statusCode == 401) {
-    const { data: res, error } = await refreshAuthToken(
-      baseURL,
-      userStore.refreshToken
-    );
+  // if (response.error.value?.statusCode == 401) {
+  //   const { data: res, error } = await refreshAuthToken(
+  //     baseURL,
+  //     userStore.refreshToken
+  //   );
 
-    if (res.value) {
-      userStore.setAuthandRefreshToken(
-        res.value.data.token,
-        res.value.data.refreshToken
-      );
+  //   if (res.value) {
+  //     userStore.setAuthandRefreshToken(
+  //       res.value.data.token,
+  //       res.value.data.refreshToken
+  //     );
 
-      const response = await call$Fetch<T>(url, {
-        ...options,
-        headers: {
-          Authorization: useUserStore().authToken,
-        },
-      });
-      return response;
-    } else if (error.value) {
-      userStore.logout();
-      router.push(`/login?redirect=${route.fullPath}`);
-      return {
-        data: ref(null),
-        error,
-      };
-    }
-  }
+  //     const response = await call$Fetch<T>(url, {
+  //       ...options,
+  //       headers: {
+  //         Authorization: useUserStore().authToken,
+  //       },
+  //     });
+  //     return response;
+  //   } else if (error.value) {
+  //     userStore.logout();
+  //     router.push(`/login?redirect=${route.fullPath}`);
+  //     return {
+  //       data: ref(null),
+  //       error,
+  //     };
+  //   }
+  // }
 
   return response;
 };

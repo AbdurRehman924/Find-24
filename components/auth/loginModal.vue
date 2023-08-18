@@ -46,6 +46,8 @@
   </div>
 </template>
 <script setup>
+  import { useUserStore } from "@/stores/userStore";
+  const userStore = useUserStore();
   const submitted = ref(false);
   const submitHandler = async () => {
     await new Promise((r) => setTimeout(r, 1000));
@@ -59,8 +61,17 @@
   };
   const handleLogin = async (formData) => {
     console.log("login submitted", formData);
-    const resp = await useLogin(formData.email, formData.password);
-    console.log("login resp", resp);
+    const { data, error } = await userStore.login(
+      formData.email,
+      formData.password,
+    );
+    if (error.value) {
+      console.log("login failed");
+      return;
+    } else {
+      console.log("login success");
+      console.log(data.value);
+    }
   };
 </script>
 <style lang="postcss" scoped></style>
