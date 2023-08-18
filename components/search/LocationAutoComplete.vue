@@ -43,11 +43,15 @@
           autocomplete="off"
         />
       </div>
-      <button role="reset" v-if="query" @click="handleReset">
+      <button
+        role="reset"
+        v-if="query || selected"
+        @click="handleReset"
+      >
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 max-h-64 overflow-auto bg-white sm:left-[40%] sm:right-[20%] sm:top-20 sm:max-h-80 sm:rounded-2xl"
+        class="absolute inset-x-0 top-56 z-10 max-h-64 overflow-auto bg-white sm:left-[40%] sm:right-[20%] sm:top-20 sm:max-h-80 sm:rounded-2xl"
       >
         <ComboboxOption
           v-for="feature in places?.features"

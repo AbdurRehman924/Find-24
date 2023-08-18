@@ -46,11 +46,15 @@
           autocomplete="off"
         />
       </div>
-      <button role="reset" v-if="query" @click="handleReset">
+      <button
+        role="reset"
+        v-if="query || selected"
+        @click="handleReset"
+      >
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 max-h-80 overflow-auto bg-white text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
+        class="absolute inset-x-0 top-56 z-10 max-h-80 overflow-auto bg-white text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
       >
         <ComboboxOption
           v-for="category in filteredCategories"
