@@ -19,35 +19,53 @@ const helper = algoliaSearchHelper(searchClient, indexName, options);
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
-  if (body.resetSingleFacet && body.facetName && !body.isNumeric) {
-    helper.removeDisjunctiveFacetRefinement(body.facetName);
-  } else if (
-    body.resetSingleFacet &&
-    body.facetName &&
-    body.isNumeric
-  ) {
-    helper.removeNumericRefinement(body.facetName);
-  }
+  if (body) {
+    if (body.category) {
+      helper.setQueryParameter(
+        "filters",
 
-  if (body.facet && !body.isNumeric) {
-    helper.toggleFacetRefinement(body.facet.name, body.facet.value);
-  } else if (body.facet && body.isNumeric) {
-    helper.addNumericRefinement(
-      body.facet.name,
-      ">=",
-      parseInt(body.facet.range.min),
-    );
-    helper.addNumericRefinement(
-      body.facet.name,
-      "<=",
-      parseInt(body.facet.range.max),
-    );
-  }
+        `${constants.CATEGORY_FACET}:${body.category}`,
+      );
+    }
+    if (body.location) {
+      helper.setQueryParameter(
+        "aroundLatLng",
+        `${body.location.lat},${body.location.lng}`,
+      );
+      helper.setQueryParameter(
+        "aroundRadius",
+        constants.MAX_AROUND_RADIUS,
+      );
+    }
 
-  if (body.page) {
-    helper.setPage(body.page);
-  } else {
-    helper.setPage(0);
+    if (body.resetSingleFacet && body.facetName && !body.isNumeric) {
+      helper.removeDisjunctiveFacetRefinement(body && body.facetName);
+    } else if (
+      body.resetSingleFacet &&
+      body.facetName &&
+      body.isNumeric
+    ) {
+      helper.removeNumericRefinement(body.facetName);
+    }
+
+    if (body.facet && !body.isNumeric) {
+      helper.toggleFacetRefinement(body.facet.name, body.facet.value);
+    } else if (body.facet && body.isNumeric) {
+      helper.addNumericRefinement(
+        body.facet.name,
+        ">=",
+        parseInt(body.facet.range.min),
+      );
+      helper.addNumericRefinement(
+        body.facet.name,
+        "<=",
+        parseInt(body.facet.range.max),
+      );
+    }
+
+    if (body.page) {
+      helper.setPage(body.page);
+    }
   }
 
   helper.search();

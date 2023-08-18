@@ -6,4 +6,5 @@ export default {
   RATING_FACET: "rating",
   PRICE_FACET: "charges",
   DISJUNCTIVE_FACETS: ["category", "rating", "charges"],
+  MAX_AROUND_RADIUS: 10000,
 };
