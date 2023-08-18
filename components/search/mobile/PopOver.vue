@@ -1,10 +1,31 @@
 <script lang="ts" setup>
+  import { Query } from "~/types/service";
+
   const emits = defineEmits<{
     (e: "close"): void;
   }>();
 
   function handleClose() {
     emits("close");
+  }
+
+  const query = ref<Query>({
+    category: "",
+
+    location: {
+      lat: 0,
+      lng: 0,
+    },
+  });
+
+  function handleUpdateCategory(category: string) {
+    query.value.category = category;
+  }
+
+  function hanldeUpdateLocation(lat: number, lng: number) {
+    query.value.location.lat = lat;
+    query.value.location.lng = lng;
+    console.log(query.value);
   }
 </script>
 
@@ -22,10 +43,14 @@
       class="mt-6 rounded-lg border-0.5 border-chinese-white bg-white shadow-variant1"
     >
       <div class="border-b-0.5 border-b-chinese-white">
-        <SearchCategoriesAutoComplete />
+        <SearchCategoriesAutoComplete
+          @update:category="handleUpdateCategory"
+        />
       </div>
       <div>
-        <SearchLocationAutoComplete />
+        <SearchLocationAutoComplete
+          @update:location="hanldeUpdateLocation"
+        />
       </div>
     </div>
     <div

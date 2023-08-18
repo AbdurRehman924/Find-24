@@ -6,6 +6,10 @@
     ComboboxOption,
   } from "@headlessui/vue";
 
+  const emits = defineEmits<{
+    (e: "update:category", category: string): void;
+  }>();
+
   const categories = [
     { id: 1, name: "Gardner" },
     { id: 2, name: "Electrician" },
@@ -31,6 +35,12 @@
     query.value = "";
     selected.value = null;
   }
+
+  watch(selected, () => {
+    if (selected.value) {
+      emits("update:category", selected.value.name);
+    }
+  });
 </script>
 
 <template>

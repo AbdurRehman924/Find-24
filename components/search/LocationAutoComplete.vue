@@ -7,6 +7,10 @@
   } from "@headlessui/vue";
   import Places, { Feature } from "~/types/mapbox";
 
+  const emits = defineEmits<{
+    (e: "update:location", lat: number, lng: number): void;
+  }>();
+
   const { searchPlaces } = useMapBox();
 
   const query = ref("");
@@ -24,7 +28,11 @@
   });
 
   watch(selected, () => {
-    console.log(selected.value);
+    emits(
+      "update:location",
+      selected.value!.center[1],
+      selected.value!.center[0],
+    );
   });
 </script>
 
