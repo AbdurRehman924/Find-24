@@ -65,6 +65,8 @@ export default defineEventHandler(async (event) => {
 
     if (body.page) {
       helper.setPage(body.page);
+    } else {
+      helper.setPage(0);
     }
   }
 
