@@ -107,7 +107,7 @@
     mapboxgl.accessToken = token;
     map = new mapboxgl.Map({
       container: "map",
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/swadon/ckkvdmhh735l418mhd4re0bse",
       zoom: 2,
       scrollZoom: true,
     });
