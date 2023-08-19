@@ -59,9 +59,6 @@ module.exports = {
         "1920": "1920px",
         sm: "18rem",
       },
-      maxHeight: {
-        "2/5": "40%",
-      },
       minWidth: {
         sm: "18rem",
         xs: "14rem",
