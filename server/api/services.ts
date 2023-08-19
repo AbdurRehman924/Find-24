@@ -1,7 +1,5 @@
 import algoliaSearch from "algoliasearch/lite";
-import algoliaSearchHelper, {
-  SearchResults,
-} from "algoliasearch-helper";
+import algoliaSearchHelper from "algoliasearch-helper";
 import constants from "~/constants";
 
 const { appId, apiKey, indexName } = useRuntimeConfig().algolia;
@@ -54,6 +52,7 @@ export default defineEventHandler(async (event) => {
     if (body.facet && !body.isNumeric) {
       helper.toggleFacetRefinement(body.facet.name, body.facet.value);
     } else if (body.facet && body.isNumeric) {
+      helper.removeNumericRefinement(body.facet.name);
       helper.addNumericRefinement(
         body.facet.name,
         ">=",
