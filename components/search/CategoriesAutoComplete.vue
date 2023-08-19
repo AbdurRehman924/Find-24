@@ -5,46 +5,41 @@
     ComboboxOptions,
     ComboboxOption,
   } from "@headlessui/vue";
+  import { storeToRefs } from "pinia";
+  import useServicesStore from "~/stores/services";
 
-  const emits = defineEmits<{
-    (e: "update:category", category: string): void;
-  }>();
+  const servicesStore = useServicesStore();
+  const { category } = storeToRefs(servicesStore);
 
   const categories = [
-    { id: 1, name: "Gardner" },
-    { id: 2, name: "Electrician" },
-    { id: 3, name: "Baby Sitter" },
-    { id: 4, name: "Plumber" },
-    { id: 5, name: "Carpenter" },
-    { id: 6, name: "Painter" },
-    { id: 7, name: "Tutor" },
-    { id: 8, name: "Others" },
+    "Gardner",
+    "Electrician",
+    "Baby Sitter",
+    "Plumber",
+    "Carpenter",
+    "Painter",
+    "Tutor",
+    "Others",
   ];
-
-  const filteredCategories = computed(() => {
-    return categories.filter((category) =>
-      category.name.toLowerCase().includes(query.value.toLowerCase()),
-    );
-  });
 
   const query = ref("");
 
-  const selected = ref<{ id: number; name: string } | null>(null);
+  const filteredCategories = computed(() => {
+    return categories.filter((category) =>
+      category.toLowerCase().includes(query.value.toLowerCase()),
+    );
+  });
 
   function handleReset() {
     query.value = "";
-    selected.value = null;
-  }
-
-  watch(selected, () => {
-    if (selected.value) {
-      emits("update:category", selected.value.name);
+    if (category.value) {
+      servicesStore.resetCategory();
     }
-  });
+  }
 </script>
 
 <template>
-  <Combobox as="template" v-model="selected">
+  <Combobox as="template" v-model="category">
     <div class="flex items-center px-6 py-3 sm:p-0">
       <div class="rounded- grow text-sm">
         <h4 class="font-semibold">Type</h4>
@@ -52,13 +47,13 @@
           class="w-full border-none p-0"
           placeholder="What service do you need..."
           @change="query = $event.target.value"
-          :display-value="() => (selected ? selected.name : query)"
+          :display-value="() => (category ? category : query)"
           autocomplete="off"
         />
       </div>
       <button
         role="reset"
-        v-if="query || selected"
+        v-if="category || query"
         @click="handleReset"
       >
         <IconsCross />
@@ -67,9 +62,9 @@
         class="absolute inset-x-0 top-56 z-10 max-h-80 overflow-auto bg-white text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
       >
         <ComboboxOption
-          v-for="category in filteredCategories"
+          v-for="(category, index) in filteredCategories"
           :value="category"
-          :key="category.id"
+          :key="index"
           v-slot="{ selected, active }"
           as="template"
         >
@@ -80,7 +75,7 @@
               'bg-frostee': active,
             }"
           >
-            {{ category.name }}
+            {{ category }}
           </li>
         </ComboboxOption>
       </ComboboxOptions>

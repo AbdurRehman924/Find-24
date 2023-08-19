@@ -5,39 +5,32 @@
     ComboboxOptions,
     ComboboxOption,
   } from "@headlessui/vue";
-  import Places, { Feature } from "~/types/mapbox";
-
-  const emits = defineEmits<{
-    (e: "update:location", lat: number, lng: number): void;
-  }>();
+  import Places from "~/types/mapbox";
+  import useServicesStore from "~/stores/services";
+  import { storeToRefs } from "pinia";
 
   const { searchPlaces } = useMapBox();
+  const servicesStore = useServicesStore();
 
   const query = ref("");
   const places = ref<Places | null>();
-  const selected = ref<Feature | null>(null);
+  const { location } = storeToRefs(servicesStore);
 
   function handleReset() {
     query.value = "";
-    selected.value = null;
+    if (location.value) {
+      servicesStore.resetLocation();
+    }
   }
 
   watch(query, async () => {
     const { data } = await searchPlaces(query.value);
     places.value = data.value;
   });
-
-  watch(selected, () => {
-    emits(
-      "update:location",
-      selected.value!.center[1],
-      selected.value!.center[0],
-    );
-  });
 </script>
 
 <template>
-  <Combobox as="template" v-model="selected">
+  <Combobox as="template" v-model="location">
     <div class="flex items-center px-6 py-3 sm:p-0">
       <div class="grow text-sm">
         <h4 class="font-semibold">Location</h4>
@@ -46,14 +39,14 @@
           placeholder="Enter prefered address..."
           @change="query = $event.target.value"
           :display-value="
-            () => (selected ? selected.place_name : query)
+            () => (location ? location.place_name : query)
           "
           autocomplete="off"
         />
       </div>
       <button
         role="reset"
-        v-if="query || selected"
+        v-if="query || location"
         @click="handleReset"
       >
         <IconsCross />

@@ -1,8 +1,11 @@
 import { SearchResults } from "algoliasearch-helper";
+import { Feature } from "types/mapbox";
 import { ServicesResponse } from "~/types/APIResponse";
 import Service from "~/types/service";
 
 export default defineStore("services", () => {
+  const category = ref("");
+  const location = ref<Feature | null>(null);
   const services = ref<Service[] | null>(null);
   const _page = ref(0);
   const totalPages = ref(0);
@@ -30,6 +33,14 @@ export default defineStore("services", () => {
     maxPrice.value = response.maxPrice;
     categoryFacets.value = response.categoryFacets;
     ratingFacets.value = response.ratingFacets;
+  }
+
+  function resetCategory() {
+    category.value = "";
+  }
+
+  function resetLocation() {
+    location.value = null;
   }
 
   async function fetchServices(page = 0) {
@@ -99,6 +110,8 @@ export default defineStore("services", () => {
   });
 
   return {
+    category,
+    location,
     services: computed(() => services.value),
     page: computed(() => _page.value),
     totalPages: computed(() => totalPages.value),
@@ -110,6 +123,8 @@ export default defineStore("services", () => {
     ratingFacets: computed(() => ratingFacets.value),
     coordinates,
     fetchServices,
+    resetCategory,
+    resetLocation,
     getServiceByCoords,
     nextPage,
     prevPage,

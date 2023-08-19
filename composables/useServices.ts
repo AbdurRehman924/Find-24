@@ -1,11 +1,32 @@
-import { SearchResults } from "algoliasearch-helper";
 import { ServicesResponse } from "~/types/APIResponse";
 
 export const useServices = () => {
-  async function fetchServices(page = 0) {
+  async function fetchServices(
+    page: number,
+    category?: string,
+    location?: { lat: number; lng: number },
+  ) {
+    let body: {} = {
+      page,
+    };
+
+    if (category) {
+      body = {
+        ...body,
+        category: category,
+      };
+    }
+
+    if (location?.lat && location?.lng) {
+      body = {
+        ...body,
+        location: location,
+      };
+    }
+
     return $fetch<ServicesResponse>("/api/services", {
       method: "POST",
-      body: { page },
+      body,
     });
   }
 

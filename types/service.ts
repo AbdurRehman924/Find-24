@@ -17,11 +17,3 @@ export interface Geoloc {
   lat: number;
   lng: number;
 }
-
-export interface Query {
-  location: {
-    lat: number;
-    lng: number;
-  };
-  category: string;
-}
