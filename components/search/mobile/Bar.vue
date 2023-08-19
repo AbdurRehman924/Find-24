@@ -1,4 +1,11 @@
 <script lang="ts" setup>
+  import { storeToRefs } from "pinia";
+  import useServicesStore from "~/stores/services";
+
+  const servicesStore = useServicesStore();
+
+  const { category } = storeToRefs(servicesStore);
+
   const showPopOver = ref(false);
   const showFilters = ref(false);
 </script>
@@ -13,9 +20,9 @@
     >
       <div class="text-xs">
         <h4 class="text-left font-semibold">Type</h4>
-        <span class="text-corduroy"
-          >What service do you need....</span
-        >
+        <span class="text-corduroy">
+          {{ category ? category : "What service do you need..." }}
+        </span>
       </div>
     </button>
     <button

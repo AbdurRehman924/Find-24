@@ -4,7 +4,7 @@
   const { fetchServices } = useServicesStore();
 
   async function handleSearch() {
-    await fetchServices(0);
+    await fetchServices();
   }
 </script>
 

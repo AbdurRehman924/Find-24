@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import useServicesStore from "~/stores/services";
   import constants from "~/constants";
+  import { storeToRefs } from "pinia";
 
   const servicesStore = useServicesStore();
 
@@ -8,6 +9,8 @@
     min: 0,
     max: 0,
   });
+
+  const { category } = storeToRefs(servicesStore);
 
   function handlePriceChange(range: { min: number; max: number }) {
     priceRange.value = range;
@@ -30,8 +33,11 @@
       <button class="text-xs text-dark_corduroy">Reset All</button>
     </div>
     <div>
-      <SearchCategoryFilter />
-      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
+      <SearchCategoryFilter v-if="!category" />
+      <div
+        class="h-[0.5px] rounded-full bg-chinese-white"
+        v-if="!category"
+      ></div>
       <SearchPriceFilter
         @changed="handlePriceChange"
         @apply-filter="handleApplyFilter"

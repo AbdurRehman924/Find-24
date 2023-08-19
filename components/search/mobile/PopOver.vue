@@ -1,31 +1,23 @@
 <script lang="ts" setup>
-  import { Query } from "~/types/service";
+  import userServicesStore from "~/stores/services";
 
   const emits = defineEmits<{
     (e: "close"): void;
   }>();
 
+  const servicesStore = userServicesStore();
+
   function handleClose() {
     emits("close");
   }
 
-  const query = ref<Query>({
-    category: "",
-
-    location: {
-      lat: 0,
-      lng: 0,
-    },
-  });
-
-  function handleUpdateCategory(category: string) {
-    query.value.category = category;
+  async function handleSearch() {
+    await servicesStore.fetchServices();
+    emits("close");
   }
 
-  function hanldeUpdateLocation(lat: number, lng: number) {
-    query.value.location.lat = lat;
-    query.value.location.lng = lng;
-    console.log(query.value);
+  async function handleClearAll() {
+    await servicesStore.resetAll();
   }
 </script>
 
@@ -43,24 +35,24 @@
       class="mt-6 rounded-lg border-0.5 border-chinese-white bg-white shadow-variant1"
     >
       <div class="border-b-0.5 border-b-chinese-white">
-        <SearchCategoriesAutoComplete
-          @update:category="handleUpdateCategory"
-        />
+        <SearchCategoriesAutoComplete />
       </div>
       <div>
-        <SearchLocationAutoComplete
-          @update:location="hanldeUpdateLocation"
-        />
+        <SearchLocationAutoComplete />
       </div>
     </div>
     <div
       class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
     >
-      <button class="font-medium text-corduroy underline">
+      <button
+        class="font-medium text-corduroy underline"
+        @click="handleClearAll"
+      >
         Clear All
       </button>
       <button
         class="flex items-center gap-2 rounded-4xl bg-palma px-4 py-3.5 font-semibold text-white shadow-variant3 focus:bg-islamic-green"
+        @click="handleSearch"
       >
         <IconsSearch />
         <span>Find Providers</span>
