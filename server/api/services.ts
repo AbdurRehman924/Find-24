@@ -23,9 +23,10 @@ export default defineEventHandler(async (event) => {
     if (body.category) {
       helper.setQueryParameter(
         "filters",
-
         `${constants.CATEGORY_FACET}:${body.category}`,
       );
+    } else {
+      helper.setQueryParameter("filters", "");
     }
     if (body.location) {
       helper.setQueryParameter(
@@ -36,6 +37,8 @@ export default defineEventHandler(async (event) => {
         "aroundRadius",
         constants.MAX_AROUND_RADIUS,
       );
+    } else {
+      helper.setQueryParameter("aroundLatLng", "");
     }
 
     if (body.resetSingleFacet && body.facetName && !body.isNumeric) {
@@ -86,6 +89,12 @@ export default defineEventHandler(async (event) => {
       );
       const services = results.results.hits;
 
+      if (services.length === 0) {
+        throw new Error("No services found", {
+          cause: 404,
+        });
+      }
+
       const minPrice = Math.min(
         ...services.map((service) => service.charges),
       );
@@ -109,7 +118,11 @@ export default defineEventHandler(async (event) => {
       });
     });
     helper.on("error", (error) => {
-      reject(error);
+      if (error.error.cause === 404) {
+        resolve(null);
+      }
+
+      reject(error.error);
     });
   });
 });

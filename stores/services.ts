@@ -6,6 +6,7 @@ import Service from "~/types/service";
 export default defineStore("services", () => {
   const category = ref("");
   const location = ref<Feature | null>(null);
+  const noServicesFound = ref(false);
   const services = ref<Service[] | null>(null);
   const _page = ref(0);
   const totalPages = ref(0);
@@ -35,17 +36,44 @@ export default defineStore("services", () => {
     ratingFacets.value = response.ratingFacets;
   }
 
-  function resetCategory() {
+  async function resetCategory() {
     category.value = "";
+    await fetchServices();
   }
 
-  function resetLocation() {
+  async function resetLocation() {
     location.value = null;
+    await fetchServices();
+  }
+
+  async function resetAll() {
+    category.value = "";
+    location.value = null;
+    await fetchServices();
   }
 
   async function fetchServices(page = 0) {
-    const response = await _fetchServices(page);
-    setState(response);
+    noServicesFound.value = false;
+
+    const categoryValue = category.value || "";
+    const locationValue = location.value
+      ? {
+          lat: location.value.center[1],
+          lng: location.value.center[0],
+        }
+      : undefined;
+
+    const response = await _fetchServices(
+      page,
+      categoryValue,
+      locationValue,
+    );
+
+    if (response) {
+      setState(response);
+    } else {
+      noServicesFound.value = true;
+    }
   }
 
   function prevPage() {
@@ -112,6 +140,7 @@ export default defineStore("services", () => {
   return {
     category,
     location,
+    noServicesFound: computed(() => noServicesFound.value),
     services: computed(() => services.value),
     page: computed(() => _page.value),
     totalPages: computed(() => totalPages.value),
@@ -125,6 +154,7 @@ export default defineStore("services", () => {
     fetchServices,
     resetCategory,
     resetLocation,
+    resetAll,
     getServiceByCoords,
     nextPage,
     prevPage,

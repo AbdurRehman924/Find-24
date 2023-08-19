@@ -30,12 +30,16 @@
     );
   });
 
-  function handleReset() {
+  async function handleReset() {
     query.value = "";
     if (category.value) {
-      servicesStore.resetCategory();
+      await servicesStore.resetCategory();
     }
   }
+
+  watch(category, () => {
+    query.value = "";
+  });
 </script>
 
 <template>

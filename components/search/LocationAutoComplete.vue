@@ -16,16 +16,20 @@
   const places = ref<Places | null>();
   const { location } = storeToRefs(servicesStore);
 
-  function handleReset() {
+  async function handleReset() {
     query.value = "";
     if (location.value) {
-      servicesStore.resetLocation();
+      await servicesStore.resetLocation();
     }
   }
 
   watch(query, async () => {
     const { data } = await searchPlaces(query.value);
     places.value = data.value;
+  });
+
+  watch(location, () => {
+    query.value = "";
   });
 </script>
 
