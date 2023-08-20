@@ -4,8 +4,12 @@ body {
 .formkit-inner {
   @apply relative;
 }
+.formkit-input,
+.dp__input_wrap > input {
+  @apply w-full rounded-lg border border-chinese-white  py-4 outline-none;
+}
 .formkit-input {
-  @apply w-full rounded-lg border border-chinese-white p-4 outline-none;
+  @apply px-4;
 }
 .formkit-input option {
   @apply rounded-lg p-4 outline-none;

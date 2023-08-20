@@ -28,14 +28,15 @@
           </button>
         </div>
         <SharedModal :controller="loginModalController">
-          <div>
-            <AuthLoginModal @close="loginModalController.close" />
-          </div>
+          <AuthLoginModal @close="loginModalController.close" />
+          <div></div>
         </SharedModal>
-        <SharedModal :controller="signupModalController">
-          <div>
-            <AuthSignupModal @close="signupModalController.close" />
-          </div>
+        <SharedModal
+          title="Sign up"
+          :controller="signupModalController"
+        >
+          <AuthSignupModal @close="signupModalController.close" />
+          <div></div>
         </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
@@ -90,6 +91,8 @@
 </template>
 <script setup>
   import { useModal } from "@/composables/useModal.ts";
+  const router = useRouter();
+  const route = useRoute();
   const mobileUIOpen = ref(false);
   const loginModalController = useModal();
   const signupModalController = useModal();
