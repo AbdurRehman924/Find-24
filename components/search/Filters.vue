@@ -10,7 +10,7 @@
     max: 0,
   });
 
-  const { category } = storeToRefs(servicesStore);
+  const { categoryFacets } = storeToRefs(servicesStore);
 
   function handlePriceChange(range: { min: number; max: number }) {
     priceRange.value = range;
@@ -33,10 +33,12 @@
       <button class="text-xs text-dark_corduroy">Reset All</button>
     </div>
     <div>
-      <SearchCategoryFilter v-if="!category" />
+      <SearchCategoryFilter
+        v-if="categoryFacets && categoryFacets.length > 1"
+      />
       <div
         class="h-[0.5px] rounded-full bg-chinese-white"
-        v-if="!category"
+        v-if="categoryFacets && categoryFacets.length > 1"
       ></div>
       <SearchPriceFilter
         @changed="handlePriceChange"
