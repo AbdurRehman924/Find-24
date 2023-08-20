@@ -1,4 +1,4 @@
-import algoliaSearch from "algoliasearch/lite";
+import algoliaSearch from "algoliasearch";
 import algoliaSearchHelper from "algoliasearch-helper";
 import constants from "~/constants";
 
