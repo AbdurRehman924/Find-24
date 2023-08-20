@@ -21,7 +21,6 @@
   const rightPercent = ref(
     100 - (maxPrice.value / overAllMaxPrice.value) * 100,
   );
-  console.log(minPrice.value, maxPrice.value, overAllMaxPrice.value);
 
   const minInput = ref<HTMLInputElement>();
   const min = ref(minPrice.value);
