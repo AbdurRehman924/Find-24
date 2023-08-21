@@ -57,14 +57,22 @@
       </li>
     </ul>
     <button
-      v-show="showMore"
+      v-show="
+        showMore &&
+        categoryFacets &&
+        categoryFacets.length > maxFacets
+      "
       class="mt-5 max-w-fit underline"
       @click="handleShowMore"
     >
       Show more
     </button>
     <button
-      v-show="!showMore"
+      v-show="
+        !showMore &&
+        categoryFacets &&
+        categoryFacets.length > maxFacets
+      "
       class="mt-5 max-w-fit underline"
       @click="handleShowLess"
     >
