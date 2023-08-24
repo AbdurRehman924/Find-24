@@ -6,7 +6,7 @@
     }"
   >
     <Combobox v-model="selected">
-      <div class="combobox">
+      <div class="combobox rounded-lg border border-chinese-white">
         <ComboboxInput
           :displayValue="(country) => country.name"
           @change="query = $event.target.value"
@@ -112,7 +112,7 @@
     @apply absolute right-0 h-full w-20;
   }
   .icon {
-    @apply absolute right-6 top-4 transform transition-transform duration-300;
+    @apply absolute right-6 top-5 transform transition-transform duration-300;
   }
 
   .country_options {

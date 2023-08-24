@@ -27,16 +27,17 @@
             Log in
           </button>
         </div>
-        <SharedModal :controller="loginModalController">
-          <AuthLoginModal @close="loginModalController.close" />
-          <div></div>
+        <SharedModal
+          title="Log in"
+          :controller="loginModalController"
+        >
+          <AuthLoginModal />
         </SharedModal>
         <SharedModal
           title="Sign up"
           :controller="signupModalController"
         >
-          <AuthSignupModal @close="signupModalController.close" />
-          <div></div>
+          <AuthSignupModal />
         </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"

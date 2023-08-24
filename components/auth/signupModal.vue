@@ -15,17 +15,17 @@
       <div class="mb-4 flex">
         <div class="w-1/2 pr-2">
           <div class="mb-2 text-sm font-medium">First Name</div>
-          <FormKit type="text" class="" />
+          <FormKit type="text" class="" placeholder="First Name" />
         </div>
         <div class="w-1/2 pl-2">
           <div class="mb-2 text-sm font-medium">Last Name</div>
-          <FormKit type="text" class="" />
+          <FormKit type="text" class="" placeholder="Last Name" />
         </div>
       </div>
 
       <div class="mb-4">
         <div class="mb-2 text-sm font-medium">Email address</div>
-        <FormKit type="email" class="" />
+        <FormKit type="email" class="" placeholder="Email Address" />
       </div>
       <div class="mb-2">
         <div class="mb-2 text-sm font-medium">
@@ -35,6 +35,7 @@
           type="password"
           suffix-icon="eyeClosed"
           @suffix-icon-click="handleIconClick"
+          placeholder="Password"
         />
       </div>
       <div class="mb-4 text-sm text-corduroy">
@@ -43,14 +44,20 @@
       <div class="mb-4 flex">
         <div class="w-1/2 pr-2">
           <div class="mb-2 text-sm font-medium">Gender</div>
-          <FormKit type="select" :options="['A', 'B']" class="" />
+          <FormKit
+            type="select"
+            :options="['Male', 'Female', 'Other']"
+            class=""
+            placeholder="Select Gender"
+          />
         </div>
         <div class="w-1/2 pl-2">
           <div class="mb-2 text-sm font-medium">Date of birth</div>
           <SharedDatepicker />
         </div>
       </div>
-      <div class="mb-4 flex">
+      <div class="mb-4 flex flex-col">
+        <div class="mb-2 text-sm font-medium">Country</div>
         <SharedCountryPicker />
       </div>
       <FormKit type="submit">Sign up</FormKit>
