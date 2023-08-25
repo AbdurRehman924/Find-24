@@ -11,21 +11,50 @@
       id="login-form"
       @submit="submitHandler"
       :actions="false"
+      :config="{ validationVisibility: 'submit' }"
     >
       <div class="mb-4 flex">
         <div class="w-1/2 pr-2">
           <div class="mb-2 text-sm font-medium">First Name</div>
-          <FormKit type="text" class="" placeholder="First Name" />
+          <FormKit
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            class=""
+            validation="required|length:3,50|alpha:latin"
+            :validation-messages="{
+              required: 'First name is required',
+              length: 'First name must be at least 3 characters',
+              alpha: 'Only use letters',
+            }"
+          />
         </div>
         <div class="w-1/2 pl-2">
           <div class="mb-2 text-sm font-medium">Last Name</div>
-          <FormKit type="text" class="" placeholder="Last Name" />
+          <FormKit
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            class=""
+            validation="required|length:3,50|alpha:latin"
+            :validation-messages="{
+              required: 'Last name is required',
+              alpha: 'Only use letters',
+              length: 'Last name must be at least 3 characters',
+            }"
+          />
         </div>
       </div>
 
       <div class="mb-4">
         <div class="mb-2 text-sm font-medium">Email address</div>
-        <FormKit type="email" class="" placeholder="Email Address" />
+        <FormKit
+          type="email"
+          name="email"
+          class=""
+          placeholder="Email Address"
+          validation="required|email"
+        />
       </div>
       <div class="mb-2">
         <div class="mb-2 text-sm font-medium">
@@ -33,9 +62,11 @@
         </div>
         <FormKit
           type="password"
+          name="password"
           suffix-icon="eyeClosed"
           @suffix-icon-click="handleIconClick"
           placeholder="Password"
+          validation="required|length:6,60"
         />
       </div>
       <div class="mb-4 text-sm text-corduroy">
@@ -46,9 +77,11 @@
           <div class="mb-2 text-sm font-medium">Gender</div>
           <FormKit
             type="select"
+            name="gender"
             :options="['Male', 'Female', 'Other']"
             class=""
             placeholder="Select Gender"
+            validation="required"
           />
         </div>
         <div class="w-1/2 pl-2">
@@ -82,9 +115,10 @@
 </template>
 <script setup>
   const submitted = ref(false);
-  const submitHandler = async () => {
-    await new Promise((r) => setTimeout(r, 1000));
-    submitted.value = true;
+  const submitHandler = async (formData) => {
+    // await new Promise((r) => setTimeout(r, 1000));
+    // submitted.value = true;
+    console.log("signup submitted", formData);
   };
   const handleIconClick = (node, e) => {
     node.props.suffixIcon =

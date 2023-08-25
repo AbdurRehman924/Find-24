@@ -20,6 +20,9 @@ body {
 button[type="submit"] {
   @apply rounded-[50px] bg-palma text-white;
 }
+.formkit-message {
+  @apply text-grenadier;
+}
 /* input[type="date"] {
   @apply rounded-[50px] bg-palma text-white;
 } */

@@ -9,6 +9,8 @@
       id="login-form"
       @submit="handleLogin"
       :actions="false"
+      :config="{ validationVisibility: 'submit' }"
+      incomplete-message="Please fill all the fields"
     >
       <div class="mb-4">
         <div class="mb-2 text-sm font-medium">Email address</div>
@@ -17,6 +19,7 @@
           type="email"
           class=""
           placeholder="Enter you email"
+          validation="required|email"
         />
       </div>
       <div class="mb-4">
@@ -28,6 +31,7 @@
           suffix-icon="eyeClosed"
           @suffix-icon-click="handleIconClick"
           suffix-icon-class="cursor-pointer"
+          validation="required"
         />
       </div>
       <div class="mb-8">Forget Password?</div>
@@ -52,19 +56,19 @@
   };
   const handleLogin = async (formData) => {
     console.log("login submitted", formData);
-    signinFailed.value = false;
-    const { data, error } = await userStore.login(
-      formData.email,
-      formData.password,
-    );
-    if (error.value) {
-      console.log("login failed");
-      signinFailed.value = true;
-      return;
-    } else {
-      console.log("login success");
-      console.log(data.value);
-    }
+    //   signinFailed.value = false;
+    //   const { data, error } = await userStore.login(
+    //     formData.email,
+    //     formData.password,
+    //   );
+    //   if (error.value) {
+    //     console.log("login failed");
+    //     signinFailed.value = true;
+    //     return;
+    //   } else {
+    //     console.log("login success");
+    //     console.log(data.value);
+    //   }
   };
 </script>
 <style lang="postcss" scoped></style>

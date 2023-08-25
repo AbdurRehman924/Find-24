@@ -12,6 +12,15 @@
       :enable-time-picker="false"
       aria-label="Date of Birth"
     />
+    <FormKit
+      type="date"
+      name="dob"
+      validation="required"
+      :validation-messages="{
+        required: 'Date of birth is required',
+      }"
+      v-model="formKitDate"
+    />
     <!-- <input type="date" name="dob" style="display: none" /> -->
     <!-- <FormKit type="date" style="display: none" /> -->
     <!-- <span class="error" v-if="errorMessage">{{ errorMessage }}</span> -->
@@ -23,6 +32,12 @@
   import "@vuepic/vue-datepicker/dist/main.css";
 
   const date = ref();
+  const formKitDate = ref();
+  watch(date, () => {
+    if (date.value) {
+      formKitDate.value = date.value.toISOString().substring(0, 10);
+    }
+  });
 
   // const { errorMessage, value } = useField(
   //   "dob",
@@ -36,12 +51,6 @@
   //       "You must be atleast 16 years old",
   //     ),
   // );
-
-  watch(date, () => {
-    if (date.value) {
-      // value.value = date.value.toISOString();
-    }
-  });
 </script>
 
 <style lang="postcss" scoped>
@@ -52,7 +61,7 @@
       focus:border-none focus:ring-0;
     }
   } */
-  input{
+  input {
     @apply border-palma outline-none;
   }
 </style>
