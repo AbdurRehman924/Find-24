@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[560px] p-6">
+  <div class="p-6">
     <div class="mb-1 mt-2 text-2xl font-semibold">
       Create a free account
     </div>

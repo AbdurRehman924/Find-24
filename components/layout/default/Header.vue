@@ -71,11 +71,27 @@
           <NuxtLink to="/" class="mobile_nav_links"
             >About Us</NuxtLink
           >
-          <NuxtLink to="/" class="mobile_nav_links">Signup</NuxtLink>
           <NuxtLink
             to="/"
             class="mobile_nav_links"
-            @click="showLoginModal"
+            @click="
+              () => {
+                mobileUIOpen = false;
+                signupModalController.open();
+              }
+            "
+            >Signup</NuxtLink
+          >
+          <!-- <button>Signup</button> -->
+          <NuxtLink
+            to="/"
+            class="mobile_nav_links"
+            @click="
+              () => {
+                mobileUIOpen = false;
+                loginModalController.open();
+              }
+            "
           >
             Log In
           </NuxtLink>

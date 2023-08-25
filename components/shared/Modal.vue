@@ -45,7 +45,7 @@
               v-if="isOpen"
               id="modal-content"
               ref="modalContentElement"
-              class="overflow-y-clip rounded-lg bg-white text-left shadow-xl"
+              class="h-full w-full max-w-[520px] overflow-y-hidden rounded-lg bg-white text-left shadow-xl"
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"
@@ -63,7 +63,9 @@
                   {{ props.title }}
                 </div>
               </div>
-              <div class="max-h-[600px] overflow-y-auto">
+              <div
+                class="h-[calc(100vh_-_72px)] overflow-y-auto md:max-h-[600px]"
+              >
                 <slot> </slot>
               </div>
             </div>

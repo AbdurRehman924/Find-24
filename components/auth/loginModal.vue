@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[520px] p-6">
+  <div class="w-full p-6 md:w-[520px]">
     <div class="mb-6 mt-2 text-2xl font-semibold">Welcome back</div>
     <div class="text-grenadier" v-if="signinFailed">
       Invalid credentials
