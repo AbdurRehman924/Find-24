@@ -16,13 +16,13 @@
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
           <button
             class="desk_nav_links"
-            @click="signupModalController.open"
+            @click="router.push({ query: { signup: true } })"
           >
             Sign up
           </button>
           <button
             class="desk_nav_links"
-            @click="loginModalController.open"
+            @click="router.push({ query: { login: true } })"
           >
             Log in
           </button>
@@ -30,12 +30,14 @@
         <SharedModal
           title="Log in"
           :controller="loginModalController"
+          @close="router.push({ query: null })"
         >
           <AuthLoginModal />
         </SharedModal>
         <SharedModal
           title="Sign up"
           :controller="signupModalController"
+          @close="router.push({ query: null })"
         >
           <AuthSignupModal />
         </SharedModal>
@@ -113,6 +115,33 @@
   const mobileUIOpen = ref(false);
   const loginModalController = useModal();
   const signupModalController = useModal();
+  console.log("route", route.query.login);
+  handleAuthQuery();
+  watch(
+    () => route.query,
+    () => {
+      handleAuthQuery();
+    },
+  );
+  function handleAuthQuery() {
+    if (route.query.login == "true") {
+      loginModalController.open();
+    } else if (route.query.signup == "true") {
+      signupModalController.open();
+    } else {
+      closeModals();
+    }
+  }
+  function closeModals() {
+    mobileUIOpen.value = false;
+    loginModalController.close();
+    signupModalController.close();
+  }
+  const closeLoginModal = () => {
+    // console.log("closeLoginModal");
+    // loginModalController.close();
+    router.push({ query: null });
+  };
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {

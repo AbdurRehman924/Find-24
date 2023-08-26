@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="auth-input relative w-full"
-    :class="{
-      'field-error': errorMessage,
-    }"
-  >
+  <div class="auth-input relative w-full">
     <Combobox v-model="selected">
       <div class="combobox rounded-lg border border-chinese-white">
         <ComboboxInput
@@ -52,8 +47,16 @@
         </ComboboxOptions>
       </TransitionRoot>
     </Combobox>
-    <input type="text" name="country" style="display: none" />
-    <span class="error" v-if="errorMessage">{{ errorMessage }}</span>
+    <FormKit
+      :wrapper-class="{ hidden: true }"
+      type="text"
+      name="country"
+      validation="required"
+      :validation-messages="{
+        required: 'Please select your country',
+      }"
+      v-model="formKitCountry"
+    />
   </div>
 </template>
 
@@ -66,21 +69,11 @@
     ComboboxOption,
     TransitionRoot,
   } from "@headlessui/vue";
-  //   import { useField } from "vee-validate";
-  //   import * as yup from "yup";
   import countries from "@/data/countries.json";
   //   import Country from "~/types/country";
-  console.log(countries);
-
+  const formKitCountry = ref();
   const selected = ref();
   const query = ref("");
-  const errorMessage = ref(null);
-  const value = ref("");
-  //   const { errorMessage, value } = useField(
-  //     "country",
-  //     yup.string().required("Country is required").nullable(),
-  //   );
-
   const filtererdCountries = computed(() =>
     query.value === ""
       ? countries
@@ -93,7 +86,9 @@
   );
   watch(selected, () => {
     if (selected.value) {
-      value.value = selected.value.name.toLowerCase();
+      formKitCountry.value = selected.value.name.toLowerCase();
+    } else {
+      formKitCountry.value = null;
     }
   });
 </script>

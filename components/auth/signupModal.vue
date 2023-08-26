@@ -12,6 +12,7 @@
       @submit="submitHandler"
       :actions="false"
       :config="{ validationVisibility: 'submit' }"
+      incomplete-message="Please fill all the fields"
     >
       <div class="mb-4 flex">
         <div class="w-1/2 pr-2">
@@ -116,8 +117,6 @@
 <script setup>
   const submitted = ref(false);
   const submitHandler = async (formData) => {
-    // await new Promise((r) => setTimeout(r, 1000));
-    // submitted.value = true;
     console.log("signup submitted", formData);
   };
   const handleIconClick = (node, e) => {

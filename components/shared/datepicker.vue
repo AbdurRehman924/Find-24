@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="auth-input"
-    :class="{
-      // 'field-error': errorMessage,
-    }"
-  >
+  <div class="auth-input">
     <VueDatePicker
       v-model="date"
       placeholder="Date of Birth"
@@ -13,6 +8,7 @@
       aria-label="Date of Birth"
     />
     <FormKit
+      :wrapper-class="{ hidden: true }"
       type="date"
       name="dob"
       validation="required"
@@ -21,9 +17,6 @@
       }"
       v-model="formKitDate"
     />
-    <!-- <input type="date" name="dob" style="display: none" /> -->
-    <!-- <FormKit type="date" style="display: none" /> -->
-    <!-- <span class="error" v-if="errorMessage">{{ errorMessage }}</span> -->
   </div>
 </template>
 
@@ -36,31 +29,13 @@
   watch(date, () => {
     if (date.value) {
       formKitDate.value = date.value.toISOString().substring(0, 10);
+    } else {
+      formKitDate.value = null;
     }
   });
-
-  // const { errorMessage, value } = useField(
-  //   "dob",
-  //   yup
-  //     .date()
-  //     .required("Date of birth is required")
-  //     .max(
-  //       new Date(
-  //         new Date().setFullYear(new Date().getFullYear() - 16),
-  //       ),
-  //       "You must be atleast 16 years old",
-  //     ),
-  // );
 </script>
 
 <style lang="postcss" scoped>
-  /* @import "~/assets/css/auth.css"; */
-  /* .auth-input {
-    input[type="date"] {
-      @apply h-full w-full border-none px-6 py-4 outline-none
-      focus:border-none focus:ring-0;
-    }
-  } */
   input {
     @apply border-palma outline-none;
   }

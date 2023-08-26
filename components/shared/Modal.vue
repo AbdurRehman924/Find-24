@@ -1,19 +1,28 @@
 <script setup lang="ts">
+  import { emit } from "process";
+
   const props = defineProps<{
     controller: ReturnType<typeof useModal>;
     title: string;
   }>();
+  const emits = defineEmits(["close"]);
   const { controller } = toRefs(props);
   const { isOpen, close } = controller.value;
 
   const { escape } = useMagicKeys();
 
   watch(escape, () => {
-    isOpen.value && close();
+    if (isOpen.value) {
+      close();
+      emits("close");
+    }
   });
 
   const modalContentElement = ref();
-  onClickOutside(modalContentElement, () => close());
+  onClickOutside(modalContentElement, () => {
+    close();
+    emits("close");
+  });
 </script>
 
 <template>
@@ -55,7 +64,7 @@
               >
                 <div
                   class="absolute top-7 cursor-pointer px-8 hover:font-medium"
-                  @click="close"
+                  @click="$emit('close')"
                 >
                   X
                 </div>
@@ -64,7 +73,7 @@
                 </div>
               </div>
               <div
-                class="h-[calc(100vh_-_72px)] overflow-y-auto md:max-h-[600px]"
+                class="max-h-[calc(100vh_-_72px)] overflow-y-auto md:max-h-[600px]"
               >
                 <slot> </slot>
               </div>

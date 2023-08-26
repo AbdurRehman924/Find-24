@@ -15,6 +15,8 @@
       <div class="mb-4">
         <div class="mb-2 text-sm font-medium">Email address</div>
         <FormKit
+          :wrapper-class="{ 'bg-black': true }"
+          :input-class="{ 'border-black': true }"
           name="email"
           type="email"
           class=""
@@ -37,6 +39,22 @@
       <div class="mb-8">Forget Password?</div>
       <FormKit type="submit" label="Login" />
     </FormKit>
+    <div class="mt-6 flex flex-col gap-y-4 text-center text-corduroy">
+      <div class="flex items-center justify-center gap-x-2">
+        <div class="w-1/2 border-b border-chinese-white"></div>
+        <div>or</div>
+        <div class="w-1/2 border-b border-chinese-white"></div>
+      </div>
+      <div class="flex justify-center gap-x-6">
+        <IconsGooglecolored />
+        <IconsFacebookcolored />
+        <IconsTwittercolored />
+      </div>
+      <div class="flex justify-center gap-x-1 text-sm">
+        Already have an account?
+        <div class="text-palma">Sign up instead</div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
