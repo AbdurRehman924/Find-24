@@ -41,6 +41,14 @@
         >
           <AuthSignupModal />
         </SharedModal>
+
+        <SharedModal
+          title=""
+          :controller="forgotPasswordModalController"
+          @close="router.push({ query: null })"
+        >
+          <AuthForgotPasswordModal />
+        </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
         >
@@ -79,7 +87,7 @@
             @click="
               () => {
                 mobileUIOpen = false;
-                signupModalController.open();
+                router.push({ query: { signup: true } });
               }
             "
             >Signup</NuxtLink
@@ -91,7 +99,7 @@
             @click="
               () => {
                 mobileUIOpen = false;
-                loginModalController.open();
+                router.push({ query: { login: true } });
               }
             "
           >
@@ -115,6 +123,7 @@
   const mobileUIOpen = ref(false);
   const loginModalController = useModal();
   const signupModalController = useModal();
+  const forgotPasswordModalController = useModal();
   console.log("route", route.query.login);
   handleAuthQuery();
   watch(
@@ -124,24 +133,21 @@
     },
   );
   function handleAuthQuery() {
+    closeAllModals();
     if (route.query.login == "true") {
       loginModalController.open();
     } else if (route.query.signup == "true") {
       signupModalController.open();
-    } else {
-      closeModals();
+    } else if (route.query.forgotPassword == "true") {
+      forgotPasswordModalController.open();
     }
   }
-  function closeModals() {
+  function closeAllModals() {
     mobileUIOpen.value = false;
     loginModalController.close();
     signupModalController.close();
+    forgotPasswordModalController.close();
   }
-  const closeLoginModal = () => {
-    // console.log("closeLoginModal");
-    // loginModalController.close();
-    router.push({ query: null });
-  };
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {

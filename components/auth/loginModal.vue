@@ -36,7 +36,12 @@
           validation="required"
         />
       </div>
-      <div class="mb-8">Forget Password?</div>
+      <div
+        class="mb-8 cursor-pointer hover:underline"
+        @click="$router.push({ query: { forgotPassword: true } })"
+      >
+        Forgot Password?
+      </div>
       <FormKit type="submit" label="Login" />
     </FormKit>
     <div class="mt-6 flex flex-col gap-y-4 text-center text-corduroy">
@@ -52,7 +57,12 @@
       </div>
       <div class="flex justify-center gap-x-1 text-sm">
         Already have an account?
-        <div class="text-palma">Sign up instead</div>
+        <div
+          class="cursor-pointer text-palma hover:underline"
+          @click="$router.push({ query: { signup: true } })"
+        >
+          Sign up instead
+        </div>
       </div>
     </div>
   </div>

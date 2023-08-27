@@ -109,7 +109,12 @@
       </div>
       <div class="flex justify-center gap-x-1 text-sm">
         Already have an account?
-        <div class="text-palma">Sign-in instead</div>
+        <div
+          class="cursor-pointer text-palma hover:underline"
+          @click="$router.push({ query: { login: true } })"
+        >
+          Sign-in instead
+        </div>
       </div>
     </div>
   </div>

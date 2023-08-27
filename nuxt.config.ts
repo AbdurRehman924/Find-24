@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      baseURL: process.env.BASE_URL,
+      // baseURL: process.env.BASE_URL,
+      baseURL: "https://api.find24.app/api/v1",
     },
   },
   tailwindcss: {

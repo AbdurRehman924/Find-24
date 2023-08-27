@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { emit } from "process";
-
   const props = defineProps<{
     controller: ReturnType<typeof useModal>;
     title: string;
