@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b-[0.5px] border-chinese-white">
+  <div class="border-b-[0.5px] border-chinese-white bg-white">
     <div
       class="relative mx-auto flex h-20 max-w-1920 justify-between px-4 py-6 sm:px-8 lg:px-16"
     >
@@ -16,27 +16,39 @@
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
           <button
             class="desk_nav_links"
-            @click="router.push({ query: { signup: true } })"
+            @click="useModals().forgotPasswordModal.open"
+          >
+            Forgot pasword
+          </button>
+          <button
+            class="desk_nav_links"
+            @click="useModals().resetPasswordModal.open"
+          >
+            Reset password
+          </button>
+          <button
+            class="desk_nav_links"
+            @click="useModals().signupModal.open"
           >
             Sign up
           </button>
           <button
             class="desk_nav_links"
-            @click="router.push({ query: { login: true } })"
+            @click="useModals().loginModal.open"
           >
             Log in
           </button>
         </div>
         <SharedModal
           title="Log in"
-          :controller="loginModalController"
+          :controller="useModals().loginModal"
           @close="router.push({ query: null })"
         >
           <AuthLoginModal />
         </SharedModal>
         <SharedModal
           title="Sign up"
-          :controller="signupModalController"
+          :controller="useModals().signupModal"
           @close="router.push({ query: null })"
         >
           <AuthSignupModal />
@@ -44,10 +56,16 @@
 
         <SharedModal
           title=""
-          :controller="forgotPasswordModalController"
+          :controller="useModals().forgotPasswordModal"
           @close="router.push({ query: null })"
         >
           <AuthForgotPasswordModal />
+        </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().resetPasswordModal"
+        >
+          <AuthResetPasswordModal />
         </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
@@ -87,19 +105,18 @@
             @click="
               () => {
                 mobileUIOpen = false;
-                router.push({ query: { signup: true } });
+                useModals().signupModal.open;
               }
             "
             >Signup</NuxtLink
           >
-          <!-- <button>Signup</button> -->
           <NuxtLink
             to="/"
             class="mobile_nav_links"
             @click="
               () => {
                 mobileUIOpen = false;
-                router.push({ query: { login: true } });
+                useModals().signupModal.open;
               }
             "
           >
@@ -117,37 +134,9 @@
   </div>
 </template>
 <script setup>
-  import { useModal } from "@/composables/useModal.ts";
   const router = useRouter();
   const route = useRoute();
   const mobileUIOpen = ref(false);
-  const loginModalController = useModal();
-  const signupModalController = useModal();
-  const forgotPasswordModalController = useModal();
-  console.log("route", route.query.login);
-  handleAuthQuery();
-  watch(
-    () => route.query,
-    () => {
-      handleAuthQuery();
-    },
-  );
-  function handleAuthQuery() {
-    closeAllModals();
-    if (route.query.login == "true") {
-      loginModalController.open();
-    } else if (route.query.signup == "true") {
-      signupModalController.open();
-    } else if (route.query.forgotPassword == "true") {
-      forgotPasswordModalController.open();
-    }
-  }
-  function closeAllModals() {
-    mobileUIOpen.value = false;
-    loginModalController.close();
-    signupModalController.close();
-    forgotPasswordModalController.close();
-  }
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {

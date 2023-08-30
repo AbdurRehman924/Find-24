@@ -12,14 +12,14 @@
   watch(escape, () => {
     if (isOpen.value) {
       close();
-      emits("close");
+      // emits("close");
     }
   });
 
   const modalContentElement = ref();
   onClickOutside(modalContentElement, () => {
     close();
-    emits("close");
+    // emits("close");
   });
 </script>
 
@@ -62,8 +62,9 @@
               >
                 <div
                   class="absolute top-7 cursor-pointer px-8 hover:font-medium"
-                  @click="$emit('close')"
+                  @click="close"
                 >
+                  <!-- @click="$emit('close')" -->
                   X
                 </div>
                 <div class="w-full text-center text-xl font-semibold">

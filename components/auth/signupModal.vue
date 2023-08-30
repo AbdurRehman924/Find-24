@@ -111,8 +111,9 @@
         Already have an account?
         <div
           class="cursor-pointer text-palma hover:underline"
-          @click="$router.push({ query: { login: true } })"
+          @click="useModals().loginModal.open"
         >
+          <!-- @click="$router.push({ query: { login: true } })" -->
           Sign-in instead
         </div>
       </div>

@@ -38,8 +38,9 @@
       </div>
       <div
         class="mb-8 cursor-pointer hover:underline"
-        @click="$router.push({ query: { forgotPassword: true } })"
+        @click="useModals().forgotPasswordModal.open"
       >
+        <!-- @click="$router.push({ query: { forgotPassword: true } })" -->
         Forgot Password?
       </div>
       <FormKit type="submit" label="Login" />
@@ -59,8 +60,9 @@
         Already have an account?
         <div
           class="cursor-pointer text-palma hover:underline"
-          @click="$router.push({ query: { signup: true } })"
+          @click="useModals().signupModal.open"
         >
+          <!-- @click="$router.push({ query: { signup: true } })" -->
           Sign up instead
         </div>
       </div>
