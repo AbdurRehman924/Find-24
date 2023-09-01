@@ -85,20 +85,23 @@
       node.props.type === "password" ? "text" : "password";
   };
   const handleLogin = async (formData) => {
-    console.log("login submitted", formData);
-    //   signinFailed.value = false;
-    //   const { data, error } = await userStore.login(
-    //     formData.email,
-    //     formData.password,
-    //   );
-    //   if (error.value) {
-    //     console.log("login failed");
-    //     signinFailed.value = true;
-    //     return;
-    //   } else {
-    //     console.log("login success");
-    //     console.log(data.value);
-    //   }
+    // console.log("login submitted", formData);
+    signinFailed.value = false;
+    const { data, error } = await userStore.login(
+      formData.email,
+      formData.password,
+    );
+    if (error.value) {
+      console.log("login failed");
+      if (error.value.data.code) {
+      }
+      // console.log(error.value.data.code);
+      signinFailed.value = true;
+      return;
+    } else {
+      console.log("login success");
+      console.log(data.value);
+    }
   };
 </script>
 <style lang="postcss" scoped></style>

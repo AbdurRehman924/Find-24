@@ -93,7 +93,7 @@
             @click="
               () => {
                 mobileUIOpen = false;
-                useModals().signupModal.open;
+                useModals().signupModal.open();
               }
             "
             >Signup</NuxtLink
@@ -104,7 +104,7 @@
             @click="
               () => {
                 mobileUIOpen = false;
-                useModals().signupModal.open;
+                useModals().loginModal.open();
               }
             "
           >

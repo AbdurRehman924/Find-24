@@ -1,5 +1,18 @@
 <template>
-  <div class="p-6">
+  <div v-if="submitted" class="p-6">
+    <div>Signup successful.</div>
+    <div>
+      Please
+      <button
+        @click="useModals().loginModal.open()"
+        class="text-malachite hover:underline"
+      >
+        login
+      </button>
+      with your credentials
+    </div>
+  </div>
+  <div v-if="!submitted" class="p-6">
     <div class="mb-1 mt-2 text-2xl font-semibold">
       Create a free account
     </div>
@@ -94,7 +107,7 @@
         <div class="mb-2 text-sm font-medium">Country</div>
         <SharedCountryPicker />
       </div>
-      <div class="mb-4 text-grenadier px-2">
+      <div class="mb-4 px-2 text-grenadier">
         <div v-for="error in signupErrors">
           {{ error.msg }}
         </div>
@@ -134,6 +147,7 @@
 
     if (data.value) {
       console.log("signup success", data.value);
+      submitted.value = true;
     } else {
       console.log("signup error", error.value.data);
       signupErrors.value = error.value.data.errors;
