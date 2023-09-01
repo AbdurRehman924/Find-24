@@ -9,7 +9,7 @@
     <FormKit
       type="form"
       id="login-form"
-      @submit="submitHandler"
+      @submit="handleSignup"
       :actions="false"
       :config="{ validationVisibility: 'submit' }"
       incomplete-message="Please fill all the fields"
@@ -79,7 +79,7 @@
           <FormKit
             type="select"
             name="gender"
-            :options="['Male', 'Female', 'Other']"
+            :options="['male', 'female', 'other']"
             class=""
             placeholder="Select Gender"
             validation="required"
@@ -93,6 +93,11 @@
       <div class="mb-4 flex flex-col">
         <div class="mb-2 text-sm font-medium">Country</div>
         <SharedCountryPicker />
+      </div>
+      <div class="mb-4 text-grenadier px-2">
+        <div v-for="error in signupErrors">
+          {{ error.msg }}
+        </div>
       </div>
       <FormKit type="submit">Sign up</FormKit>
     </FormKit>
@@ -122,8 +127,17 @@
 </template>
 <script setup>
   const submitted = ref(false);
-  const submitHandler = async (formData) => {
-    console.log("signup submitted", formData);
+  const signupErrors = ref({});
+  const handleSignup = async (formData) => {
+    // console.log("signup submitted", formData);
+    const { error, data } = await useSignup(formData);
+
+    if (data.value) {
+      console.log("signup success", data.value);
+    } else {
+      console.log("signup error", error.value.data);
+      signupErrors.value = error.value.data.errors;
+    }
   };
   const handleIconClick = (node, e) => {
     node.props.suffixIcon =

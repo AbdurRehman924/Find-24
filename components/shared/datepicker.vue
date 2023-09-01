@@ -11,9 +11,10 @@
       :wrapper-class="{ hidden: true }"
       type="date"
       name="dob"
-      validation="required"
+      :validation="[['required'], ['date_before', maxDOB()]]"
       :validation-messages="{
         required: 'Date of birth is required',
+        date_before: 'You must be at least 16 years old',
       }"
       v-model="formKitDate"
     />
@@ -23,7 +24,13 @@
 <script setup lang="ts">
   import VueDatePicker from "@vuepic/vue-datepicker";
   import "@vuepic/vue-datepicker/dist/main.css";
+  const maxDOB = () => {
+    const maxDateOfBirth = new Date();
+    maxDateOfBirth.setFullYear(maxDateOfBirth.getFullYear() - 16);
+    console.log(maxDateOfBirth.toISOString().substring(0, 10));
 
+    return maxDateOfBirth.toISOString().substring(0, 10);
+  };
   const date = ref();
   const formKitDate = ref();
   watch(date, () => {
@@ -35,8 +42,4 @@
   });
 </script>
 
-<style lang="postcss" scoped>
-  input {
-    @apply border-palma outline-none;
-  }
-</style>
+<style lang="postcss" scoped></style>
