@@ -78,6 +78,7 @@
   </div>
 </template>
 <script setup>
+  import { useUserStore } from "@/stores/userStore";
   const emailConfirmed = ref(false);
   const emailError = ref(false);
   const showConfirmation = ref(false);
@@ -95,11 +96,17 @@
     }
   };
   const handleResetCodeVerification = async (formData) => {
-    const { data, error } =
-      await useResetPassword().verifyResetCode(formData.resetCode);
+    const { data, error } = await useResetPassword().verifyResetCode(
+      formData.resetCode,
+    );
     if (data.value) {
       invalidCode.value = false;
       showConfirmation.value = true;
+      // console.log(data.value.data.token);
+      // let { resetPasswordToken } = useUserStore();
+      // resetPasswordToken = data.value.data.token;
+      // resetPasswordToken = data.value;
+      useUserStore().resetPasswordToken = data.value.data.token;
       await new Promise(
         (resolve) =>
           setTimeout(() => {

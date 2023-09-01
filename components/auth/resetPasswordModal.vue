@@ -20,21 +20,6 @@
       incomplete-message="Please fill all the fields"
     >
       <div class="mb-4">
-        <div class="mb-2 flex justify-between text-sm font-medium">
-          <div>Enter the code form your email here</div>
-          <div v-if="invalidCode" class="text-grenadier">
-            Invalid Code
-          </div>
-        </div>
-        <FormKit
-          type="text"
-          validation="required|length:4,4|numeric"
-          name="passwordResetToken"
-          placeholder="Enter the code"
-          validation-label="Password reset code"
-        ></FormKit>
-      </div>
-      <div class="mb-4">
         <div class="mb-2 text-sm font-medium">Password</div>
         <FormKit
           name="password"
@@ -61,15 +46,14 @@
             confirm: 'Passwords do not match',
           }"
         />
-        <!-- validation-label="Password confirmation" -->
       </div>
 
-      <FormKit type="submit" label="Login" />
+      <FormKit type="submit" label="Reset Password" />
     </FormKit>
   </div>
 </template>
 <script setup>
-import { useUserStore } from '@/stores/userStore';
+  import { useUserStore } from "@/stores/userStore";
 
   const invalidCode = ref(false);
   const showConfirmation = ref(false);
@@ -79,14 +63,14 @@ import { useUserStore } from '@/stores/userStore';
       formData.password,
       resetPasswordToken,
     );
-    if (error) {
-      invalidCode.value = true;
-      console.log("error");
-      console.log(error);
-    } else {
+    if (data.value) {
       showConfirmation.value = true;
       console.log("data");
       console.log(data);
+    } else {
+      invalidCode.value = true;
+      console.log("error");
+      console.log(error);
     }
   };
   const handleIconClick = (node, e) => {

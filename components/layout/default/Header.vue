@@ -16,18 +16,6 @@
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
           <button
             class="desk_nav_links"
-            @click="useModals().forgotPasswordModal.open"
-          >
-            Forgot pasword
-          </button>
-          <button
-            class="desk_nav_links"
-            @click="useModals().resetPasswordModal.open"
-          >
-            Reset password
-          </button>
-          <button
-            class="desk_nav_links"
             @click="useModals().signupModal.open"
           >
             Sign up
