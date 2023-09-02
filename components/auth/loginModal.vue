@@ -2,7 +2,7 @@
   <div class="w-full p-6 md:w-[520px]">
     <div class="mb-6 mt-2 text-2xl font-semibold">Welcome back</div>
     <div class="text-grenadier" v-if="signinFailed">
-      Invalid credentials
+      {{ message }}
     </div>
     <FormKit
       type="form"
@@ -40,7 +40,6 @@
         class="mb-8 cursor-pointer hover:underline"
         @click="useModals().forgotPasswordModal.open"
       >
-        <!-- @click="$router.push({ query: { forgotPassword: true } })" -->
         Forgot Password?
       </div>
       <FormKit type="submit" label="Login" />
@@ -62,7 +61,6 @@
           class="cursor-pointer text-palma hover:underline"
           @click="useModals().signupModal.open"
         >
-          <!-- @click="$router.push({ query: { signup: true } })" -->
           Sign up instead
         </div>
       </div>
@@ -74,6 +72,7 @@
   const userStore = useUserStore();
   const submitted = ref(false);
   const signinFailed = ref(false);
+  const message = ref("");
   const submitHandler = async () => {
     await new Promise((r) => setTimeout(r, 1000));
     submitted.value = true;
@@ -85,7 +84,6 @@
       node.props.type === "password" ? "text" : "password";
   };
   const handleLogin = async (formData) => {
-    // console.log("login submitted", formData);
     signinFailed.value = false;
     const { data, error } = await userStore.login(
       formData.email,
@@ -93,14 +91,13 @@
     );
     if (error.value) {
       console.log("login failed");
-      if (error.value.data.code) {
-      }
-      // console.log(error.value.data.code);
+      message.value = error.value.data.message;
       signinFailed.value = true;
       return;
     } else {
       console.log("login success");
       console.log(data.value);
+      useModals().loginModal.close();
     }
   };
 </script>

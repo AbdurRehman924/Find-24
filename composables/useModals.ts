@@ -3,6 +3,8 @@ const modals = {
   signup: modalController(),
   forgotPassword: modalController(),
   resetPassword: modalController(),
+  emailConfirmationSuccess: modalController(),
+  emailConfirmationFailed: modalController(),
 };
 const closeModals = () => {
   let modal: keyof typeof modals;
@@ -18,6 +20,8 @@ export const useModals = () => {
     signupModal: modals.signup,
     forgotPasswordModal: modals.forgotPassword,
     resetPasswordModal: modals.resetPassword,
+    emailConfirmSuccessModal: modals.emailConfirmationSuccess,
+    emailConfirmFailedModal: modals.emailConfirmationFailed,
   };
 };
 function modalController() {

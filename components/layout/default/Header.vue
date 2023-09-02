@@ -55,6 +55,18 @@
         >
           <AuthResetPasswordModal />
         </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().emailConfirmSuccessModal"
+        >
+          <AuthConfirmEmailSuccess />
+        </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().emailConfirmFailedModal"
+        >
+          <AuthConfirmEmailFailed />
+        </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
         >
