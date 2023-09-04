@@ -46,33 +46,7 @@ export const useUserStore = defineStore("user", {
         console.log(error);
       }
     },
-    async updateUserProfileData(data: Partial<User>) {
-      let key: keyof User;
-      for (key in data) {
-        this.user[key] = data[key];
-      }
-      const updatedDataToSend = {
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
-        country: this.user.country,
-        gender: this.user.gender,
-        dob: this.user.dob,
-        city: this.user.city,
-        zipCode: this.user.zipCode,
-        phone: this.user.phone,
-        street: this.user.street,
-      };
-      const { res, error } = await useUpdateUserData(
-        updatedDataToSend,
-      );
-      if (error.value) {
-        console.log("If else error", error);
-        return;
-      } else {
-        console.log(res.value?.message, res.value?.code);
-      }
-      return { res, error };
-    },
+   
   },
   getters: {
     isLoggedIn(state) {
