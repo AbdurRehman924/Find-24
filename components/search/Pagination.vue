@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
 
   const servicesStore = useServicesStore();
 
-  const { page, totalPages } = storeToRefs(servicesStore);
+  const { page, totalPages, setPage, nextPage, previousPage } =
+    useServices();
 
   const isFirstPage = computed(() => page.value === 0);
   const isLastPage = computed(() => page.value === totalPages.value);
@@ -27,7 +27,7 @@
     <button
       class="flex items-center"
       :class="{ 'opacity-60': isFirstPage }"
-      @click="servicesStore.prevPage"
+      @click="previousPage"
       :disabled="isFirstPage"
     >
       <IconsBackarrow />
@@ -39,7 +39,7 @@
       :class="{
         'rounded-full bg-palma text-white': i == page,
       }"
-      @click="servicesStore.goToPage(i)"
+      @click="setPage(i)"
     >
       {{ i + 1 }}
     </button>
@@ -47,7 +47,7 @@
       class="flex items-center"
       :class="{ 'opacity-60': isLastPage }"
       :disabled="isLastPage"
-      @click="servicesStore.nextPage"
+      @click="nextPage"
     >
       <span>Next</span>
       <IconsNextarrow />

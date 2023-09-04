@@ -17,10 +17,9 @@
 
   const { token } = useRuntimeConfig().public.mapbox;
 
-  const servicesStore = useServicesStore();
-  const currentService = ref<Service | null>(null);
+  const { currentPopUp, setCurrentPopUp } = useServices();
 
-  const { coordinates } = storeToRefs(servicesStore);
+  const { coordinates } = useServices();
 
   let map: Map | null = null;
   const markers: Marker[] = [];
@@ -53,7 +52,6 @@
   function removePopup() {
     popup.remove();
     map?.zoomTo(6, { duration: 5000 });
-    currentService.value = null;
   }
 
   function addMarkers() {
@@ -87,10 +85,7 @@
     marker: Marker,
     coordinates: { lat: number; lng: number },
   ) {
-    currentService.value = servicesStore.getServiceByCoords(
-      coordinates,
-    ) as Service;
-
+    setCurrentPopUp(coordinates);
     flyToMarker(marker);
     updatePopUp(marker);
   }
@@ -128,8 +123,8 @@
   <ClientOnly>
     <SearchResultCard
       ref="popUpEl"
-      v-show="currentService"
-      :service="currentService"
+      v-show="currentPopUp"
+      :service="currentPopUp"
     >
       <button
         class="absolute left-1.5 top-1.5 rounded-full bg-white"

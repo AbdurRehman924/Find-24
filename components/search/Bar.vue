@@ -1,11 +1,5 @@
 <script setup lang="ts">
-  import useServicesStore from "~/stores/services";
-
-  const { fetchServices } = useServicesStore();
-
-  async function handleSearch() {
-    await fetchServices();
-  }
+  async function handleSearch() {}
 </script>
 
 <template>

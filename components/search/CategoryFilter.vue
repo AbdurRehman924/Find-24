@@ -1,11 +1,7 @@
 <script setup lang="ts">
-  import { storeToRefs } from "pinia";
-  import useServicesStore from "~/stores/services";
   import constants from "~/constants";
 
-  const servicesStore = useServicesStore();
-
-  const { categoryFacets } = storeToRefs(servicesStore);
+  const { categoryFacets, toggleFacet, removeFacet } = useServices();
 
   const maxFacets = ref(4);
   const showMore = computed(
@@ -21,19 +17,19 @@
   }
 
   function handleCategoryFilter(categoryValue: string) {
-    servicesStore.toggleFacets({
-      name: constants.CATEGORY_FACET,
-      value: categoryValue,
-    });
+    toggleFacet(constants.CATEGORY_FACET, categoryValue);
   }
 
   async function handleReset() {
-    await servicesStore.removeFacet(constants.CATEGORY_FACET);
+    removeFacet(constants.CATEGORY_FACET);
   }
 </script>
 
 <template>
-  <div class="py-6 text-sm text-dark_corduroy">
+  <div
+    class="py-6 text-sm text-dark_corduroy"
+    v-if="categoryFacets && categoryFacets.length > 1"
+  >
     <div class="mb-5 flex justify-between">
       <h4 class="font-medium text-dark-jungle-green">Service Type</h4>
       <button class="text-xs" @click="handleReset">Reset</button>

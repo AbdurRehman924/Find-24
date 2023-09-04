@@ -45,16 +45,11 @@
       Filters
     </h3>
     <div class="px-4">
-      <SearchCategoryFilter
-        v-if="categoryFacets && categoryFacets.length > 1"
-      />
-      <div
-        class="h-[0.5px] rounded-full bg-chinese-white"
-        v-if="categoryFacets && categoryFacets.length > 1"
-      ></div>
-      <SearchPriceFilter @changed="handlePriceChange" />
-      <div class="h-[0.5px] rounded-full bg-chinese-white"></div>
-      <SearchRatingFilter />
+      <div class="divide-y divide-chinese-white">
+        <SearchCategoryFilter />
+        <SearchPriceFilter @changed="handlePriceChange" />
+        <SearchRatingFilter />
+      </div>
       <div class="flex items-center justify-between py-6 text-sm">
         <button class="font-medium text-corduroy underline">
           Clear All

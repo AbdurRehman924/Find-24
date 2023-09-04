@@ -1,14 +1,5 @@
 <script setup lang="ts">
-  import { storeToRefs } from "pinia";
-  import useServicesStore from "~/stores/services";
-
-  const servicesStore = useServicesStore();
-
-  const { services } = storeToRefs(servicesStore);
-
-  onMounted(async () => {
-    await servicesStore.fetchServices();
-  });
+  const { services } = useServices();
 </script>
 
 <template>
