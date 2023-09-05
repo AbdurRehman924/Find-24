@@ -22,40 +22,30 @@ export const useServices = () => {
   const { $algoliaHelper } = useNuxtApp();
 
   function searchServices() {
-    if (category.value && location.value) {
-      $algoliaHelper.setQueryParameter(
-        "aroundLatLng",
-        `${location.value.center[1]},${location.value.center[0]}`,
-      );
-      $algoliaHelper.setQueryParameter(
-        "aroundRadius",
-        constants.MAX_AROUND_RADIUS,
-      );
-      $algoliaHelper.setQueryParameter(
-        "filters",
-        `category:${category.value}`,
-      );
-    }
+    const filters = [];
+
     if (category.value) {
-      $algoliaHelper.setQueryParameter(
-        "filters",
-        `category:${category.value}`,
-      );
-    } else if (!category.value) {
-      $algoliaHelper.setQueryParameter("filters", "");
+      filters.push(`category:${category.value}`);
     }
+
     if (location.value) {
+      const { center } = location.value;
       $algoliaHelper.setQueryParameter(
         "aroundLatLng",
-        `${location.value.center[1]},${location.value.center[0]}`,
+        `${center[1]},${center[0]}`,
       );
       $algoliaHelper.setQueryParameter(
         "aroundRadius",
         constants.MAX_AROUND_RADIUS,
       );
-    } else if (!location.value) {
+    } else {
       $algoliaHelper.setQueryParameter("aroundLatLng", "");
     }
+
+    $algoliaHelper.setQueryParameter(
+      "filters",
+      filters.join(" AND "),
+    );
     $algoliaHelper.search();
   }
 
