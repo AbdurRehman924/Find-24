@@ -5,11 +5,8 @@
     ComboboxOptions,
     ComboboxOption,
   } from "@headlessui/vue";
-  import { storeToRefs } from "pinia";
-  import useServicesStore from "~/stores/services";
 
-  const servicesStore = useServicesStore();
-  const { category } = storeToRefs(servicesStore);
+  const { category, resetCategory } = useServices();
 
   const categories = [
     "Gardner",
@@ -33,7 +30,7 @@
   async function handleReset() {
     query.value = "";
     if (category.value) {
-      await servicesStore.resetCategory();
+      resetCategory();
     }
   }
 

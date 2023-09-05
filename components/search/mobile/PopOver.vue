@@ -3,13 +3,14 @@
     (e: "close"): void;
   }>();
 
-  const { removeAllFacets } = useServices();
+  const { removeAllFacets, searchServices } = useServices();
 
   function handleClose() {
     emits("close");
   }
 
-  async function handleSearch() {
+  function handleSearch() {
+    searchServices();
     emits("close");
   }
 </script>

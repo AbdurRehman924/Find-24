@@ -1,10 +1,5 @@
 <script lang="ts" setup>
-  import { storeToRefs } from "pinia";
-  import useServicesStore from "~/stores/services";
-
-  const servicesStore = useServicesStore();
-
-  const { category } = storeToRefs(servicesStore);
+  const { category } = useServices();
 
   const showPopOver = ref(false);
   const showFilters = ref(false);

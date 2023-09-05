@@ -1,6 +1,7 @@
 import { SearchResults } from "algoliasearch-helper";
 import Service from "~/types/service";
 import constants from "~/constants";
+import { Feature } from "types/mapbox";
 
 const services = ref<Service[] | null>(null);
 const categoryFacets = ref<SearchResults.FacetValue[]>([]);
@@ -14,11 +15,62 @@ const overAllMaxPrice = ref<number>(0);
 const page = ref<number>(0);
 const totalPages = ref<number>(0);
 
+const category = ref<string>("");
+const location = ref<Feature | null>(null);
+
 export const useServices = () => {
   const { $algoliaHelper } = useNuxtApp();
 
   function searchServices() {
+    if (category.value && location.value) {
+      $algoliaHelper.setQueryParameter(
+        "aroundLatLng",
+        `${location.value.center[1]},${location.value.center[0]}`,
+      );
+      $algoliaHelper.setQueryParameter(
+        "aroundRadius",
+        constants.MAX_AROUND_RADIUS,
+      );
+      $algoliaHelper.setQueryParameter(
+        "filters",
+        `category:${category.value}`,
+      );
+    }
+    if (category.value) {
+      $algoliaHelper.setQueryParameter(
+        "filters",
+        `category:${category.value}`,
+      );
+    } else if (!category.value) {
+      $algoliaHelper.setQueryParameter("filters", "");
+    }
+    if (location.value) {
+      $algoliaHelper.setQueryParameter(
+        "aroundLatLng",
+        `${location.value.center[1]},${location.value.center[0]}`,
+      );
+      $algoliaHelper.setQueryParameter(
+        "aroundRadius",
+        constants.MAX_AROUND_RADIUS,
+      );
+    } else if (!location.value) {
+      $algoliaHelper.setQueryParameter("aroundLatLng", "");
+    }
     $algoliaHelper.search();
+  }
+
+  function resetCategory() {
+    if (!category.value) return;
+
+    category.value = "";
+    searchServices();
+  }
+
+  function resetLocation() {
+    if (!location.value) return;
+
+    location.value = null;
+    searchServices();
   }
 
   function setPage(page: number) {
@@ -154,6 +206,8 @@ export const useServices = () => {
 
   return {
     searchServices,
+    resetCategory,
+    resetLocation,
     toggleFacet,
     removeFacet,
     applyNumericFacet,
@@ -163,6 +217,8 @@ export const useServices = () => {
     setPage,
     nextPage,
     previousPage,
+    category,
+    location,
     services: computed(() => services.value),
     categoryFacets: computed(() => categoryFacets.value),
     ratingFacets: computed(() => ratingFacets.value),

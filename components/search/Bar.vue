@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  async function handleSearch() {}
+  const { searchServices } = useServices();
 </script>
 
 <template>
@@ -11,7 +11,7 @@
     <SearchLocationAutoComplete class="grow" />
     <button
       class="font-semi flex items-center gap-2 whitespace-nowrap rounded-4xl bg-palma px-4 py-3.5 text-sm text-white hover:bg-islamic-green focus:bg-islamic-green"
-      @click="handleSearch"
+      @click="searchServices"
     >
       <IconsSearch />
       <span>Find Providers</span>
