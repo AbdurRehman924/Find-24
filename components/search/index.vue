@@ -1,7 +1,10 @@
 <script lang="ts" setup>
+  import { storeToRefs } from "pinia";
+  import useServicesStore from "~/stores/services";
+
   const showMap = ref(false);
 
-  const { services } = useServices();
+  const { services } = storeToRefs(useServicesStore());
 
   const noServicesFound = computed(
     () => services.value?.length === 0,

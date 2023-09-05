@@ -5,8 +5,13 @@
     ComboboxOptions,
     ComboboxOption,
   } from "@headlessui/vue";
+  import { storeToRefs } from "pinia";
+  import useServiceStore from "~/stores/services";
 
-  const { category, resetCategory } = useServices();
+  const servicesStore = useServiceStore();
+
+  const { resetCategory } = servicesStore;
+  const { category } = storeToRefs(servicesStore);
 
   const categories = [
     "Gardner",

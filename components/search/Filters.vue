@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import useServicesStore from "~/stores/services";
   import constants from "~/constants";
 
   const priceRange = ref<{ min: number; max: number }>({
@@ -6,7 +7,7 @@
     max: 0,
   });
 
-  const { applyNumericFacet, removeAllFacets } = useServices();
+  const { applyNumericFacet, removeAllFacets } = useServicesStore();
 
   function handlePriceChange(range: { min: number; max: number }) {
     priceRange.value = range;

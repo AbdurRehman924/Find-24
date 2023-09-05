@@ -1,166 +1,227 @@
 import { SearchResults } from "algoliasearch-helper";
-import { Feature } from "types/mapbox";
-import { ServicesResponse } from "~/types/APIResponse";
 import Service from "~/types/service";
+import constants from "~/constants";
+import { Feature } from "types/mapbox";
 
 export default defineStore("services", () => {
-  const category = ref("");
-  const location = ref<Feature | null>(null);
-  const noServicesFound = ref(false);
+  // state
+  const { $algoliaHelper } = useNuxtApp();
+
   const services = ref<Service[] | null>(null);
-  const _page = ref(0);
-  const totalPages = ref(0);
-  const overAllMinPrice = ref(0);
-  const overAllMaxPrice = ref(0);
-  const minPrice = ref(0);
-  const maxPrice = ref(0);
-  const categoryFacets = ref<SearchResults.FacetValue[] | null>(null);
-  const ratingFacets = ref<SearchResults.FacetValue[] | null>(null);
+  const categoryFacets = ref<SearchResults.FacetValue[]>([]);
+  const ratingFacets = ref<SearchResults.FacetValue[]>([]);
+  const currentPopUpCoordinates = ref<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+  const overAllMinPrice = ref<number>(0);
+  const overAllMaxPrice = ref<number>(0);
+  const page = ref<number>(0);
+  const totalPages = ref<number>(0);
 
-  const {
-    fetchServices: _fetchServices,
-    applyFacet,
-    removeFacet: _removeFacet,
-    applyNumericFacet,
-  } = useServices();
+  const category = ref<string>("");
+  const location = ref<Feature | null>(null);
 
-  function setState(response: ServicesResponse) {
-    services.value = response.services;
-    _page.value = response.page;
-    totalPages.value = response.totalPages;
-    overAllMinPrice.value = response.overAllMinPrice;
-    overAllMaxPrice.value = response.overAllMaxPrice;
-    minPrice.value = response.minPrice;
-    maxPrice.value = response.maxPrice;
-    categoryFacets.value = response.categoryFacets;
-    ratingFacets.value = response.ratingFacets;
-  }
+  // actions
+  function searchServices() {
+    const filters = [];
 
-  async function resetCategory() {
-    category.value = "";
-    await fetchServices();
-  }
+    if (category.value) {
+      filters.push(`category:${category.value}`);
+    }
 
-  async function resetLocation() {
-    location.value = null;
-    await fetchServices();
-  }
-
-  async function resetAll() {
-    category.value = "";
-    location.value = null;
-    await fetchServices();
-  }
-
-  async function fetchServices(page = 0) {
-    noServicesFound.value = false;
-
-    const categoryValue = category.value || "";
-    const locationValue = location.value
-      ? {
-          lat: location.value.center[1],
-          lng: location.value.center[0],
-        }
-      : undefined;
-
-    const response = await _fetchServices(
-      page,
-      categoryValue,
-      locationValue,
-    );
-
-    if (response) {
-      setState(response);
+    if (location.value) {
+      const { center } = location.value;
+      $algoliaHelper.setQueryParameter(
+        "aroundLatLng",
+        `${center[1]},${center[0]}`,
+      );
+      $algoliaHelper.setQueryParameter(
+        "aroundRadius",
+        constants.MAX_AROUND_RADIUS,
+      );
     } else {
-      noServicesFound.value = true;
+      $algoliaHelper.setQueryParameter("aroundLatLng", "");
     }
+
+    $algoliaHelper.setQueryParameter(
+      "filters",
+      filters.join(" AND "),
+    );
+    $algoliaHelper.search();
   }
 
-  function prevPage() {
-    if (_page.value > 0) {
-      return fetchServices(_page.value - 1);
-    }
+  function resetCategory() {
+    if (!category.value) return;
+
+    category.value = "";
+    searchServices();
+  }
+
+  function resetLocation() {
+    if (!location.value) return;
+
+    location.value = null;
+    searchServices();
+  }
+
+  function setPage(page: number) {
+    $algoliaHelper.setPage(page).search();
   }
 
   function nextPage() {
-    if (_page.value < totalPages.value) {
-      return fetchServices(_page.value + 1);
+    if (page.value < totalPages.value) {
+      setPage(page.value + 1);
     }
   }
 
-  function goToPage(page: number) {
-    return fetchServices(page);
+  function previousPage() {
+    if (page.value > 0) {
+      setPage(page.value - 1);
+    }
   }
 
-  async function toggleFacets(facet: {
-    name: string;
-    value: string;
-  }) {
-    const response = await applyFacet(facet);
-    setState(response);
+  function toggleFacet(facetName: string, FacetValue: string) {
+    $algoliaHelper
+      .toggleFacetRefinement(facetName, FacetValue)
+      .search();
   }
 
-  async function numericFacet(facet: {
-    name: string;
-    range: { min: number; max: number };
-  }) {
-    const response = await applyNumericFacet(facet);
-    setState(response);
+  function removeFacet(facetName: string) {
+    $algoliaHelper
+      .removeDisjunctiveFacetRefinement(facetName)
+      .search();
   }
 
-  async function removeFacet(facetName: string, isNumeric = false) {
-    const response = await _removeFacet(facetName, isNumeric);
-    setState(response);
+  function applyNumericFacet(
+    facetName: string,
+    range: { min: number; max: number },
+  ) {
+    $algoliaHelper
+      .addNumericRefinement(facetName, ">=", range.min)
+      .addNumericRefinement(facetName, "<=", range.max)
+      .search();
   }
 
-  function getServiceByCoords({
-    lat,
-    lng,
-  }: {
+  function removeNumericFacet(facetName: string) {
+    $algoliaHelper.removeNumericRefinement(facetName).search();
+  }
+
+  function removeAllFacets() {
+    $algoliaHelper.clearRefinements().search();
+  }
+
+  function setCurrentPopUp(coordinates: {
     lat: number;
     lng: number;
   }) {
-    if (services.value) {
-      return services.value.find((service) => {
-        return (
-          service._geoloc.lat === lat && service._geoloc.lng === lng
-        );
-      });
-    }
-    return null;
+    currentPopUpCoordinates.value = coordinates;
   }
+
+  // getters
+  const minPrice = computed(() => {
+    if (services.value) {
+      return services.value.reduce((min, service) => {
+        if (service.charges < min) {
+          return service.charges;
+        }
+        return min;
+      }, Infinity);
+    } else {
+      return overAllMinPrice.value;
+    }
+  });
+
+  const maxPrice = computed(() => {
+    if (services.value) {
+      return services.value.reduce((max, service) => {
+        if (service.charges > max) {
+          return service.charges;
+        }
+        return max;
+      }, 0);
+    } else {
+      return overAllMaxPrice.value;
+    }
+  });
 
   const coordinates = computed(() => {
     if (services.value) {
-      return services.value.map((service) => service._geoloc);
+      return services.value.map((service) => {
+        return {
+          lat: service._geoloc.lat,
+          lng: service._geoloc.lng,
+        };
+      });
+    } else {
+      return [];
     }
-    return [];
+  });
+
+  const currentPopUp = computed(() => {
+    if (currentPopUpCoordinates.value && services.value) {
+      return (
+        services.value.find(
+          (service) =>
+            service._geoloc.lat ===
+              currentPopUpCoordinates.value?.lat &&
+            service._geoloc.lng ===
+              currentPopUpCoordinates.value?.lng,
+        ) || null
+      );
+    } else {
+      return null;
+    }
+  });
+
+  onMounted(() => {
+    $algoliaHelper.search();
+    $algoliaHelper.on("result", (result) => {
+      services.value = result.results.hits;
+      categoryFacets.value = result.results.getFacetValues(
+        constants.CATEGORY_FACET,
+        {},
+      ) as SearchResults.FacetValue[];
+      ratingFacets.value = result.results.getFacetValues(
+        constants.RATING_FACET,
+        { sortBy: ["name:asc"] },
+      ) as SearchResults.FacetValue[];
+      overAllMinPrice.value = result.results.getFacetStats(
+        constants.PRICE_FACET,
+      )?.min;
+      overAllMaxPrice.value = result.results.getFacetStats(
+        constants.PRICE_FACET,
+      )?.max;
+      page.value = result.results.page;
+      totalPages.value = result.results.nbPages;
+    });
   });
 
   return {
-    category,
-    location,
-    noServicesFound: computed(() => noServicesFound.value),
-    services: computed(() => services.value),
-    page: computed(() => _page.value),
-    totalPages: computed(() => totalPages.value),
-    overAllMaxPrice: computed(() => overAllMaxPrice.value),
-    overAllMinPrice: computed(() => overAllMinPrice.value),
-    minPrice: computed(() => minPrice.value),
-    maxPrice: computed(() => maxPrice.value),
-    categoryFacets: computed(() => categoryFacets.value),
-    ratingFacets: computed(() => ratingFacets.value),
-    coordinates,
-    fetchServices,
+    searchServices,
     resetCategory,
     resetLocation,
-    resetAll,
-    getServiceByCoords,
-    nextPage,
-    prevPage,
-    goToPage,
-    toggleFacets,
-    numericFacet,
+    toggleFacet,
     removeFacet,
+    applyNumericFacet,
+    removeNumericFacet,
+    removeAllFacets,
+    setCurrentPopUp,
+    setPage,
+    nextPage,
+    previousPage,
+    category,
+    location,
+    services: computed(() => services.value),
+    categoryFacets: computed(() => categoryFacets.value),
+    ratingFacets: computed(() => ratingFacets.value),
+    overAllMinPrice: computed(() => overAllMinPrice.value),
+    overAllMaxPrice: computed(() => overAllMaxPrice.value),
+    page: computed(() => page.value),
+    totalPages: computed(() => totalPages.value),
+    minPrice,
+    maxPrice,
+    coordinates,
+    currentPopUp,
   };
 });

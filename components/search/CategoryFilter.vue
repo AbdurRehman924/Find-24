@@ -1,7 +1,11 @@
 <script setup lang="ts">
+  import useServicesStore from "~/stores/services";
   import constants from "~/constants";
+  import { storeToRefs } from "pinia";
 
-  const { categoryFacets, toggleFacet, removeFacet } = useServices();
+  const servicesStore = useServicesStore();
+  const { toggleFacet, removeFacet } = servicesStore;
+  const { categoryFacets } = storeToRefs(servicesStore);
 
   const maxFacets = ref(4);
   const showMore = computed(

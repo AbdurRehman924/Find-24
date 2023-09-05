@@ -1,10 +1,12 @@
 <script setup lang="ts">
+  import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
 
   const servicesStore = useServicesStore();
 
-  const { page, totalPages, setPage, nextPage, previousPage } =
-    useServices();
+  const { setPage, nextPage, previousPage } = servicesStore;
+
+  const { page, totalPages } = storeToRefs(servicesStore);
 
   const isFirstPage = computed(() => page.value === 0);
   const isLastPage = computed(() => page.value === totalPages.value);
@@ -23,6 +25,7 @@
 <template>
   <div
     class="mx-auto mt-14 flex max-w-fit gap-2 font-medium text-dark_corduroy"
+    v-if="totalPages > 1"
   >
     <button
       class="flex items-center"

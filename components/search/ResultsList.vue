@@ -1,5 +1,8 @@
 <script setup lang="ts">
-  const { services } = useServices();
+  import { storeToRefs } from "pinia";
+  import useServicesStore from "~/stores/services";
+
+  const { services } = storeToRefs(useServicesStore());
 </script>
 
 <template>

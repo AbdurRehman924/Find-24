@@ -1,18 +1,17 @@
 <script setup lang="ts">
+  import { storeToRefs } from "pinia";
   import constants from "~/constants";
+  import useServicesStore from "~/stores/services";
 
   const emits = defineEmits<{
     (e: "changed", range: { min: number; max: number }): void;
     (e: "applyFilter"): void;
   }>();
 
-  const {
-    overAllMinPrice,
-    overAllMaxPrice,
-    minPrice,
-    maxPrice,
-    removeNumericFacet,
-  } = useServices();
+  const servicesStore = useServicesStore();
+  const { removeNumericFacet } = servicesStore;
+  const { minPrice, maxPrice, overAllMaxPrice, overAllMinPrice } =
+    storeToRefs(servicesStore);
 
   const maximumPriceGap = ref(100);
   const leftPercent = ref(

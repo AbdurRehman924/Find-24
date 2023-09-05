@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import useServicesStore from "~/stores/services";
   import constants from "~/constants";
+  import { storeToRefs } from "pinia";
 
   const servicesStore = useServicesStore();
 
-  const { ratingFacets, toggleFacet, removeFacet } = useServices();
+  const { toggleFacet, removeFacet } = servicesStore;
+  const { ratingFacets } = storeToRefs(servicesStore);
 
   function handleCategoryFilter(rating: string) {
     toggleFacet(constants.RATING_FACET, rating);

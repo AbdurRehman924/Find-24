@@ -1,5 +1,7 @@
 <script setup lang="ts">
-  const { searchServices } = useServices();
+  import useServicesStore from "~/stores/services";
+
+  const { searchServices } = useServicesStore();
 </script>
 
 <template>

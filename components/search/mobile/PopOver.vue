@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+  import useServicesStore from "~/stores/services";
+
   const emits = defineEmits<{
     (e: "close"): void;
   }>();
 
-  const { removeAllFacets, searchServices } = useServices();
+  const { removeAllFacets, searchServices } = useServicesStore();
 
   function handleClose() {
     emits("close");

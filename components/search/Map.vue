@@ -17,9 +17,9 @@
 
   const { token } = useRuntimeConfig().public.mapbox;
 
-  const { currentPopUp, setCurrentPopUp } = useServices();
-
-  const { coordinates } = useServices();
+  const servicesStore = useServicesStore();
+  const { setCurrentPopUp } = servicesStore;
+  const { currentPopUp, coordinates } = storeToRefs(servicesStore);
 
   let map: Map | null = null;
   const markers: Marker[] = [];

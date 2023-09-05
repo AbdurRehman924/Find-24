@@ -6,13 +6,17 @@
     ComboboxOption,
   } from "@headlessui/vue";
   import Places from "~/types/mapbox";
+  import useServicesStore from "~/stores/services";
+  import { storeToRefs } from "pinia";
 
   const { searchPlaces } = useMapBox();
 
   const query = ref("");
   const places = ref<Places | null>();
 
-  const { location, resetLocation } = useServices();
+  const serviceStore = useServicesStore();
+  const { resetLocation } = serviceStore;
+  const { location } = storeToRefs(serviceStore);
 
   async function handleReset() {
     query.value = "";
