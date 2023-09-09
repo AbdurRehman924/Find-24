@@ -12,7 +12,6 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/forms": "^0.5.4",
     "@types/mapbox-gl": "^2.7.12",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
@@ -20,13 +19,16 @@
     "prettier-plugin-tailwindcss": "^0.4.1"
   },
   "dependencies": {
+    "@formkit/nuxt": "^0.17.5",
     "@headlessui/vue": "^1.7.15",
+    "pinia": "^2.1.6",
     "@pinia/nuxt": "^0.4.11",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
+    "@vuepic/vue-datepicker": "^5.4.0",
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0",
     "algoliasearch": "^4.19.1",
     "algoliasearch-helper": "^3.14.0",
-    "mapbox-gl": "^2.15.0",
-    "pinia": "^2.1.6"
+    "mapbox-gl": "^2.15.0"
   }
 }

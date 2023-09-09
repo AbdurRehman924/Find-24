@@ -78,10 +78,10 @@ module.exports = {
       borderRadius: {
         "4xl": "3.125rem",
       },
+      border: {
+        "1/2": "0.5px solid",
+      },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

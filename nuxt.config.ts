@@ -1,8 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@formkit/nuxt",
+    [
+      "@pinia/nuxt",
+      {
+        autoImports: ["defineStore"],
+      },
+    ],
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
   runtimeConfig: {
     public: {
+      baseURL: "https://api.find24.app/api/v1",
       mapbox: {
         token: process.env.MAPBOX_TOKEN,
       },
@@ -18,16 +31,6 @@ export default defineNuxtConfig({
       indexName: process.env.ALGOLIA_INDEX_NAME,
     },
   },
-  modules: [
-    "@nuxtjs/tailwindcss",
-    "@vueuse/nuxt",
-    [
-      "@pinia/nuxt",
-      {
-        autoImports: ["defineStore"],
-      },
-    ],
-  ],
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
   },

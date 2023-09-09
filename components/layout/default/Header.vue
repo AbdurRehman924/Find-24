@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b-[0.5px] border-chinese-white">
+  <div class="border-b-[0.5px] border-chinese-white bg-white">
     <div
       class="relative mx-auto flex h-20 max-w-1920 justify-between px-4 py-6 sm:px-8 lg:px-16"
     >
@@ -14,9 +14,59 @@
       </div>
       <div class="flex items-center justify-end">
         <div class="mr-6 hidden items-center gap-x-6 lg:flex">
-          <a href="#" class="desk_nav_links">Sign up</a>
-          <a href="#" class="desk_nav_links">Log in</a>
+          <button
+            class="desk_nav_links"
+            @click="useModals().signupModal.open"
+          >
+            Sign up
+          </button>
+          <button
+            class="desk_nav_links"
+            @click="useModals().loginModal.open"
+          >
+            Log in
+          </button>
         </div>
+        <SharedModal
+          title="Log in"
+          :controller="useModals().loginModal"
+          @close="router.push({ query: null })"
+        >
+          <AuthLoginModal />
+        </SharedModal>
+        <SharedModal
+          title="Sign up"
+          :controller="useModals().signupModal"
+          @close="router.push({ query: null })"
+        >
+          <AuthSignupModal />
+        </SharedModal>
+
+        <SharedModal
+          title=""
+          :controller="useModals().forgotPasswordModal"
+          @close="router.push({ query: null })"
+        >
+          <AuthForgotPasswordModal />
+        </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().resetPasswordModal"
+        >
+          <AuthResetPasswordModal />
+        </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().emailConfirmSuccessModal"
+        >
+          <AuthConfirmEmailSuccess />
+        </SharedModal>
+        <SharedModal
+          title=""
+          :controller="useModals().emailConfirmFailedModal"
+        >
+          <AuthConfirmEmailFailed />
+        </SharedModal>
         <button
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
         >
@@ -37,36 +87,41 @@
         class="absolute left-0 top-[80px] z-10 h-screen w-full bg-white px-4 py-7"
       >
         <div class="flex flex-col items-center gap-y-9">
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Services</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Find Provider</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >Features</NuxtLink
           >
-          <NuxtLink
-            to="/"
-            class="mobile_nav_links"
+          <NuxtLink to="/" class="mobile_nav_links"
             >About Us</NuxtLink
           >
           <NuxtLink
             to="/"
             class="mobile_nav_links"
+            @click="
+              () => {
+                mobileUIOpen = false;
+                useModals().signupModal.open();
+              }
+            "
             >Signup</NuxtLink
           >
           <NuxtLink
             to="/"
             class="mobile_nav_links"
-            >Log In</NuxtLink
+            @click="
+              () => {
+                mobileUIOpen = false;
+                useModals().loginModal.open();
+              }
+            "
           >
+            Log In
+          </NuxtLink>
           <NuxtLink
             to="/"
             class="w-full rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green sm:hidden"
@@ -79,6 +134,8 @@
   </div>
 </template>
 <script setup>
+  const router = useRouter();
+  const route = useRoute();
   const mobileUIOpen = ref(false);
 </script>
 <style lang="postcss" scopped>
