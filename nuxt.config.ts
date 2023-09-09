@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      baseURL: "https://api.find24.app/api/v1",
+      baseURL: process.env.BASE_URL,
       mapbox: {
         token: process.env.MAPBOX_TOKEN,
       },
@@ -24,11 +24,6 @@ export default defineNuxtConfig({
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.ALGOLIA_INDEX_NAME,
       },
-    },
-    algolia: {
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_API_KEY,
-      indexName: process.env.ALGOLIA_INDEX_NAME,
     },
   },
   tailwindcss: {
