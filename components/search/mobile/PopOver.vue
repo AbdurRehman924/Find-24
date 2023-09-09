@@ -1,23 +1,19 @@
 <script lang="ts" setup>
-  import userServicesStore from "~/stores/services";
+  import useServicesStore from "~/stores/services";
 
   const emits = defineEmits<{
     (e: "close"): void;
   }>();
 
-  const servicesStore = userServicesStore();
+  const { removeAllFacets, searchServices } = useServicesStore();
 
   function handleClose() {
     emits("close");
   }
 
-  async function handleSearch() {
-    await servicesStore.fetchServices();
+  function handleSearch() {
+    searchServices();
     emits("close");
-  }
-
-  async function handleClearAll() {
-    await servicesStore.resetAll();
   }
 </script>
 
@@ -46,7 +42,7 @@
     >
       <button
         class="font-medium text-corduroy underline"
-        @click="handleClearAll"
+        @click="removeAllFacets"
       >
         Clear All
       </button>

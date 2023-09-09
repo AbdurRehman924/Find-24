@@ -4,6 +4,8 @@
 
   const servicesStore = useServicesStore();
 
+  const { setPage, nextPage, previousPage } = servicesStore;
+
   const { page, totalPages } = storeToRefs(servicesStore);
 
   const isFirstPage = computed(() => page.value === 0);
@@ -23,11 +25,12 @@
 <template>
   <div
     class="mx-auto mt-14 flex max-w-fit gap-2 font-medium text-dark_corduroy"
+    v-if="totalPages > 1"
   >
     <button
       class="flex items-center"
       :class="{ 'opacity-60': isFirstPage }"
-      @click="servicesStore.prevPage"
+      @click="previousPage"
       :disabled="isFirstPage"
     >
       <IconsBackarrow />
@@ -39,7 +42,7 @@
       :class="{
         'rounded-full bg-palma text-white': i == page,
       }"
-      @click="servicesStore.goToPage(i)"
+      @click="setPage(i)"
     >
       {{ i + 1 }}
     </button>
@@ -47,7 +50,7 @@
       class="flex items-center"
       :class="{ 'opacity-60': isLastPage }"
       :disabled="isLastPage"
-      @click="servicesStore.nextPage"
+      @click="nextPage"
     >
       <span>Next</span>
       <IconsNextarrow />

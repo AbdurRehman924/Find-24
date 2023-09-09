@@ -1,11 +1,7 @@
 <script setup lang="ts">
   import useServicesStore from "~/stores/services";
 
-  const { fetchServices } = useServicesStore();
-
-  async function handleSearch() {
-    await fetchServices();
-  }
+  const { searchServices } = useServicesStore();
 </script>
 
 <template>
@@ -17,7 +13,7 @@
     <SearchLocationAutoComplete class="grow" />
     <button
       class="font-semi flex items-center gap-2 whitespace-nowrap rounded-4xl bg-palma px-4 py-3.5 text-sm text-white hover:bg-islamic-green focus:bg-islamic-green"
-      @click="handleSearch"
+      @click="searchServices"
     >
       <IconsSearch />
       <span>Find Providers</span>

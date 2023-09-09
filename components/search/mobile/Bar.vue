@@ -2,9 +2,7 @@
   import { storeToRefs } from "pinia";
   import useServicesStore from "~/stores/services";
 
-  const servicesStore = useServicesStore();
-
-  const { category } = storeToRefs(servicesStore);
+  const { category } = storeToRefs(useServicesStore());
 
   const showPopOver = ref(false);
   const showFilters = ref(false);

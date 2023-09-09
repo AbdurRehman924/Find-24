@@ -10,16 +10,18 @@
   import { storeToRefs } from "pinia";
 
   const { searchPlaces } = useMapBox();
-  const servicesStore = useServicesStore();
 
   const query = ref("");
   const places = ref<Places | null>();
-  const { location } = storeToRefs(servicesStore);
+
+  const serviceStore = useServicesStore();
+  const { resetLocation } = serviceStore;
+  const { location } = storeToRefs(serviceStore);
 
   async function handleReset() {
     query.value = "";
     if (location.value) {
-      await servicesStore.resetLocation();
+      resetLocation();
     }
   }
 
