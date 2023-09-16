@@ -2,7 +2,7 @@
   <div class="mx-auto grid max-w-1920 grid-cols-4 bg-penache p-14">
     <div
       id="side_menu"
-      class="col-span-1 mr-6 flex flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5"
+      class="sticky top-0 col-span-1 mr-6 flex flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5"
     >
       <!-- profile pic, name, email -->
       <div

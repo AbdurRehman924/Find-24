@@ -67,10 +67,158 @@
     <div class="flex gap-x-6">
       <!-- upcomming bookings -->
       <div class="w-2/3">
-        <div class="text-lg font-semibold">Upcoming Bookings</div>
-        <div class="">
-
+        <div class="mb-6 text-lg font-semibold">
+          Upcoming Bookings
         </div>
+
+        <!-- table wrapper -->
+        <table id="upcomming_table" class="">
+          <!-- table body -->
+          <tbody>
+            <tr class="rounded-t-2xl bg-cultured">
+              <th>
+                <div>Service Provider</div>
+                <IconsTogglesort />
+              </th>
+              <th>Service</th>
+              <th>
+                <div>Date & Time</div>
+                <IconsTogglesort />
+              </th>
+              <th>Action</th>
+            </tr>
+            <div class="h-[420px] overflow-auto">
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+              <tr>
+                <td class="name">
+                  <img src="https://placehold.co/40x40" alt="" />
+                  Ben houinard
+                </td>
+                <td class="service">Car Steam</td>
+                <td class="date_time">
+                  <div class="date">5 Jan, 2023</div>
+                  <div class="time">4:00 AM</div>
+                </td>
+                <td class="actions">
+                  <IconsBlackcal />
+                  <IconsGreenchat />
+                  <IconsRedcross />
+                </td>
+              </tr>
+            </div>
+          </tbody>
+        </table>
       </div>
 
       <!-- activity log -->
@@ -82,6 +230,40 @@
 </template>
 <script setup></script>
 <style lang="postcss" scoped>
-  .status_card {
+  #upcomming_table {
+    @apply w-full;
+    tr {
+      @apply flex items-center justify-between gap-x-4;
+      @apply w-full px-6 py-3;
+      th {
+        @apply w-1/4;
+        @apply flex items-center gap-x-2;
+      }
+      td {
+        @apply w-1/4;
+      }
+      /* {
+        @apply rounded-t-2xl bg-cultured px-6 py-4 text-sm font-semibold;
+      } */
+      .name {
+        @apply flex items-center gap-x-2;
+        img {
+          @apply inline-block;
+        }
+      }
+      .service {
+        @apply text-palma;
+      }
+      .date_time {
+        @apply text-sm font-medium text-dark_corduroy;
+        .date {
+        }
+        .time {
+        }
+      }
+      .actions {
+        @apply flex gap-x-2;
+      }
+    }
   }
 </style>
