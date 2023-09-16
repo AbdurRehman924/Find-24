@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main class="mx-auto max-w-1920 px-4 py-14 sm:px-8 lg:px-16">
+  <main
+    class="mx-auto flex max-w-1920 flex-col items-center gap-14 px-4 py-14 sm:px-8 lg:px-16"
+  >
     <div class="text-center">
       <h1
         class="mb-4 text-2xl font-bold sm:text-3xl lg:text-4xl xl:text-5xl"
@@ -13,7 +15,30 @@
         customer base
       </p>
     </div>
+    <section class="flex flex-col gap-6">
+      <div class="img-wrapper">
+        <img
+          class="h-full w-full rounded-t-2xl object-cover"
+          src="~/assets/images/provider-placeholder.jpg"
+          alt="Provider Image Placeholder"
+        />
+      </div>
+    </section>
   </main>
 </template>
 
-<style scoped></style>
+<style lang="postcss" scoped>
+  .img-wrapper {
+    aspect-ratio: 82 / 113;
+  }
+  @screen sm {
+    .img-wrapper {
+      aspect-ratio: 176 / 113;
+    }
+  }
+  @screen xl {
+    .img-wrapper {
+      aspect-ratio: 445 / 752;
+    }
+  }
+</style>
