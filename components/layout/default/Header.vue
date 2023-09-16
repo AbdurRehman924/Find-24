@@ -67,11 +67,12 @@
         >
           <AuthConfirmEmailFailed />
         </SharedModal>
-        <button
+        <nuxt-link
+          to="/provider/signup"
           class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
         >
           Provide Services
-        </button>
+        </nuxt-link>
         <IconsHamburger
           class="lg:hidden"
           v-if="!mobileUIOpen"
@@ -123,7 +124,7 @@
             Log In
           </NuxtLink>
           <NuxtLink
-            to="/"
+            to="/provider/signup"
             class="w-full rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green sm:hidden"
           >
             Provide Services
