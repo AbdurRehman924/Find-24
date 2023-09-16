@@ -18,7 +18,7 @@
 <template>
   <SearchMobileBar />
   <SearchBar />
-  <div class="mt-14 md:px-8 2xl:px-16" v-if="!noServicesFound">
+  <section class="mt-14 md:px-8 2xl:px-16" v-if="!noServicesFound">
     <div
       class="grid grid-cols-4 md:grid-cols-8 xl:grid-cols-12"
       v-if="!showMap"
@@ -45,8 +45,8 @@
         <span> <IconsTilt /> </span>
       </button>
     </div>
-  </div>
-  <div v-else class="flex h-[50dvh] items-center justify-center">
+  </section>
+  <section v-else class="flex h-[50dvh] items-center justify-center">
     <div
       class="rounded-2xl bg-white p-16 text-2xl font-bold text-palma shadow-md sm:text-3xl lg:text-5xl"
     >
@@ -57,7 +57,7 @@
         Reset
       </button>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped></style>
