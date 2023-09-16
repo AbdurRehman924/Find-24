@@ -1,8 +1,8 @@
 <template>
-  <div class="mx-auto grid max-w-[1440px] grid-cols-4 p-14">
+  <div class="mx-auto grid max-w-1920 grid-cols-4 bg-penache p-14">
     <div
       id="side_menu"
-      class="col-span-1 flex flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5"
+      class="col-span-1 mr-6 flex flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5"
     >
       <!-- profile pic, name, email -->
       <div
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <NuxtPage />
+    <NuxtPage class="col-span-3" />
   </div>
 </template>
 <script setup></script>
