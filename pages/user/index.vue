@@ -222,8 +222,18 @@
       </div>
 
       <!-- activity log -->
-      <div class="1/2">
-        <div class="text-lg font-semibold">Activity Log</div>
+      <div class="w-1/3">
+        <div class="mb-6 text-lg font-semibold">Activity Log</div>
+        <div class="h-[368px]">
+          <div class="activity">
+            <div><img src="https://placehold.co/48x48" alt="" /></div>
+            <div class="message">Message</div>
+            <div class="date_time">
+              <div class="date">Feb 9, 2024</div>
+              <div class="time">11:00 PM</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -264,6 +274,17 @@
       .actions {
         @apply flex gap-x-2;
       }
+    }
+  }
+  .activity {
+    @apply mb-6 flex h-[60px] items-center justify-between gap-x-4 text-sm text-corduroy;
+
+    > img {
+      @apply rounded-full;
+    }
+    .date,
+    .time {
+      @apply text-xs font-medium;
     }
   }
 </style>
