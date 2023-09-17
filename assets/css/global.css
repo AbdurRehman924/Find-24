@@ -161,3 +161,23 @@ button[type="submit"] {
   border-color: transparent;
   background-color: currentColor;
 }
+/* width */
+::-webkit-scrollbar {
+  /* width: 10px; */
+  @apply w-2;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply rounded-md bg-chinese-white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply rounded-md bg-palma;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply rounded-md bg-malachite;
+}
