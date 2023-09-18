@@ -53,7 +53,7 @@
               <IconsHelp />
               <div>Help and Support</div>
             </NuxtLink>
-            <NuxtLink to="/" class="link">
+            <NuxtLink to="/user/settings" class="link">
               <IconsSettings />
               <div>Settings</div>
             </NuxtLink>
