@@ -1,23 +1,43 @@
 <template>
   <div class="flex flex-col">
     <div class="mb-6 text-2xl font-semibold">Settings</div>
-    <div class="flex">
-      <div class="link">
-        link
-
-        <div class=""></div>
-      </div>
+    <div class="mb-8 flex">
+      <RouterLink v-for="link in links" :to="link.path" class="link">
+        {{ link.name }}
+      </RouterLink>
     </div>
     <NuxtPage />
   </div>
 </template>
-<script setup></script>
+<script setup>
+  const links = [
+    {
+      name: "Profile Settings",
+      path: "/user/settings/",
+    },
+    {
+      name: "Login & Security",
+      path: "/user/",
+    },
+    {
+      name: "Notifications",
+      path: "/user/",
+    },
+    {
+      name: "Payment Settings",
+      path: "/user/",
+    },
+    {
+      name: "Connected Apps",
+      path: "/user/",
+    },
+  ];
+</script>
 <style lang="postcss" scoped>
   .link {
-    @apply mb-3 w-44 text-lg font-medium text-dark_corduroy;
-
-    > .link_under {
-      @apply border-2;
-    }
+    @apply w-44 border-b-2 border-chinese-white pb-3 text-center text-lg font-medium text-dark_corduroy;
+  }
+  .router-link-exact-active {
+    @apply border-palma text-palma;
   }
 </style>
