@@ -9,6 +9,7 @@
     />
     <FormKit
       :wrapper-class="{ hidden: true }"
+      id="dob"
       type="date"
       name="dob"
       :validation="[['required'], ['date_before', maxDOB()]]"
@@ -38,6 +39,13 @@
       formKitDate.value = date.value.toISOString().substring(0, 10);
     } else {
       formKitDate.value = null;
+    }
+  });
+  watch(formKitDate, () => {
+    if (formKitDate.value) {
+      date.value = new Date(formKitDate.value);
+    } else {
+      date.value = null;
     }
   });
 </script>

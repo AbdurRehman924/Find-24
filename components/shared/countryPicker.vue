@@ -48,6 +48,7 @@
       </TransitionRoot>
     </Combobox>
     <FormKit
+      id="country"
       :wrapper-class="{ hidden: true }"
       type="text"
       name="country"
@@ -89,6 +90,15 @@
       formKitCountry.value = selected.value.name.toLowerCase();
     } else {
       formKitCountry.value = null;
+    }
+  });
+  watch(formKitCountry, () => {
+    if (formKitCountry.value) {
+      selected.value = countries.filter(
+        (country) => country.name.toLowerCase() === formKitCountry.value,
+      )[0];
+    } else {
+      selected.value = null;
     }
   });
 </script>

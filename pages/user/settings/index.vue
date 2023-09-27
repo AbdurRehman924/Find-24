@@ -42,22 +42,21 @@
 
   <!-- Personal info update form -->
   <div>
-    firstName: {{ firstName }} - lastName:
-    {{ lastName }}
+    firstName: {{ user.firstName }} - lastName:
+    {{ user.lastName }}
   </div>
   <FormKit
     type="form"
+    id="personalInfo"
     :actions="false"
     :config="{ validationVisibility: 'submit' }"
-    :v-modal="{
-      firstName: firstName,
-      lastName: lastName,
-    }"
+    @submit="handleProfileUpdate"
   >
     <div class="row">
       <div>
         <div class="mb-2 text-sm font-medium">First name</div>
         <FormKit
+          id="firstName"
           type="text"
           name="firstName"
           placeholder="First Name"
@@ -73,6 +72,7 @@
       <div>
         <div class="mb-2 text-sm font-medium">Last name</div>
         <FormKit
+          id="lastName"
           type="text"
           name="lastName"
           placeholder="Last Name"
@@ -90,6 +90,7 @@
       <div>
         <div class="mb-2 text-sm font-medium">Gender</div>
         <FormKit
+          id="gender"
           type="select"
           name="gender"
           :options="['male', 'female', 'other']"
@@ -107,8 +108,9 @@
       <div class="full">
         <div class="mb-2 text-sm font-medium">Address</div>
         <FormKit
+          id="address"
           type="text"
-          name="address"
+          name="street"
           placeholder="Enter you address"
           validations="required"
         ></FormKit>
@@ -122,11 +124,21 @@
       <div class="flex gap-x-4">
         <div class="w-1/2">
           <div class="mb-2 text-sm font-medium">City</div>
-          <FormKit type="text"></FormKit>
+          <FormKit
+            id="city"
+            type="text"
+            name="city"
+            validation="required|length3,50"
+          ></FormKit>
         </div>
         <div class="w-1/2">
           <div class="mb-2 text-sm font-medium">Zip Code</div>
-          <FormKit type="text"></FormKit>
+          <FormKit
+            id="zipCode"
+            type="text"
+            name="zipCode"
+            validation="required|length:3,50"
+          ></FormKit>
         </div>
       </div>
     </div>
@@ -140,9 +152,40 @@
 <script setup>
   import { useUserStore } from "@/stores/userStore";
   import { storeToRefs } from "pinia";
-  const userStore = storeToRefs(useUserStore());
-  // console.log(userStore.user.value);
-  const { firstName, lastName } = userStore.user.value;
+  import { getNode } from "@formkit/core";
+
+  const { user } = storeToRefs(useUserStore());
+
+  onMounted(() => {
+    updateFormValues();
+  });
+  async function handleProfileUpdate(formData) {
+    console.log("submit", formData);
+    const { res, error } = await useUpdateUserData(formData);
+    if (error.value) {
+      console.log(error.value);
+    } else {
+      console.log(res.value);
+    }
+  }
+  function updateFormValues() {
+    const personalInfo = getNode("personalInfo");
+    const dob = personalInfo.children.filter(
+      (child) => child.name === "dob",
+    )[0];
+    const country = personalInfo.children.filter(
+      (child) => child.name === "country",
+    )[0];
+
+    getNode("firstName").input(user.value.firstName);
+    getNode("lastName").input(user.value.lastName);
+    getNode("gender").input(user.value.gender);
+    dob.input(user.value.dob);
+    country.input(user.value.country);
+    getNode("address").input(user.value.street);
+    getNode("city").input(user.value.city);
+    getNode("zipCode").input(user.value.zipCode);
+  }
 </script>
 <style lang="postcss" scoped>
   .row {
