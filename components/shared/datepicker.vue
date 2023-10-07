@@ -6,11 +6,13 @@
       auto-apply
       :enable-time-picker="false"
       aria-label="Date of Birth"
+      name="datepicker"
     />
     <FormKit
       :wrapper-class="{ hidden: true }"
       type="date"
       name="dob"
+      id="dob"
       :validation="[['required'], ['date_before', maxDOB()]]"
       :validation-messages="{
         required: 'Date of birth is required',

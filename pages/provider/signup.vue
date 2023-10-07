@@ -15,7 +15,7 @@
         customer base
       </p>
     </div>
-    <section class="flex flex-col gap-6">
+    <section class="flex flex-col gap-6 lg:flex-row">
       <div class="img-wrapper">
         <img
           class="h-full w-full rounded-t-2xl object-cover"
@@ -37,9 +37,11 @@
       aspect-ratio: 176 / 113;
     }
   }
-  @screen xl {
+  @screen lg {
     .img-wrapper {
       aspect-ratio: 445 / 752;
+      max-width: 445px;
+      max-height: 752px;
     }
   }
 </style>

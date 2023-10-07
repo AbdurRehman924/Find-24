@@ -6,11 +6,10 @@
           :displayValue="(country: any) => country.name"
           @change="query = $event.target.value"
           placeholder="Country"
-          id="country"
           class="rounded-lg"
           :class="{ 'bg-saltpan text-dark_corduroy': initialValue }"
         />
-        <ComboboxButton class="combobox_button">
+        <ComboboxButton class="combobox_button" name="dropdown">
           <IconsChevronupdown class="icon" aria-hidden="true" />
         </ComboboxButton>
       </div>
@@ -54,6 +53,7 @@
       :wrapper-class="{ hidden: true }"
       type="text"
       name="country"
+      id="country"
       validation="required"
       :validation-messages="{
         required: 'Please select your country',

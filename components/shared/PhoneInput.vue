@@ -1,6 +1,6 @@
 <template>
   <div class="auth-input relative flex w-full text-dark_corduroy">
-    <Combobox as="div" v-model="selected" class="basis-[45%]">
+    <Combobox as="div" v-model="selected" class="basis-2/5">
       <div
         class="combobox rounded-l-lg border-y border-l border-chinese-white"
       >
@@ -59,6 +59,7 @@
       :wrapper-class="{ hidden: true }"
       type="tel"
       name="phone"
+      id="phone"
       validation="required"
       :validation-messages="{
         required: 'Please add your phone number',

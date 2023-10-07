@@ -7,76 +7,85 @@
 
 <template>
   <section>
-    <h2 class="font-semibold">Personal Information</h2>
+    <h2 class="font-semibold sm:text-lg xl:text-2xl">
+      Personal Information
+    </h2>
     <FormKit type="form" form-class="py-6" :actions="false">
-      <FormKit
-        type="text"
-        name="firstName"
-        outer-class="mb-2"
-        input-class="bg-saltpan text-dark_corduroy"
-        label-class="mb-2 font-medium"
-        label="First name"
-        :value="user.firstName"
-        validation="required"
-      />
-      <FormKit
-        type="text"
-        name="lastName"
-        outer-class="my-2"
-        input-class="bg-saltpan text-dark_corduroy"
-        label-class="mb-2 font-medium"
-        label="Last name"
-        :value="user.lastName"
-      />
-      <FormKit
-        type="email"
-        name="email"
-        outer-class="my-2"
-        input-class="bg-saltpan text-dark_corduroy"
-        label-class="mb-2 font-medium"
-        label="Email Address"
-        :value="user.email"
-      />
-      <div class="bg-saltpan">
-        <SharedDatepicker :initialValue="user.dob" />
+      <div class="flex flex-col gap-4 pb-2 sm:flex-row">
+        <FormKit
+          type="text"
+          name="firstName"
+          outer-class="w-full"
+          input-class="bg-saltpan text-dark_corduroy"
+          label-class="mb-2 font-medium"
+          label="First name"
+          :value="user.firstName"
+          validation="required"
+        />
+        <FormKit
+          type="text"
+          name="lastName"
+          outer-class="w-full"
+          input-class="bg-saltpan text-dark_corduroy"
+          label-class="mb-2 font-medium"
+          label="Last name"
+          :value="user.lastName"
+        />
+      </div>
+      <div class="flex flex-col gap-4 py-2 sm:flex-row">
+        <FormKit
+          type="email"
+          name="email"
+          outer-class="w-full"
+          input-class="bg-saltpan text-dark_corduroy"
+          label-class="mb-2 font-medium"
+          label="Email Address"
+          :value="user.email"
+        />
+        <div class="w-full bg-saltpan">
+          <label for="dob" class="mb-2 font-medium"
+            >Date of birth</label
+          >
+          <SharedDatepicker :initialValue="user.dob" />
+        </div>
       </div>
       <FormKit
         type="text"
         name="street"
-        outer-class="my-2"
+        outer-class="py-2"
         input-class="bg-saltpan text-dark_corduroy"
         label-class="mb-2 font-medium"
         label="Address"
         :value="user.street"
       />
-      <div class="flex gap-4">
-        <FormKit
-          type="text"
-          name="city"
-          outer-class="my-2"
-          input-class="bg-saltpan text-dark_corduroy"
-          label-class="mb-2 font-medium"
-          label="City"
-          v-model="user.city"
-        />
-        <FormKit
-          type="text"
-          name="zipCode"
-          outer-class="my-2"
-          input-class="bg-saltpan text-dark_corduroy"
-          label-class="mb-2 font-medium"
-          label="Zip Code"
-          :value="user.zipCode"
-        />
+      <div class="flex flex-col gap-4 py-2 sm:flex-row">
+        <div class="flex basis-1/2 gap-4">
+          <FormKit
+            type="text"
+            name="city"
+            input-class="bg-saltpan text-dark_corduroy"
+            label-class="mb-2 font-medium"
+            label="City"
+            v-model="user.city"
+          />
+          <FormKit
+            type="text"
+            name="zipCode"
+            input-class="bg-saltpan text-dark_corduroy"
+            label-class="mb-2 font-medium"
+            label="Zip Code"
+            :value="user.zipCode"
+          />
+        </div>
+        <div class="grow">
+          <label for="country" class="mb-2 font-medium"
+            >Country</label
+          >
+          <SharedCountryPicker :initialValue="user.country" />
+        </div>
       </div>
-      <div class="my-2">
-        <label for="country" class="mb-2 font-semibold"
-          >Country</label
-        >
-        <SharedCountryPicker :initialValue="user.country" />
-      </div>
-      <div class="my-2">
-        <label for="country" class="mb-2 font-semibold"
+      <div class="py-2 sm:w-1/2">
+        <label for="phone" class="mb-2 font-medium"
           >Phone Number</label
         >
         <SharedPhoneInput :initial-value="user.phone" />
@@ -84,8 +93,8 @@
       <FormKit
         type="submit"
         label="Next Step"
-        outer-class="mt-8 shadow-variant5"
-        input-class="font-semibold border-none flex gap-2 items-center justify-center"
+        outer-class="mt-6 ml-auto shadow-variant5 sm:max-w-fit"
+        input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3"
       >
         <span>Next Step</span>
         <IconsRightArrow />
