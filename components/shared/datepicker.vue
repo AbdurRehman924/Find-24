@@ -24,15 +24,22 @@
 <script setup lang="ts">
   import VueDatePicker from "@vuepic/vue-datepicker";
   import "@vuepic/vue-datepicker/dist/main.css";
+
+  const props = defineProps<{
+    initialValue?: string;
+  }>();
+
   const maxDOB = () => {
     const maxDateOfBirth = new Date();
     maxDateOfBirth.setFullYear(maxDateOfBirth.getFullYear() - 16);
-    console.log(maxDateOfBirth.toISOString().substring(0, 10));
 
     return maxDateOfBirth.toISOString().substring(0, 10);
   };
   const date = ref();
   const formKitDate = ref();
+  if (props.initialValue) {
+    date.value = new Date(props.initialValue);
+  }
   watch(date, () => {
     if (date.value) {
       formKitDate.value = date.value.toISOString().substring(0, 10);

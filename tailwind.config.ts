@@ -71,6 +71,7 @@ module.exports = {
         variant2: "0px 2px 2px 0px rgba(0, 0, 0, 0.05);",
         variant3: "0px 3px 10px 0px rgba(29, 184, 18, 0.10);",
         variant4: "0px 8px 16px -8px rgba(0, 0, 0, 0.05);",
+        variant5: "0px 2px 10px 0px rgba(17, 171, 32, 0.05);",
       },
       borderWidth: {
         "0.5": "0.5px",

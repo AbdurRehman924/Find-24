@@ -23,6 +23,7 @@
           alt="Provider Image Placeholder"
         />
       </div>
+      <ProdviderSignupPersonalInfo />
     </section>
   </main>
 </template>

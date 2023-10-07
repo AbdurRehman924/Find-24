@@ -64,6 +64,9 @@ input[type="range"]::-moz-range-thumb {
 .dp__input_wrap > input {
   @apply w-full rounded-lg border border-chinese-white  py-4 outline-none;
 }
+.dp__input_wrap > input {
+  @apply bg-saltpan text-dark_corduroy;
+}
 .formkit-input {
   @apply px-4;
 }

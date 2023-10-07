@@ -3,9 +3,12 @@
     <Combobox v-model="selected">
       <div class="combobox rounded-lg border border-chinese-white">
         <ComboboxInput
-          :displayValue="(country) => country.name"
+          :displayValue="(country: any) => country.name"
           @change="query = $event.target.value"
           placeholder="Country"
+          id="country"
+          class="rounded-lg"
+          :class="{ 'bg-saltpan text-dark_corduroy': initialValue }"
         />
         <ComboboxButton class="combobox_button">
           <IconsChevronupdown class="icon" aria-hidden="true" />
@@ -35,7 +38,7 @@
             <li
               class="country_option"
               :class="{
-                'bg-athens-gray': active,
+                'bg-frostee text-palma': active,
               }"
             >
               <span>
@@ -60,7 +63,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
   import {
     Combobox,
     ComboboxInput,
@@ -71,9 +74,23 @@
   } from "@headlessui/vue";
   import countries from "@/data/countries.json";
   //   import Country from "~/types/country";
+
+  const props = defineProps<{
+    initialValue?: string;
+  }>();
+
   const formKitCountry = ref();
   const selected = ref();
   const query = ref("");
+
+  if (props.initialValue) {
+    selected.value = countries.find(
+      (country) =>
+        country.name.toLowerCase() ==
+        props.initialValue?.toLocaleLowerCase(),
+    );
+  }
+
   const filtererdCountries = computed(() =>
     query.value === ""
       ? countries
