@@ -1,14 +1,13 @@
 <script lang="ts" setup>
   import {
     Listbox,
-    ListboxLabel,
     ListboxButton,
     ListboxOptions,
     ListboxOption,
   } from "@headlessui/vue";
 
   const experienceLevel = ["Beginner", "Intermediate", "Expert"];
-  const selectedPerson = ref("Expertise Level");
+  const selectedPerson = ref();
 </script>
 
 <template>
@@ -18,7 +17,10 @@
         class="flex w-full items-center justify-between rounded-lg border border-chinese-white p-4"
         id="experience"
       >
-        <span class="block truncate">{{ selectedPerson }}</span>
+        <span class="block truncate" v-if="selectedPerson">{{
+          selectedPerson
+        }}</span>
+        <span class="block truncate" v-else>Experience Level</span>
         <IconsChevronupdown aria-hidden="true" />
       </ListboxButton>
 
@@ -54,4 +56,14 @@
       </transition>
     </div>
   </Listbox>
+  <FormKit
+    :wrapper-class="{ hidden: true }"
+    type="text"
+    name="experience"
+    validation="required"
+    :validation-messages="{
+      required: 'Experience level is required',
+    }"
+    v-model="selectedPerson"
+  />
 </template>

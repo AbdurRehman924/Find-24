@@ -4,7 +4,7 @@
   const { user } = useUserStore();
   const { imagesURL } = useRuntimeConfig().public;
 
-  const goToSection = ref(0);
+  const section = ref(0);
 </script>
 
 <template>
@@ -38,10 +38,14 @@
         />
       </div>
       <ProdviderSignupPersonalInfo
-        v-if="goToSection == 0"
-        @go-next="goToSection++"
+        v-if="section == 0"
+        @go-next="section++"
       />
-      <ProdviderSignupProfessionalnfo v-if="goToSection == 1" />
+      <ProdviderSignupProfessionalnfo
+        v-if="section == 1"
+        @go-back="section--"
+        @go-next="section++"
+      />
     </section>
   </main>
 </template>

@@ -1,11 +1,25 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  const emits = defineEmits<{
+    (e: "goNext"): void;
+    (e: "goBack"): void;
+  }>();
+
+  function submitHandler() {
+    emits("goNext");
+  }
+</script>
 
 <template>
   <section class="grow">
     <h2 class="font-semibold sm:text-lg xl:text-2xl">
       Professional Information
     </h2>
-    <FormKit type="form" form-class="py-6" :actions="false">
+    <FormKit
+      type="form"
+      form-class="py-6"
+      :actions="false"
+      @submit="submitHandler"
+    >
       <FormKit
         type="text"
         name="service"
@@ -56,6 +70,7 @@
         </FormKit>
         <button
           class="flex items-center justify-center gap-2 rounded-full border border-chinese-white px-6 py-3"
+          @click.prevent="emits('goBack')"
         >
           <IconsLeftArrow />
           <span>Previous</span>
