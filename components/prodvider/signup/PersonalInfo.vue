@@ -1,8 +1,16 @@
 <script lang="ts" setup>
   import { useUserStore } from "~/stores/userStore";
 
+  const emits = defineEmits<{
+    (e: "goNext"): void;
+  }>();
+
   const userStore = useUserStore();
   const { user } = userStore;
+
+  function submitHandler() {
+    emits("goNext");
+  }
 </script>
 
 <template>
@@ -10,7 +18,12 @@
     <h2 class="font-semibold sm:text-lg xl:text-2xl">
       Personal Information
     </h2>
-    <FormKit type="form" form-class="py-6" :actions="false">
+    <FormKit
+      type="form"
+      form-class="py-6"
+      :actions="false"
+      @submit="submitHandler"
+    >
       <div class="flex flex-col gap-4 pb-2 sm:flex-row">
         <FormKit
           type="text"

@@ -57,6 +57,7 @@ module.exports = {
     extend: {
       maxWidth: {
         "1920": "1920px",
+        "1440": "1440px",
         sm: "18rem",
       },
       minWidth: {

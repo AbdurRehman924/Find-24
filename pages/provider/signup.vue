@@ -1,8 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { useUserStore } from "~/stores/userStore";
+
+  const { user } = useUserStore();
+  const { imagesURL } = useRuntimeConfig().public;
+
+  const goToSection = ref(0);
+</script>
 
 <template>
   <main
-    class="mx-auto flex max-w-1920 flex-col items-center gap-14 px-4 py-14 sm:px-8 lg:px-16"
+    class="mx-auto flex max-w-1440 flex-col items-center gap-14 px-4 py-14 sm:px-8 lg:px-16"
   >
     <div class="text-center">
       <h1
@@ -15,15 +22,26 @@
         customer base
       </p>
     </div>
-    <section class="flex flex-col gap-6 lg:flex-row">
+    <section class="flex w-full flex-col gap-6 lg:flex-row">
       <div class="img-wrapper">
         <img
+          v-if="user.image"
+          :src="`${imagesURL}/${user.image}`"
+          alt="Your image"
+          class="h-full w-full rounded-t-2xl object-cover"
+        />
+        <img
+          v-else
           class="h-full w-full rounded-t-2xl object-cover"
           src="~/assets/images/provider-placeholder.jpg"
           alt="Provider Image Placeholder"
         />
       </div>
-      <ProdviderSignupPersonalInfo />
+      <ProdviderSignupPersonalInfo
+        v-if="goToSection == 0"
+        @go-next="goToSection++"
+      />
+      <ProdviderSignupProfessionalnfo v-if="goToSection == 1" />
     </section>
   </main>
 </template>

@@ -1,9 +1,4 @@
-<script lang="ts" setup>
-  import { useUserStore } from "~/stores/userStore";
-
-  const userStore = useUserStore();
-  const { user } = userStore;
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <section class="grow">
