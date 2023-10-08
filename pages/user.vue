@@ -32,11 +32,11 @@
               <IconsMessage />
               <div>Messages</div>
             </NuxtLink>
-            <NuxtLink to="/" class="link">
+            <NuxtLink to="/user/requests" class="link">
               <IconsRequest />
               <div>Service Requests</div>
             </NuxtLink>
-            <NuxtLink to="/" class="link">
+            <NuxtLink to="/user/history" class="link">
               <IconsHistory />
               <div>Consumed Services</div>
             </NuxtLink>
