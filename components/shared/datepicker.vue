@@ -41,7 +41,7 @@
   const formKitDate = ref();
   if (props.initialValue) {
     date.value = new Date(props.initialValue);
-    formKitDate.value = props.initialValue;
+    formKitDate.value = date.value.toISOString().substring(0, 10);
   }
   watch(date, () => {
     if (date.value) {
