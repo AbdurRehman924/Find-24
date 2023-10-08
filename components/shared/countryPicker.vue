@@ -89,6 +89,7 @@
         country.name.toLowerCase() ==
         props.initialValue?.toLocaleLowerCase(),
     );
+    formKitCountry.value = props.initialValue;
   }
 
   const filtererdCountries = computed(() =>

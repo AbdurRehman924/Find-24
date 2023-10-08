@@ -41,6 +41,7 @@
   const formKitDate = ref();
   if (props.initialValue) {
     date.value = new Date(props.initialValue);
+    formKitDate.value = props.initialValue;
   }
   watch(date, () => {
     if (date.value) {

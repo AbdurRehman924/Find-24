@@ -107,6 +107,7 @@
         (country) => country.code == parsed.country,
       );
       phoneNumber.value = parsed.nationalNumber;
+      formKitPhone.value = parsed.formatInternational();
     }
   }
 
