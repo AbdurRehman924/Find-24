@@ -17,7 +17,7 @@
           name="firstName"
           outer-class="w-full"
           input-class="bg-saltpan text-dark_corduroy"
-          label-class="mb-2 font-medium"
+          label-class="mb-2 inline-block font-medium"
           label="First name"
           :value="user.firstName"
           validation="required"
@@ -27,7 +27,7 @@
           name="lastName"
           outer-class="w-full"
           input-class="bg-saltpan text-dark_corduroy"
-          label-class="mb-2 font-medium"
+          label-class="mb-2 font-medium inline-block"
           label="Last name"
           :value="user.lastName"
         />
@@ -38,12 +38,12 @@
           name="email"
           outer-class="w-full"
           input-class="bg-saltpan text-dark_corduroy"
-          label-class="mb-2 font-medium"
+          label-class="mb-2 font-medium inline-block"
           label="Email Address"
           :value="user.email"
         />
         <div class="w-full bg-saltpan">
-          <label for="dob" class="mb-2 font-medium"
+          <label for="dob" class="mb-2 inline-block font-medium"
             >Date of birth</label
           >
           <SharedDatepicker :initialValue="user.dob" />
@@ -54,7 +54,7 @@
         name="street"
         outer-class="py-2"
         input-class="bg-saltpan text-dark_corduroy"
-        label-class="mb-2 font-medium"
+        label-class="mb-2 font-medium inline-block"
         label="Address"
         :value="user.street"
       />
@@ -64,7 +64,7 @@
             type="text"
             name="city"
             input-class="bg-saltpan text-dark_corduroy"
-            label-class="mb-2 font-medium"
+            label-class="mb-2 font-medium inline-block"
             label="City"
             v-model="user.city"
           />
@@ -72,20 +72,20 @@
             type="text"
             name="zipCode"
             input-class="bg-saltpan text-dark_corduroy"
-            label-class="mb-2 font-medium"
+            label-class="mb-2 font-medium inline-block"
             label="Zip Code"
             :value="user.zipCode"
           />
         </div>
         <div class="grow">
-          <label for="country" class="mb-2 font-medium"
+          <label for="country" class="mb-2 inline-block font-medium"
             >Country</label
           >
           <SharedCountryPicker :initialValue="user.country" />
         </div>
       </div>
       <div class="py-2 sm:w-1/2">
-        <label for="phone" class="mb-2 font-medium"
+        <label for="phone" class="mb-2 inline-block font-medium"
           >Phone Number</label
         >
         <SharedPhoneInput :initial-value="user.phone" />
