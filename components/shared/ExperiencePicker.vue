@@ -14,7 +14,7 @@
   <Listbox v-model="selectedPerson">
     <div class="relative text-dark_corduroy">
       <ListboxButton
-        class="flex w-full items-center justify-between rounded-lg border border-chinese-white p-4"
+        class="flex w-full items-center justify-between rounded-lg border border-chinese-white p-4 focus:border-palma focus:text-dark-jungle-green"
         id="experience"
       >
         <span class="block truncate" v-if="selectedPerson">{{

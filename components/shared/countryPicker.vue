@@ -1,13 +1,19 @@
 <template>
   <div class="auth-input relative w-full">
     <Combobox v-model="selected">
-      <div class="combobox rounded-lg border border-chinese-white">
+      <div
+        class="combobox rounded-lg border border-chinese-white"
+        :class="{
+          'text-dark_corduroy focus-within:border-palma focus-within:text-dark-jungle-green':
+            initialValue,
+        }"
+      >
         <ComboboxInput
           :displayValue="(country: any) => country.name"
           @change="query = $event.target.value"
           placeholder="Country"
           class="rounded-lg"
-          :class="{ 'bg-saltpan text-dark_corduroy': initialValue }"
+          :class="{ 'bg-saltpan': initialValue }"
         />
         <ComboboxButton class="combobox_button" name="dropdown">
           <IconsChevronupdown class="icon" aria-hidden="true" />

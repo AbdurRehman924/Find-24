@@ -2,7 +2,7 @@
   <div class="auth-input relative flex w-full text-dark_corduroy">
     <Combobox as="div" v-model="selected" class="basis-2/5">
       <div
-        class="combobox rounded-l-lg border-y border-l border-chinese-white"
+        class="combobox rounded-l-lg border border-chinese-white focus-within:border-palma focus-within:text-dark-jungle-green"
       >
         <ComboboxInput
           :displayValue="
@@ -52,7 +52,7 @@
     <FormKit
       type="tel"
       name="_phone"
-      input-class="rounded-l-none bg-saltpan"
+      input-class="rounded-l-none bg-saltpan focus:border-palma focus:text-dark-jungle-green"
       v-model="phoneNumber"
     />
     <FormKit
