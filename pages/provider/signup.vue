@@ -37,7 +37,7 @@
           alt="Provider Image Placeholder"
         />
       </div>
-      <ProdviderSignupPersonalInfo
+      <!-- <ProdviderSignupPersonalInfo
         v-if="section == 0"
         @go-next="section++"
       />
@@ -46,6 +46,8 @@
         @go-back="section--"
         @go-next="section++"
       />
+       -->
+      <ProdviderSignupUploadDocuments />
     </section>
   </main>
 </template>
