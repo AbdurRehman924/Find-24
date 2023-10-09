@@ -5,6 +5,8 @@
   const { imagesURL } = useRuntimeConfig().public;
 
   const section = ref(0);
+
+  function handleRegister() {}
 </script>
 
 <template>
@@ -37,7 +39,7 @@
           alt="Provider Image Placeholder"
         />
       </div>
-      <ProdviderSignupPersonalInfo
+      <!-- <ProdviderSignupPersonalInfo
         v-if="section == 0"
         @go-next="section++"
       />
@@ -45,9 +47,13 @@
         v-if="section == 1"
         @go-back="section--"
         @go-next="section++"
-      />
+      /> -->
 
-      <!-- <ProdviderSignupUploadDocuments /> -->
+      <ProdviderSignupUploadDocuments
+       
+        @go-back="section--"
+        @go-next="handleRegister"
+      />
     </section>
   </main>
 </template>
