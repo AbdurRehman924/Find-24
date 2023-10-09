@@ -24,7 +24,7 @@
         customer base
       </p>
     </div>
-    <section class="flex w-full flex-col gap-6 lg:flex-row">
+    <section class="flex w-full flex-col lg:flex-row">
       <div class="img-wrapper">
         <img
           v-if="user.image"
@@ -39,20 +39,24 @@
           alt="Provider Image Placeholder"
         />
       </div>
-      <ProdviderSignupPersonalInfo
-        v-if="section == 0"
-        @go-next="section++"
-      />
-      <ProdviderSignupProfessionalnfo
-        v-else-if="section == 1"
-        @go-back="section--"
-        @go-next="section++"
-      />
-      <ProdviderSignupUploadDocuments
-        v-else-if="section == 2"
-        @go-back="section--"
-        @go-next="handleRegister"
-      />
+      <div class="flex flex-col">
+        <ProdviderSignupProgresBar :current-section="section" />
+        <div class="mb-8 h-[0.5px] w-full bg-chinese-white"></div>
+        <ProdviderSignupPersonalInfo
+          v-if="section == 0"
+          @go-next="section++"
+        />
+        <ProdviderSignupProfessionalnfo
+          v-else-if="section == 1"
+          @go-back="section--"
+          @go-next="section++"
+        />
+        <ProdviderSignupUploadDocuments
+          v-else-if="section == 2"
+          @go-back="section--"
+          @go-next="handleRegister"
+        />
+      </div>
     </section>
   </main>
 </template>

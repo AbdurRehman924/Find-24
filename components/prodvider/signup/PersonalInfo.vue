@@ -14,7 +14,7 @@
 </script>
 
 <template>
-  <section class="flex grow flex-col">
+  <section class="flex grow flex-col px-4 sm:px-8 xl:px-16">
     <h2 class="font-semibold sm:text-lg xl:text-2xl">
       Personal Information
     </h2>
