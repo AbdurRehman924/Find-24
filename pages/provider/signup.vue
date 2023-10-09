@@ -39,18 +39,17 @@
           alt="Provider Image Placeholder"
         />
       </div>
-      <!-- <ProdviderSignupPersonalInfo
+      <ProdviderSignupPersonalInfo
         v-if="section == 0"
         @go-next="section++"
       />
       <ProdviderSignupProfessionalnfo
-        v-if="section == 1"
+        v-else-if="section == 1"
         @go-back="section--"
         @go-next="section++"
-      /> -->
-
+      />
       <ProdviderSignupUploadDocuments
-       
+        v-else-if="section == 2"
         @go-back="section--"
         @go-next="handleRegister"
       />
