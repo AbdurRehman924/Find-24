@@ -68,7 +68,10 @@ input[type="range"]::-moz-range-thumb {
   @apply bg-saltpan text-dark_corduroy;
 }
 .dp__input:hover {
-  @apply border-palma text-dark-jungle-green !important;
+  @apply !border-chinese-white;
+}
+.dp__input:focus {
+  @apply !border-palma !text-dark-jungle-green;
 }
 .formkit-input {
   @apply px-4;
