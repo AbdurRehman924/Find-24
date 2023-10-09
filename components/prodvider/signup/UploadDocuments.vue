@@ -6,45 +6,39 @@
 
   const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
-  const input1 = ref<HTMLInputElement | null>(null);
-  const input2 = ref<HTMLInputElement | null>(null);
-  const file1 = ref();
-  const file2 = ref();
-  const error1 = ref("");
-  const error2 = ref("");
+  const documents = reactive([
+    {
+      title: "Upload identity verification",
+      file: null,
+      error: "",
+    },
+    {
+      title: "Upload address verification",
+      file: null,
+      error: "",
+    },
+  ]);
 
-  function handleFileUpload1() {
-    if (input1.value && input1.value.files) {
-      file1.value = input1.value.files[0];
-      if (file1.value.size > MAX_SIZE) {
-        file1.value = null;
-        error1.value = `File size should be maximum 5MB`;
-      } else {
-        error1.value = "";
-      }
-    }
-  }
-
-  function handleFileUpload2() {
-    if (input2.value && input2.value.files) {
-      file2.value = input2.value.files[0];
-      if (file2.value.size > MAX_SIZE) {
-        file2.value = null;
-        error2.value = `File size should be maximum 5MB`;
-      } else {
-        error2.value = "";
-      }
+  function handleFileChange(file: any, index: number) {
+    if (!file) {
+      documents[index].error = "Could not upload file try again";
+    } else if (file.size > MAX_SIZE) {
+      documents[index].error = "File size is too large";
+    } else {
+      documents[index].error = "";
+      documents[index].file = file;
     }
   }
 
   function submitHandler() {
-    if (!file1.value) {
-      error1.value = "Identity verification document is required";
-    }
-    if (!file2.value) {
-      error2.value = "Address verification document is required";
-    }
-    if (file1.value && file2.value) {
+    let isValid = true;
+    documents.forEach((doc) => {
+      if (!doc.file) {
+        doc.error = "Please upload a file";
+        isValid = false;
+      }
+    });
+    if (isValid) {
       emits("goNext");
     }
   }
@@ -60,62 +54,14 @@
       class="flex grow flex-col justify-between gap-6 py-6"
     >
       <div class="flex flex-col gap-4 sm:flex-row">
-        <div class="flex w-full flex-col gap-2">
-          <h3 class="font-medium">Upload identity verification</h3>
-          <label
-            class="flex cursor-pointer flex-col items-center gap-4 rounded-lg border-2 border-dashed border-chinese-white px-4 py-12 focus:border-palma focus:outline-none"
-            tabindex="0"
-            @keypress.enter="input1?.click()"
-          >
-            <IconsUpload />
-            <p class="flex flex-col items-center gap-2">
-              <span class="text-palma">Choose file</span>
-              <span class="text-sm text-dark_corduroy"
-                >JPG, PNG or PDF, file size no more than 5MB</span
-              >
-            </p>
-            <input
-              ref="input1"
-              type="file"
-              accept="image/png, image/jpeg, image/jpg, application/pdf"
-              style="display: none"
-              @change="handleFileUpload1"
-            />
-          </label>
-          <p v-if="error1" class="text-grenadier">{{ error1 }}</p>
-          <p class="py-4 text-dark_corduroy" v-else>
-            <span v-if="file1">{{ file1.name }}</span>
-            <span v-else>No files added yet</span>
-          </p>
-        </div>
-        <div class="flex w-full flex-col gap-2">
-          <h3 class="font-medium">Upload address verification</h3>
-          <label
-            class="flex cursor-pointer flex-col items-center gap-4 rounded-lg border-2 border-dashed border-chinese-white px-4 py-12 focus:border-palma focus:outline-none"
-            tabindex="0"
-            @keypress.enter="input2?.click()"
-          >
-            <IconsUpload />
-            <p class="flex flex-col items-center gap-2">
-              <span class="text-palma">Choose file</span>
-              <span class="text-sm text-dark_corduroy"
-                >JPG, PNG or PDF, file size no more than 5MB</span
-              >
-            </p>
-            <input
-              ref="input2"
-              type="file"
-              accept="image/png, image/jpeg, image/jpg, application/pdf"
-              style="display: none"
-              @change="handleFileUpload2"
-            />
-          </label>
-          <p v-if="error2" class="text-grenadier">{{ error2 }}</p>
-          <p class="py-4 text-dark_corduroy" v-else>
-            <span v-if="file2">{{ file2.name }}</span>
-            <span v-else>No files added yet</span>
-          </p>
-        </div>
+        <SharedFileInput
+          v-for="(document, index) in documents"
+          :key="index"
+          :title="document.title"
+          :file="document.file"
+          :error="document.error"
+          @changed="(file) => handleFileChange(file, index)"
+        />
       </div>
       <div
         class="flex flex-col-reverse gap-4 sm:flex-row sm:justify-between"
