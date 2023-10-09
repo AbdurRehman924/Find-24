@@ -35,9 +35,22 @@
               Reschedule
             </button>
           </div>
-          <div>
+          <div class="flex">
             <!-- rating -->
-            <NuxtRating rating-size="20px"/>
+            <div>
+              <SharedRating :rating="4">
+                <template #active>
+                  <IconsStar class="h-5 w-5 text-ripe-lemon" />
+                </template>
+                <template #inactive>
+                  <IconsStar class="h-5 w-5 text-chinese-white" />
+                </template>
+              </SharedRating>
+            </div>
+            <div class="px-2">.</div>
+            <div class="font-medium text-dark_corduroy">
+              421 Total reviews
+            </div>
           </div>
           <div>
             Amount Paid: <span class="font-semibold">$219.78</span>
