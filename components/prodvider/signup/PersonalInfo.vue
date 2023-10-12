@@ -51,7 +51,8 @@
             type="email"
             name="email"
             outer-class="w-full"
-            input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
+            input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green disabled:cursor-not-allowed"
+            :disabled="true"
             label-class="mb-2 font-medium inline-block"
             label="Email Address"
             :value="user.email"
@@ -102,7 +103,10 @@
           <label for="phone" class="mb-2 inline-block font-medium"
             >Phone Number</label
           >
-          <SharedPhoneInput :initial-value="user.phone" />
+          <SharedPhoneInput
+            :initial-value="user.phone"
+            :disabled="true"
+          />
         </div>
       </div>
       <FormKit

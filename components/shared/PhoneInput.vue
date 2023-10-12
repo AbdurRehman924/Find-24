@@ -5,12 +5,13 @@
         class="combobox rounded-l-lg border border-chinese-white focus-within:border-palma focus-within:text-dark-jungle-green"
       >
         <ComboboxInput
+          :disabled="disabled"
           :displayValue="
             (country: any) => country.flag + country.dial_code
           "
           @change="query = $event.target.value"
           placeholder="Code"
-          class="rounded-lg bg-saltpan"
+          class="rounded-lg bg-saltpan disabled:cursor-not-allowed"
         />
       </div>
       <TransitionRoot
@@ -52,8 +53,9 @@
     <FormKit
       type="tel"
       name="_phone"
-      input-class="rounded-l-none bg-saltpan focus:border-palma focus:text-dark-jungle-green"
+      input-class="rounded-l-none bg-saltpan focus:border-palma focus:text-dark-jungle-green disabled:cursor-not-allowed"
       v-model="phoneNumber"
+      :disabled="disabled"
     />
     <FormKit
       :wrapper-class="{ hidden: true }"
@@ -91,6 +93,7 @@
 
   const props = defineProps<{
     initialValue?: string;
+    disabled?: boolean;
   }>();
 
   const formKitPhone = ref();
