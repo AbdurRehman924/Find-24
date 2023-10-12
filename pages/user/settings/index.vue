@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end">
+    <div class="mt-10 flex justify-end">
       <div class="h-14 w-44">
         <button
           @click="editingMode = true"
@@ -259,10 +259,12 @@
 </script>
 <style lang="postcss" scoped>
   .row {
-    @apply mb-4 flex gap-x-6;
+    @apply flex flex-col;
+    @apply sm:flex-row sm:gap-x-6;
 
     > div {
-      @apply w-1/2;
+      @apply sm:w-1/2;
+      @apply mb-4;
     }
     .full {
       @apply w-full;

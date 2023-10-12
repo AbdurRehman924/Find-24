@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div class="mb-6 text-2xl font-semibold">Settings</div>
-    <div class="mb-8 flex">
+    <div class="mb-8 flex flex-wrap gap-y-4">
       <RouterLink v-for="link in links" :to="link.path" class="link">
         {{ link.name }}
       </RouterLink>
