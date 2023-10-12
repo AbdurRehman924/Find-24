@@ -41,11 +41,64 @@
   </div>
 
   <!-- Personal info update form -->
-  <div>
-    firstName: {{ user.firstName }} - lastName:
-    {{ user.lastName }}
+  <div v-if="!editingMode">
+    <div class="row">
+      <div>
+        <div class="mb-2 text-sm font-medium">First name</div>
+        <div>{{ user.firstName }}</div>
+      </div>
+      <div>
+        <div class="mb-2 text-sm font-medium">Last name</div>
+        <div>
+          {{ user.lastName }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="mb-2 text-sm font-medium">Gender</div>
+        {{ user.gender }}
+      </div>
+      <div>
+        <div class="mb-2 text-sm font-medium">Date of birth</div>
+        {{ user.dob }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="full">
+        <div class="mb-2 text-sm font-medium">Address</div>
+        {{ user.street }}
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <div class="mb-2 text-sm font-medium">Country</div>
+        {{ user.country }}
+      </div>
+      <div class="flex gap-x-4">
+        <div class="w-1/2">
+          <div class="mb-2 text-sm font-medium">City</div>
+          {{ user.city }}
+        </div>
+        <div class="w-1/2">
+          <div class="mb-2 text-sm font-medium">Zip Code</div>
+          {{ user.zipCode }}
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <div class="h-14 w-44">
+        <button
+          @click="editingMode = true"
+          class="h-full w-full rounded-full bg-palma font-medium text-white"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
   </div>
   <FormKit
+    v-show="editingMode"
     type="form"
     id="personalInfo"
     :actions="false"
@@ -142,7 +195,15 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end">
+    <div class="flex justify-end gap-x-4">
+      <div class="h-14 w-44">
+        <button
+          @click="editingMode = false"
+          class="h-full w-full rounded-full bg-provincial-pink font-medium text-grenadier"
+        >
+          Cancel
+        </button>
+      </div>
       <div class="h-14 w-44">
         <FormKit type="submit" label="Save Changes" />
       </div>
@@ -155,17 +216,21 @@
   import { getNode } from "@formkit/core";
 
   const { user } = storeToRefs(useUserStore());
+  const { updateProfileData, fetchUserProfileData } = useUserStore();
+  const editingMode = ref(false);
+  await fetchUserProfileData();
 
-  onMounted(() => {
+  onMounted(async () => {
     updateFormValues();
   });
   async function handleProfileUpdate(formData) {
-    console.log("submit", formData);
-    const { res, error } = await useUpdateUserData(formData);
+    // console.log("submit", formData);
+    const { res, error } = await updateProfileData(formData);
     if (error.value) {
-      console.log(error.value);
+      // console.log(error.value);
     } else {
-      console.log(res.value);
+      // console.log(res.value);
+      editingMode.value = false;
     }
   }
   function updateFormValues() {
@@ -186,6 +251,11 @@
     getNode("city").input(user.value.city);
     getNode("zipCode").input(user.value.zipCode);
   }
+  watch(editingMode, (val) => {
+    if (val == true) {
+      // updateFormValues();
+    }
+  });
 </script>
 <style lang="postcss" scoped>
   .row {

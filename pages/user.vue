@@ -1,8 +1,10 @@
 <template>
-  <div class="mx-auto grid max-w-1920 grid-cols-4 bg-penache p-14">
+  <div
+    class="mx-auto flex max-w-1920 flex-col gap-y-6 bg-penache p-4 md:flex-row md:p-8 lg:p-14"
+  >
     <div
       id="side_menu"
-      class="sticky top-0 col-span-1 mr-6 flex flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5"
+      class="flex w-full flex-col rounded-2xl border border-chinese-white bg-white shadow-variant5 md:mr-6 md:w-1/4"
     >
       <!-- profile pic, name, email -->
       <div
@@ -65,7 +67,7 @@
         </div>
       </div>
     </div>
-    <NuxtPage class="col-span-3" />
+    <NuxtPage class="w-full md:w-3/4" />
   </div>
 </template>
 <script setup></script>
