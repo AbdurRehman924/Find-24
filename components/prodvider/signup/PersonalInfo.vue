@@ -7,8 +7,15 @@
 
   const userStore = useUserStore();
   const { user } = userStore;
+  const errors = ref<any[]>([]);
 
-  function submitHandler() {
+  async function submitHandler(values: any) {
+    values.gender = user.gender;
+    const { error } = await useUpdateUserData(values);
+    if (error.value && error.value.data) {
+      errors.value = error.value.data.errors;
+      return;
+    }
     emits("goNext");
   }
 </script>
@@ -81,7 +88,7 @@
               input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
               label-class="mb-2 font-medium inline-block"
               label="City"
-              v-model="user.city"
+              :value="user.city"
             />
             <FormKit
               type="text"
@@ -108,6 +115,11 @@
             :disabled="true"
           />
         </div>
+      </div>
+      <div v-if="errors.length > 0">
+        <p v-for="error in errors" class="text-sm text-grenadier">
+          {{ error.msg }}
+        </p>
       </div>
       <FormKit
         type="submit"
