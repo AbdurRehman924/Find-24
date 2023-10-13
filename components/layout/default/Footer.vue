@@ -2,7 +2,7 @@
 
 <template>
   <footer
-    class="max-w-120 bg-white px-4 py-16 text-xs text-corduroy sm:px-8 lg:px-16"
+    class="max-w-120 border-t border-chinese-white border-opacity-50 bg-white px-4 py-16 text-xs text-corduroy sm:px-8 lg:px-16"
   >
     <section class="grid gap-6 sm:grid-cols-3 lg:grid-cols-4">
       <div>

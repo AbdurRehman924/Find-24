@@ -26,7 +26,7 @@
       <SearchFilters v-if="services" />
       <SearchResultsList />
       <div
-        class="sticky top-2 col-span-3 hidden max-h-[60dvh] rounded-2xl xl:block 2xl:col-span-2"
+        class="sticky top-24 col-span-3 hidden max-h-[60dvh] rounded-2xl xl:block 2xl:col-span-2"
         v-if="services"
       >
         <SearchMap />
