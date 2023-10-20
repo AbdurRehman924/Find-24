@@ -1,5 +1,7 @@
 <template>
-  <header class="sticky top-0 z-10 border-b-[0.5px] border-chinese-white bg-white">
+  <header
+    class="sticky top-0 z-10 border-b-[0.5px] border-chinese-white bg-white"
+  >
     <div
       class="relative mx-auto flex h-20 max-w-1920 justify-between px-4 py-6 sm:px-8 lg:px-16"
     >
@@ -13,7 +15,10 @@
         <a href="#" class="desk_nav_links">About us</a>
       </div>
       <div class="flex items-center justify-end">
-        <div class="mr-6 hidden items-center gap-x-6 lg:flex">
+        <div
+          v-if="!isLoggedIn"
+          class="mr-6 hidden items-center gap-x-6 lg:flex"
+        >
           <button
             class="desk_nav_links"
             @click="useModals().signupModal.open"
@@ -27,6 +32,37 @@
             Log in
           </button>
         </div>
+
+        <button
+          class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
+        >
+          Provide Services
+        </button>
+        <div
+          v-if="isLoggedIn"
+          class="hidden items-center gap-x-6 lg:flex"
+        >
+          <IconsBell class="" />
+          <div class="relative p-1">
+            <img
+              class="rounded-full"
+              src="https://placehold.co/32x32"
+              alt="profile picture"
+            />
+            <IconsOnlineIndicator class="absolute bottom-0 right-0" />
+          </div>
+        </div>
+        <IconsHamburger
+          class="lg:hidden"
+          v-if="!mobileUIOpen"
+          @click="mobileUIOpen = true"
+        />
+        <IconsCross
+          v-if="mobileUIOpen"
+          @click="mobileUIOpen = false"
+        />
+      </div>
+      <template>
         <SharedModal
           title="Log in"
           :controller="useModals().loginModal"
@@ -67,21 +103,7 @@
         >
           <AuthConfirmEmailFailed />
         </SharedModal>
-        <button
-          class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
-        >
-          Provide Services
-        </button>
-        <IconsHamburger
-          class="lg:hidden"
-          v-if="!mobileUIOpen"
-          @click="mobileUIOpen = true"
-        />
-        <IconsCross
-          v-if="mobileUIOpen"
-          @click="mobileUIOpen = false"
-        />
-      </div>
+      </template>
       <div
         v-if="mobileUIOpen"
         class="absolute left-0 top-[80px] z-10 h-screen w-full bg-white px-4 py-7"
@@ -134,9 +156,13 @@
   </header>
 </template>
 <script setup>
+  import { storeToRefs } from "pinia";
+  import { useUserStore } from "@/stores/userStore";
+
   const router = useRouter();
   const route = useRoute();
   const mobileUIOpen = ref(false);
+  const { user, isLoggedIn } = storeToRefs(useUserStore());
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {
