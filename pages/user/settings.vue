@@ -17,7 +17,7 @@
     },
     {
       name: "Login & Security",
-      path: "/user/",
+      path: "/user/settings/login_and_security",
     },
     {
       name: "Notifications",
