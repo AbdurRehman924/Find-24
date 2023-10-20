@@ -67,6 +67,12 @@ input[type="range"]::-moz-range-thumb {
 .formkit-input {
   @apply px-4;
 }
+.formkit-input:focus {
+  @apply border-palma;
+}
+.formkit-input > .valid {
+  @apply bg-tara;
+}
 .formkit-input option {
   @apply rounded-lg p-4 outline-none;
 }

@@ -15,7 +15,11 @@
               Last updated 4 months ago
             </div>
           </div>
-          <button class="font-medium text-palma">Change</button>
+          <NuxtLink
+            to="/changepassword"
+            class="font-medium text-palma"
+            >Change</NuxtLink
+          >
         </div>
       </div>
       <div class="flex items-center">
