@@ -71,8 +71,21 @@
   </div>
 </template>
 <script setup>
-  const handleChangePassword = () => {
-    console.log("submitted");
+  const handleChangePassword = async (formValues) => {
+    const { currentPassword, password: newPassword } = formValues;
+    const { data, error } = await useResetPassword().changePassword(
+      currentPassword,
+      newPassword,
+    );
+    console.log(error.value.statusCode);
+    if (error.value && error.value.statusCode === 401) {
+      // useModals().forgotPasswordModal.open();
+      alert("Please enter correct password");
+    } else if (error.value) {
+      alert("Something went wrong");
+    } else {
+      alert("Password changed successfully");
+    }
   };
   const handleIconClick = (node, e) => {
     node.props.suffixIcon =

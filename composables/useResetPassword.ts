@@ -36,10 +36,25 @@ const verifyResetCode = async (code: string) => {
   );
   return { data, error };
 };
+const changePassword = async (
+  currentPassword: string,
+  newPassword: string,
+) => {
+  const { data, error } = await useFetch("/auth/changePassword", {
+    method: "PUT",
+    body: {
+      currentPassword,
+      newPassword,
+    },
+    baseURL: useRuntimeConfig().public.baseURL,
+  });
+  return { data, error };
+};
 export const useResetPassword = () => {
   return {
     setNewPassword,
     sendResetCode,
     verifyResetCode,
+    changePassword,
   };
 };
