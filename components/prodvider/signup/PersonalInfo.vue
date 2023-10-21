@@ -11,7 +11,7 @@
 
   async function submitHandler(values: any) {
     values.gender = user.gender;
-    const { error } = await useUpdateUserData(values);
+    const { error } = await userStore.updateProfileData(values);
     if (error.value && error.value.data) {
       errors.value = error.value.data.errors;
       return;
