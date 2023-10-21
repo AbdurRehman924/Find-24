@@ -35,7 +35,9 @@
               Sanuekpalchain42@gmail.com
             </div>
           </div>
-          <button class="font-medium text-palma">Change</button>
+          <NuxtLink to="/changeemail" class="font-medium text-palma"
+            >Change</NuxtLink
+          >
         </div>
       </div>
       <div class="flex items-center">

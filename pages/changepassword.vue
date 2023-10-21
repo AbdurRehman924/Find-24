@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto my-28 max-w-2xl">
+  <div class="mx-auto my-28 max-w-2xl px-4">
     <div class="mb-2 text-4xl font-bold">Update your password</div>
     <div class="mb-6 text-dark_corduroy">
       Keep your account secure by changing your password. Enter your
