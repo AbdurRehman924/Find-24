@@ -1,12 +1,26 @@
 <script lang="ts" setup>
+  import { Category } from "~/types/category";
+
   const emits = defineEmits<{
     (e: "goNext"): void;
     (e: "goBack"): void;
   }>();
 
+  const { getCategories } = useCategories();
+
+  const categories = ref<Category[]>([]);
+
   function submitHandler() {
     emits("goNext");
   }
+
+  onMounted(async () => {
+    const { data } = await getCategories();
+    if (data.value) {
+      categories.value = data.value.data;
+      console.log(categories.value);
+    }
+  });
 </script>
 
 <template>
