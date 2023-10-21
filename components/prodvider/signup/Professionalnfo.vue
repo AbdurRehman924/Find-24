@@ -10,7 +10,9 @@
 
   const categories = ref<Category[]>([]);
 
-  function submitHandler() {
+  function submitHandler(values: any) {
+    console.log(values);
+
     emits("goNext");
   }
 
@@ -35,19 +37,12 @@
       @submit="submitHandler"
     >
       <div>
-        <FormKit
-          type="text"
-          name="service"
-          outer-class="w-full pb-2"
-          input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
-          label-class="mb-2 font-medium inline-block"
-          label="Add Service"
-          placeholder="e.g. Plumber"
-          validation="required"
-          :validation-messages="{
-            required: 'Atleast one service is required',
-          }"
-        />
+        <div class="pb-2">
+          <label for="category" class="mb-2 inline-block font-medium"
+            >Add a service</label
+          >
+          <SharedCategoryPicker :categories="categories" />
+        </div>
         <div class="py-2">
           <label
             for="experience"
@@ -58,14 +53,14 @@
         </div>
         <FormKit
           type="textarea"
-          name="bio"
+          name="description"
           rows="10"
           columns="10"
           outer-class="w-full py-2"
           input-class="bg-saltpan text-dark_corduroy resize-none focus:text-dark-jungle-green focus:border-palma"
           label-class="mb-2 font-medium inline-block"
-          label="Write your bio"
-          placeholder="Write something about yourself"
+          label="Write description"
+          placeholder="Write something about the service you provide"
           validation="required"
           :validation-messages="{
             required: 'Bio is required',

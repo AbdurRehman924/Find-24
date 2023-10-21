@@ -6,7 +6,7 @@
     ListboxOption,
   } from "@headlessui/vue";
 
-  const experienceLevel = ["Beginner", "Intermediate", "Expert"];
+  const experienceLevel = ["beginner", "intermediate", "expert"];
   const selectedPerson = ref();
 </script>
 
@@ -46,7 +46,7 @@
                   ? 'bg-frostee font-medium text-palma'
                   : 'text-dark_corduroy',
                 selected ? 'border-l border-palma text-palma' : '',
-                'p-4',
+                'p-4 capitalize',
               ]"
             >
               <span>{{ experience }}</span>
