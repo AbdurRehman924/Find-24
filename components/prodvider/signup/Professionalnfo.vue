@@ -7,12 +7,19 @@
   }>();
 
   const { getCategories } = useCategories();
+  const { onBoardServices } = useProvideServices();
+
+  const pending = ref(false);
 
   const categories = ref<Category[]>([]);
 
-  function submitHandler(values: any) {
-    console.log(values);
-
+  async function submitHandler(values: any) {
+    pending.value = true;
+    const { data, error } = await onBoardServices(values);
+    pending.value = false;
+    if (error.value && error.value.data) {
+      return;
+    }
     emits("goNext");
   }
 
@@ -20,7 +27,6 @@
     const { data } = await getCategories();
     if (data.value) {
       categories.value = data.value.data;
-      console.log(categories.value);
     }
   });
 </script>
@@ -63,7 +69,7 @@
           placeholder="Write something about the service you provide"
           validation="required"
           :validation-messages="{
-            required: 'Bio is required',
+            required: 'Description is required',
           }"
         />
       </div>
@@ -81,10 +87,20 @@
           type="submit"
           label="Next Step"
           outer-class="shadow-variant5"
-          input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3"
+          :input-class="{
+            'font-semibold border-none px-6 py-3 disabled:cursor-not-allowed disabled:bg-opacity-50': true,
+            '!px-16': pending,
+          }"
+          :disabled="pending"
         >
-          <span>Next Step</span>
-          <IconsRightArrow />
+          <p
+            class="flex items-center justify-center gap-2"
+            v-if="!pending"
+          >
+            <span>Next Step</span>
+            <IconsRightArrow />
+          </p>
+          <SharedSpinner v-else />
         </FormKit>
       </div>
     </FormKit>

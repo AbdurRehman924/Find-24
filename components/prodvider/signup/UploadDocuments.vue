@@ -4,9 +4,17 @@
     (e: "goBack"): void;
   }>();
 
+  const { uploadDocuments } = useProvideServices();
+
   const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
-  const documents = reactive([
+  const documents = reactive<
+    {
+      title: string;
+      file: Blob | null;
+      error: string;
+    }[]
+  >([
     {
       title: "Upload identity verification",
       file: null,
@@ -19,7 +27,9 @@
     },
   ]);
 
-  function handleFileChange(file: any, index: number) {
+  const pending = ref(false);
+
+  function handleFileChange(file: Blob, index: number) {
     if (!file) {
       documents[index].error = "Could not upload file try again";
     } else if (file.size > MAX_SIZE) {
@@ -30,7 +40,7 @@
     }
   }
 
-  function submitHandler() {
+  async function submitHandler() {
     let isValid = true;
     documents.forEach((doc) => {
       if (!doc.file) {
@@ -39,6 +49,18 @@
       }
     });
     if (isValid) {
+      const formData = new FormData();
+      documents.forEach((doc) => {
+        if (doc.file) {
+          formData.append(doc.title, doc.file);
+        }
+      });
+      pending.value = true;
+      const { data, error } = await uploadDocuments(formData);
+      pending.value = false;
+      if (error.value && error.value.data) {
+        return;
+      }
       emits("goNext");
     }
   }
@@ -77,10 +99,20 @@
           type="submit"
           label="Next Step"
           outer-class="shadow-variant5"
-          input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3 focus:border focus:border-chinese-white"
+          :input-class="{
+            'font-semibold border-none px-6 py-3 disabled:cursor-not-allowed disabled:bg-opacity-50': true,
+            '!px-16': pending,
+          }"
+          :disabled="pending"
         >
-          <span>Register</span>
-          <IconsRightArrow />
+          <p
+            class="flex items-center justify-center gap-2"
+            v-if="!pending"
+          >
+            <span>Register</span>
+            <IconsRightArrow />
+          </p>
+          <SharedSpinner v-else />
         </FormKit>
       </div>
     </form>

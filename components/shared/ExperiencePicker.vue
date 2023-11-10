@@ -59,7 +59,7 @@
   <FormKit
     :wrapper-class="{ hidden: true }"
     type="text"
-    name="experience"
+    name="experienceLevel"
     validation="required"
     :validation-messages="{
       required: 'Experience level is required',

@@ -8,10 +8,13 @@
   const userStore = useUserStore();
   const { user } = userStore;
   const errors = ref<any[]>([]);
+  const pending = ref(false);
 
   async function submitHandler(values: any) {
     values.gender = user.gender;
+    pending.value = true;
     const { error } = await userStore.updateProfileData(values);
+    pending.value = false;
     if (error.value && error.value.data) {
       errors.value = error.value.data.errors;
       return;
@@ -125,10 +128,20 @@
         type="submit"
         label="Next Step"
         outer-class="ml-auto shadow-variant5 w-full sm:w-auto"
-        input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3"
+        :input-class="{
+          'font-semibold border-none px-6 py-3 disabled:cursor-not-allowed disabled:bg-opacity-50': true,
+          '!px-16': pending,
+        }"
+        :disabled="pending"
       >
-        <span>Next Step</span>
-        <IconsRightArrow />
+        <p
+          class="flex items-center justify-center gap-2"
+          v-if="!pending"
+        >
+          <span>Next Step</span>
+          <IconsRightArrow />
+        </p>
+        <SharedSpinner v-else />
       </FormKit>
     </FormKit>
   </section>

@@ -27,13 +27,6 @@
     <section class="flex w-full flex-col lg:flex-row">
       <div class="img-wrapper">
         <img
-          v-if="user.image"
-          :src="`${imagesURL}/${user.image}`"
-          alt="Your image"
-          class="h-full w-full rounded-t-2xl object-cover"
-        />
-        <img
-          v-else
           class="h-full w-full rounded-t-2xl object-cover"
           src="~/assets/images/provider-placeholder.jpg"
           alt="Provider Image Placeholder"
