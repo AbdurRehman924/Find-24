@@ -56,10 +56,13 @@
         }
       });
       pending.value = true;
-      const { data, error } = await uploadDocuments(formData);
+      const { error } = await uploadDocuments(formData);
       pending.value = false;
       if (error.value && error.value.data) {
-        return;
+        throw createError({
+          statusCode: error.value.data.statusCode,
+          statusMessage: error.value.data.message,
+        });
       }
       emits("goNext");
     }

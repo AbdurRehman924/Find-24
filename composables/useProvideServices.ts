@@ -13,7 +13,7 @@ export const useProvideServices = () => {
     experienceLevel: string;
     description: string;
   }) {
-    return useFetchWrapper("/user/onboardingServices", {
+    return useFetchWrapper("/user/onboardingService", {
       method: "POST",
       baseURL,
       Headers: {

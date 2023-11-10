@@ -28,21 +28,29 @@
       <div class="flex flex-col">
         <ProdviderSignupProgresBar :current-section="section" />
         <div class="mb-8 h-[0.5px] w-full bg-chinese-white"></div>
-        <ProdviderSignupPersonalInfo
-          v-if="section == 0"
-          @go-next="section++"
-        />
-        <ProdviderSignupProfessionalnfo
-          v-else-if="section == 1"
-          @go-back="section--"
-          @go-next="section++"
-        />
-        <ProdviderSignupUploadDocuments
-          v-else-if="section == 2"
-          @go-back="section--"
-          @go-next="section++"
-        />
-        <ProdviderSignupSucess v-else />
+        <NuxtErrorBoundary>
+          <ProdviderSignupPersonalInfo
+            v-if="section == 0"
+            @go-next="section++"
+          />
+          <ProdviderSignupProfessionalnfo
+            v-else-if="section == 1"
+            @go-back="section--"
+            @go-next="section++"
+          />
+          <ProdviderSignupUploadDocuments
+            v-else-if="section == 2"
+            @go-back="section--"
+            @go-next="section++"
+          />
+          <ProdviderSignupSucess v-else />
+          <template #error="{ error }">
+            <div class="px-4 sm:px-8 xl:px-16">
+              Oops something went wrong. Please try again later.
+              <code>{{ error }}</code>
+            </div>
+          </template>
+        </NuxtErrorBoundary>
       </div>
     </section>
   </main>

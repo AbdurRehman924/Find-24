@@ -15,18 +15,27 @@
 
   async function submitHandler(values: any) {
     pending.value = true;
-    const { data, error } = await onBoardServices(values);
+    const { error } = await onBoardServices(values);
     pending.value = false;
     if (error.value && error.value.data) {
-      return;
+      throw createError({
+        statusCode: error.value.data.statusCode,
+        statusMessage: error.value.data.message,
+      });
     }
     emits("goNext");
   }
 
   onMounted(async () => {
-    const { data } = await getCategories();
+    const { data, error } = await getCategories();
     if (data.value) {
       categories.value = data.value.data;
+    }
+    if (error.value) {
+      throw createError({
+        statusCode: error.value.data.statusCode,
+        statusMessage: error.value.data.message,
+      });
     }
   });
 </script>
