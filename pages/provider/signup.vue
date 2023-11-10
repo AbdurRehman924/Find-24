@@ -1,12 +1,5 @@
 <script setup lang="ts">
-  import { useUserStore } from "~/stores/userStore";
-
-  const { user } = useUserStore();
-  const { imagesURL } = useRuntimeConfig().public;
-
   const section = ref(0);
-
-  function handleRegister() {}
 </script>
 
 <template>
@@ -47,8 +40,9 @@
         <ProdviderSignupUploadDocuments
           v-else-if="section == 2"
           @go-back="section--"
-          @go-next="handleRegister"
+          @go-next="section++"
         />
+        <ProdviderSignupSucess v-else />
       </div>
     </section>
   </main>
