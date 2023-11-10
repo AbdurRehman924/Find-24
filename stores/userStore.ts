@@ -46,7 +46,17 @@ export const useUserStore = defineStore("user", {
         console.log(error);
       }
     },
-   
+    async updateProfileData(user: User) {
+      const { res, error } = await useUpdateUserData(user);
+      console.log(res.value);
+      console.log(res.value?.code);
+
+      if (res.value && res.value.code === 200) {
+        this.user = { ...this.user, ...user };
+      }
+
+      return { res, error };
+    },
   },
   getters: {
     isLoggedIn(state) {

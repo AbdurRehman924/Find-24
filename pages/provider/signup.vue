@@ -1,12 +1,5 @@
 <script setup lang="ts">
-  import { useUserStore } from "~/stores/userStore";
-
-  const { user } = useUserStore();
-  const { imagesURL } = useRuntimeConfig().public;
-
   const section = ref(0);
-
-  function handleRegister() {}
 </script>
 
 <template>
@@ -27,13 +20,6 @@
     <section class="flex w-full flex-col lg:flex-row">
       <div class="img-wrapper">
         <img
-          v-if="user.image"
-          :src="`${imagesURL}/${user.image}`"
-          alt="Your image"
-          class="h-full w-full rounded-t-2xl object-cover"
-        />
-        <img
-          v-else
           class="h-full w-full rounded-t-2xl object-cover"
           src="~/assets/images/provider-placeholder.jpg"
           alt="Provider Image Placeholder"
@@ -42,20 +28,29 @@
       <div class="flex flex-col">
         <ProdviderSignupProgresBar :current-section="section" />
         <div class="mb-8 h-[0.5px] w-full bg-chinese-white"></div>
-        <ProdviderSignupPersonalInfo
-          v-if="section == 0"
-          @go-next="section++"
-        />
-        <ProdviderSignupProfessionalnfo
-          v-else-if="section == 1"
-          @go-back="section--"
-          @go-next="section++"
-        />
-        <ProdviderSignupUploadDocuments
-          v-else-if="section == 2"
-          @go-back="section--"
-          @go-next="handleRegister"
-        />
+        <NuxtErrorBoundary>
+          <ProdviderSignupPersonalInfo
+            v-if="section == 0"
+            @go-next="section++"
+          />
+          <ProdviderSignupProfessionalnfo
+            v-else-if="section == 1"
+            @go-back="section--"
+            @go-next="section++"
+          />
+          <ProdviderSignupUploadDocuments
+            v-else-if="section == 2"
+            @go-back="section--"
+            @go-next="section++"
+          />
+          <ProdviderSignupSucess v-else />
+          <template #error="{ error }">
+            <div class="px-4 sm:px-8 xl:px-16">
+              Oops something went wrong. Please try again later.
+              <code>{{ error }}</code>
+            </div>
+          </template>
+        </NuxtErrorBoundary>
       </div>
     </section>
   </main>

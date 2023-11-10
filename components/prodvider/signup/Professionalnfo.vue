@@ -1,12 +1,43 @@
 <script lang="ts" setup>
+  import { Category } from "~/types/category";
+
   const emits = defineEmits<{
     (e: "goNext"): void;
     (e: "goBack"): void;
   }>();
 
-  function submitHandler() {
+  const { getCategories } = useCategories();
+  const { onBoardServices } = useProvideServices();
+
+  const pending = ref(false);
+
+  const categories = ref<Category[]>([]);
+
+  async function submitHandler(values: any) {
+    pending.value = true;
+    const { error } = await onBoardServices(values);
+    pending.value = false;
+    if (error.value && error.value.data) {
+      throw createError({
+        statusCode: error.value.data.statusCode,
+        statusMessage: error.value.data.message,
+      });
+    }
     emits("goNext");
   }
+
+  onMounted(async () => {
+    const { data, error } = await getCategories();
+    if (data.value) {
+      categories.value = data.value.data;
+    }
+    if (error.value) {
+      throw createError({
+        statusCode: error.value.data.statusCode,
+        statusMessage: error.value.data.message,
+      });
+    }
+  });
 </script>
 
 <template>
@@ -21,19 +52,12 @@
       @submit="submitHandler"
     >
       <div>
-        <FormKit
-          type="text"
-          name="service"
-          outer-class="w-full pb-2"
-          input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
-          label-class="mb-2 font-medium inline-block"
-          label="Add Service"
-          placeholder="e.g. Plumber"
-          validation="required"
-          :validation-messages="{
-            required: 'Atleast one service is required',
-          }"
-        />
+        <div class="pb-2">
+          <label for="category" class="mb-2 inline-block font-medium"
+            >Add a service</label
+          >
+          <SharedCategoryPicker :categories="categories" />
+        </div>
         <div class="py-2">
           <label
             for="experience"
@@ -44,17 +68,17 @@
         </div>
         <FormKit
           type="textarea"
-          name="bio"
+          name="description"
           rows="10"
           columns="10"
           outer-class="w-full py-2"
           input-class="bg-saltpan text-dark_corduroy resize-none focus:text-dark-jungle-green focus:border-palma"
           label-class="mb-2 font-medium inline-block"
-          label="Write your bio"
-          placeholder="Write something about yourself"
+          label="Write description"
+          placeholder="Write something about the service you provide"
           validation="required"
           :validation-messages="{
-            required: 'Bio is required',
+            required: 'Description is required',
           }"
         />
       </div>
@@ -72,10 +96,20 @@
           type="submit"
           label="Next Step"
           outer-class="shadow-variant5"
-          input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3"
+          :input-class="{
+            'font-semibold border-none px-6 py-3 disabled:cursor-not-allowed disabled:bg-opacity-50': true,
+            '!px-16': pending,
+          }"
+          :disabled="pending"
         >
-          <span>Next Step</span>
-          <IconsRightArrow />
+          <p
+            class="flex items-center justify-center gap-2"
+            v-if="!pending"
+          >
+            <span>Next Step</span>
+            <IconsRightArrow />
+          </p>
+          <SharedSpinner v-else />
         </FormKit>
       </div>
     </FormKit>

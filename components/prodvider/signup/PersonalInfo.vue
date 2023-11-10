@@ -7,8 +7,18 @@
 
   const userStore = useUserStore();
   const { user } = userStore;
+  const errors = ref<any[]>([]);
+  const pending = ref(false);
 
-  function submitHandler() {
+  async function submitHandler(values: any) {
+    values.gender = user.gender;
+    pending.value = true;
+    const { error } = await userStore.updateProfileData(values);
+    pending.value = false;
+    if (error.value && error.value.data) {
+      errors.value = error.value.data.errors;
+      return;
+    }
     emits("goNext");
   }
 </script>
@@ -51,7 +61,8 @@
             type="email"
             name="email"
             outer-class="w-full"
-            input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
+            input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green disabled:cursor-not-allowed"
+            :disabled="true"
             label-class="mb-2 font-medium inline-block"
             label="Email Address"
             :value="user.email"
@@ -80,7 +91,7 @@
               input-class="bg-saltpan text-dark_corduroy focus:border-palma focus:text-dark-jungle-green"
               label-class="mb-2 font-medium inline-block"
               label="City"
-              v-model="user.city"
+              :value="user.city"
             />
             <FormKit
               type="text"
@@ -102,17 +113,35 @@
           <label for="phone" class="mb-2 inline-block font-medium"
             >Phone Number</label
           >
-          <SharedPhoneInput :initial-value="user.phone" />
+          <SharedPhoneInput
+            :initial-value="user.phone"
+            :disabled="true"
+          />
         </div>
+      </div>
+      <div v-if="errors.length > 0">
+        <p v-for="error in errors" class="text-sm text-grenadier">
+          {{ error.msg }}
+        </p>
       </div>
       <FormKit
         type="submit"
         label="Next Step"
         outer-class="ml-auto shadow-variant5 w-full sm:w-auto"
-        input-class="font-semibold border-none flex gap-2 items-center justify-center px-6 py-3"
+        :input-class="{
+          'font-semibold border-none px-6 py-3 disabled:cursor-not-allowed disabled:bg-opacity-50': true,
+          '!px-16': pending,
+        }"
+        :disabled="pending"
       >
-        <span>Next Step</span>
-        <IconsRightArrow />
+        <p
+          class="flex items-center justify-center gap-2"
+          v-if="!pending"
+        >
+          <span>Next Step</span>
+          <IconsRightArrow />
+        </p>
+        <SharedSpinner v-else />
       </FormKit>
     </FormKit>
   </section>
