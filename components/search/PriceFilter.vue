@@ -52,7 +52,7 @@
   }
 
   async function handleReset() {
-    router.push({ query: { price: undefined } });
+    pushPriceQuery(undefined, undefined);
     removeNumericFacet(constants.PRICE_FACET);
   }
 

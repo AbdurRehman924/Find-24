@@ -31,21 +31,18 @@
           ?.split("|")
           .filter((category) => category !== categoryValue)
           .join("|") || undefined;
-      router.push({ query: { category: newQuery } });
+      pushCategoryQuery(newQuery);
     } else if (route.query.category) {
-      router.push({
-        query: {
-          category: `${route.query.category}|${categoryValue}`,
-        },
-      });
+      pushCategoryQuery(`${route.query.category}|${categoryValue}`);
     } else {
-      router.push({ query: { category: categoryValue } });
+      pushCategoryQuery(categoryValue);
     }
+
     toggleFacet(constants.CATEGORY_FACET, categoryValue);
   }
 
   async function handleReset() {
-    router.push({ query: { category: undefined } });
+    pushCategoryQuery(undefined);
     removeFacet(constants.CATEGORY_FACET);
   }
 </script>

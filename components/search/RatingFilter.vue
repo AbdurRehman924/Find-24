@@ -20,22 +20,18 @@
           .filter((rating) => rating != ratingValue)
           .join("|") || undefined;
 
-      router.push({ query: { rating: newQuery } });
+      pushRatingQuery(newQuery);
     } else if (route.query.rating) {
-      router.push({
-        query: {
-          rating: `${route.query.rating}|${ratingValue}`,
-        },
-      });
+      pushRatingQuery(`${route.query.rating}|${ratingValue}`);
     } else {
-      router.push({ query: { rating: ratingValue } });
+      pushRatingQuery(ratingValue);
     }
 
     toggleFacet(constants.RATING_FACET, ratingValue);
   }
 
   async function handleReset() {
-    router.push({ query: { rating: undefined } });
+    pushRatingQuery(undefined);
     removeFacet(constants.RATING_FACET);
   }
 </script>

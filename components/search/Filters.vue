@@ -20,12 +20,7 @@
 
   async function handleApplyFilter() {
     if (priceRange.value.min && priceRange.value.max) {
-      router.push({
-        query: {
-          price__gte: priceRange.value.min,
-          price__lte: priceRange.value.max,
-        },
-      });
+      pushPriceQuery(priceRange.value.min, priceRange.value.max);
       applyNumericFacet(constants.PRICE_FACET, priceRange.value);
     }
   }
