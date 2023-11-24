@@ -2,6 +2,9 @@
   import useServicesStore from "~/stores/services";
   import constants from "~/constants";
 
+  const route = useRoute();
+  const router = useRouter();
+
   const priceRange = ref<{ min: number; max: number }>({
     min: 0,
     max: 0,
@@ -15,6 +18,11 @@
 
   async function handleApplyFilter() {
     if (priceRange.value.min && priceRange.value.max) {
+      router.push({
+        query: {
+          price: `${priceRange.value.min}-${priceRange.value.max}`,
+        },
+      });
       applyNumericFacet(constants.PRICE_FACET, priceRange.value);
     }
   }

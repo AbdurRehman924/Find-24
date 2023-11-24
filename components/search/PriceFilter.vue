@@ -8,6 +8,8 @@
     (e: "applyFilter"): void;
   }>();
 
+  const router = useRouter();
+
   const servicesStore = useServicesStore();
   const { removeNumericFacet } = servicesStore;
   const { minPrice, maxPrice, overAllMaxPrice, overAllMinPrice } =
@@ -50,10 +52,12 @@
   }
 
   async function handleReset() {
+    router.push({ query: { price: undefined } });
     removeNumericFacet(constants.PRICE_FACET);
   }
 
   function handleApplyFilter() {
+    handleReset();
     emits("applyFilter");
   }
 </script>
