@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import useServicesStore from "~/stores/services";
   import constants from "~/constants";
+  import { on } from "events";
 
   const route = useRoute();
   const router = useRouter();
@@ -10,7 +11,8 @@
     max: 0,
   });
 
-  const { applyNumericFacet, removeAllFacets } = useServicesStore();
+  const { applyNumericFacet, toggleFacet, removeAllFacets } =
+    useServicesStore();
 
   function handlePriceChange(range: { min: number; max: number }) {
     priceRange.value = range;
@@ -20,12 +22,42 @@
     if (priceRange.value.min && priceRange.value.max) {
       router.push({
         query: {
-          price: `${priceRange.value.min}-${priceRange.value.max}`,
+          price__gte: priceRange.value.min,
+          price__lte: priceRange.value.max,
         },
       });
       applyNumericFacet(constants.PRICE_FACET, priceRange.value);
     }
   }
+
+  onMounted(() => {
+    if (route.query.category) {
+      const categories = route.query.category
+        .toString()
+        .split("|")
+        .map((category) => category);
+      categories.forEach((category) => {
+        toggleFacet(constants.CATEGORY_FACET, category);
+      });
+    }
+    if (route.query.price) {
+      const [min, max] = route.query.price
+        .toString()
+        .split("-")
+        .map((price) => parseInt(price));
+      priceRange.value = { min, max };
+      applyNumericFacet(constants.PRICE_FACET, priceRange.value);
+    }
+    if (route.query.rating) {
+      const ratings = route.query.rating
+        .toString()
+        .split("|")
+        .map((rating) => rating);
+      ratings.forEach((rating) => {
+        toggleFacet(constants.RATING_FACET, rating);
+      });
+    }
+  });
 </script>
 
 <template>

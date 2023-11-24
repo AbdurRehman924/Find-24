@@ -7,6 +7,8 @@ export default defineStore("services", () => {
   // state
   const { $algoliaHelper } = useNuxtApp();
 
+  const route = useRoute();
+
   const services = ref<Service[] | null>(null);
   const categoryFacets = ref<SearchResults.FacetValue[]>([]);
   const ratingFacets = ref<SearchResults.FacetValue[]>([]);
@@ -120,29 +122,17 @@ export default defineStore("services", () => {
 
   // getters
   const minPrice = computed(() => {
-    if (services.value) {
-      return services.value.reduce((min, service) => {
-        if (service.charges < min) {
-          return service.charges;
-        }
-        return min;
-      }, Infinity);
-    } else {
-      return overAllMinPrice.value;
+    if (route.query.price__gte) {
+      return parseInt(route.query.price__gte as string);
     }
+    return overAllMinPrice.value;
   });
 
   const maxPrice = computed(() => {
-    if (services.value) {
-      return services.value.reduce((max, service) => {
-        if (service.charges > max) {
-          return service.charges;
-        }
-        return max;
-      }, 0);
-    } else {
-      return overAllMaxPrice.value;
+    if (route.query.price__lte) {
+      return parseInt(route.query.price__lte as string);
     }
+    return overAllMaxPrice.value;
   });
 
   const coordinates = computed(() => {
