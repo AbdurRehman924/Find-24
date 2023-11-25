@@ -1,45 +1,29 @@
-export function pushCategoryQuery(value: string | undefined) {
+function pushQuery(
+  updatedQuery: Record<string, string | number | undefined>,
+) {
   const router = useRouter();
   const route = useRoute();
   router.push({
     query: {
-      category: value,
-      rating: route.query.rating,
-      price__gte: route.query.price__gte,
-      price__lte: route.query.price__lte,
+      ...route.query,
+      ...updatedQuery,
     },
   });
 }
 
+export function pushCategoryQuery(value: string | undefined) {
+  pushQuery({ category: value, category_type: undefined });
+}
+
 export function pushRatingQuery(value: number | string | undefined) {
-  const router = useRouter();
-  const route = useRoute();
-  router.push({
-    query: {
-      category: route.query.category || undefined,
-      category_type: route.query.category_type || undefined,
-      rating: value,
-      price__gte: route.query.price__gte,
-      price__lte: route.query.price__lte,
-    },
-  });
+  pushQuery({ rating: value });
 }
 
 export function pushPriceQuery(
   gte: number | string | undefined,
   lte: number | string | undefined,
 ) {
-  const router = useRouter();
-  const route = useRoute();
-  router.push({
-    query: {
-      category: route.query.category || undefined,
-      category_type: route.query.category_type || undefined,
-      rating: route.query.rating,
-      price__gte: gte,
-      price__lte: lte,
-    },
-  });
+  pushQuery({ price__gte: gte, price__lte: lte });
 }
 
 export function pushSearchQuery(
@@ -47,16 +31,10 @@ export function pushSearchQuery(
   lat: number | undefined,
   lng: number | undefined,
 ) {
-  const router = useRouter();
-  const route = useRoute();
-  router.push({
-    query: {
-      category_type: category,
-      rating: route.query.rating,
-      price__gte: route.query.price__gte,
-      price__lte: route.query.price__lte,
-      lat,
-      lng,
-    },
+  pushQuery({
+    category_type: category,
+    lat,
+    lng,
+    category: undefined,
   });
 }

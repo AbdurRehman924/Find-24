@@ -32,6 +32,9 @@ export default defineStore("services", () => {
 
     if (category.value) {
       filters.push(`category:${category.value}`);
+      $algoliaHelper.removeDisjunctiveFacetRefinement(
+        constants.CATEGORY_FACET,
+      );
     }
 
     if (location.value) {
@@ -59,7 +62,6 @@ export default defineStore("services", () => {
       location.value ? location.value.center[0] : undefined,
     );
 
-    $algoliaHelper.clearRefinements();
     $algoliaHelper.search();
   }
 
