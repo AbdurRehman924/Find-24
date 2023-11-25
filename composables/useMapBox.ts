@@ -8,5 +8,11 @@ export const useMapBox = () => {
     );
   }
 
-  return { searchPlaces };
+  function locationFromLatLng(lat: string, lng: string) {
+    return $fetch<Places>(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapbox.token}`,
+    );
+  }
+
+  return { searchPlaces, locationFromLatLng };
 };

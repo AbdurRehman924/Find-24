@@ -9,6 +9,8 @@ export default defineStore("services", () => {
 
   const route = useRoute();
 
+  const { locationFromLatLng } = useMapBox();
+
   const services = ref<Service[] | null>(null);
   const categoryFacets = ref<SearchResults.FacetValue[]>([]);
   const ratingFacets = ref<SearchResults.FacetValue[]>([]);
@@ -50,6 +52,14 @@ export default defineStore("services", () => {
       "filters",
       filters.join(" AND "),
     );
+
+    pushSearchQuery(
+      category.value ? category.value : undefined,
+      location.value ? location.value.center[1] : undefined,
+      location.value ? location.value.center[0] : undefined,
+    );
+
+    $algoliaHelper.clearRefinements();
     $algoliaHelper.search();
   }
 
@@ -164,8 +174,8 @@ export default defineStore("services", () => {
     }
   });
 
-  onMounted(() => {
-    $algoliaHelper.search();
+  onMounted(async () => {
+    // $algoliaHelper.search();
     $algoliaHelper.on("result", (result) => {
       services.value = result.results.hits;
       categoryFacets.value = result.results.getFacetValues(
@@ -185,6 +195,18 @@ export default defineStore("services", () => {
       page.value = result.results.page;
       totalPages.value = result.results.nbPages;
     });
+
+    if (route.query.lat && route.query.lng) {
+      const res = await locationFromLatLng(
+        route.query.lat as string,
+        route.query.lng as string,
+      );
+      location.value = res.features[0];
+    }
+    if (route.query.category_type) {
+      category.value = route.query.category_type as string;
+    }
+    searchServices();
   });
 
   return {
