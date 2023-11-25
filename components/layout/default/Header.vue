@@ -40,16 +40,39 @@
         </button>
         <div
           v-if="isLoggedIn"
-          class="hidden items-center gap-x-6 lg:flex"
+          class="relative hidden items-center gap-x-6 lg:flex"
         >
           <IconsBell class="" />
-          <div class="relative p-1">
+          <div
+            class="relative p-1"
+            @click="
+              showProfilePopover
+                ? (showProfilePopover = false)
+                : (showProfilePopover = true)
+            "
+          >
             <img
               class="rounded-full"
               src="https://placehold.co/32x32"
               alt="profile picture"
             />
             <IconsOnlineIndicator class="absolute bottom-0 right-0" />
+          </div>
+
+          <div
+            ref="profilePopover"
+            v-if="showProfilePopover"
+            class="absolute right-5 top-10 w-[340px] rounded-[20px] bg-white p-8"
+          >
+            <div class="flex flex-col items-center">
+              <img
+                class="rounded-full mb-4"
+                src="http://placehold.co/115x115"
+                alt=""
+              />
+              <div>name</div>
+              <div>email</div>
+            </div>
           </div>
         </div>
         <IconsHamburger
@@ -163,6 +186,14 @@
   const route = useRoute();
   const mobileUIOpen = ref(false);
   const { user, isLoggedIn } = storeToRefs(useUserStore());
+
+  const profilePopover = ref(null);
+  const showProfilePopover = ref(false);
+
+  onClickOutside(profilePopover, (e) => {
+    console.log(e);
+    showProfilePopover.value = false;
+  });
 </script>
 <style lang="postcss" scopped>
   .mobile_nav_links {
