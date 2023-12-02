@@ -17,8 +17,10 @@
             alt=""
           />
         </div>
-        <div class="mb-1 text-xl font-semibold">Kumar Sanu</div>
-        <div class="text-sm">someone@gmail.com</div>
+        <div class="mb-1 text-xl font-semibold">
+          {{ user.firstName }} {{ user.lastName }}
+        </div>
+        <div class="text-sm">{{ user.email }}</div>
       </div>
 
       <!-- rest of stuff -->
@@ -70,7 +72,12 @@
     <NuxtPage class="w-full md:w-3/4" />
   </div>
 </template>
-<script setup></script>
+<script setup>
+  import { useUserStore } from "@/stores/userStore";
+  import { storeToRefs } from "pinia";
+
+  const { user } = storeToRefs(useUserStore());
+</script>
 <style scoped>
   .link {
     @apply flex gap-x-3 p-3 hover:text-palma;
