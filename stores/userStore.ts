@@ -32,6 +32,10 @@ export const useUserStore = defineStore("user", {
     },
     logout() {
       this.$reset();
+      // this.authToken = "";
+      // this.refreshToken = "";
+      // this.resetPasswordToken = "";
+      // this.user = {} as User;
     },
     async fetchUserProfileData() {
       try {

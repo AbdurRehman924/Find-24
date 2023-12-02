@@ -64,14 +64,37 @@
             v-if="showProfilePopover"
             class="absolute right-5 top-10 w-[340px] rounded-[20px] bg-white p-8"
           >
-            <div class="flex flex-col items-center">
-              <img
-                class="rounded-full mb-4"
-                src="http://placehold.co/115x115"
-                alt=""
-              />
-              <div>name</div>
-              <div>email</div>
+            <div class="flex flex-col gap-y-6">
+              <div class="flex flex-col items-center">
+                <img
+                  class="mb-4 rounded-full"
+                  src="http://placehold.co/115x115"
+                  alt=""
+                />
+                <div class="mb-1 text-xl font-semibold">
+                  {{ user.firstName }} {{ user.lastName }}
+                </div>
+                <div class="text-dark_corduroy">
+                  {{ user.email }}
+                </div>
+              </div>
+              <div
+                class="h-[2px] w-full border-b border-chinese-white"
+              ></div>
+              <div
+                class="flex flex-col gap-y-4 text-sm font-medium text-dark_corduroy"
+              >
+                <NuxtLink to="/user" class="flex items-center gap-x-4"
+                  >Dashboard</NuxtLink
+                >
+                <NuxtLink to="/user" class="flex items-center gap-x-4"
+                  >Messages</NuxtLink
+                >
+                <NuxtLink to="/user/settings">Settings</NuxtLink>
+                <button @click="logout" class="text-left">
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -185,6 +208,7 @@
   const router = useRouter();
   const route = useRoute();
   const mobileUIOpen = ref(false);
+  const { logout } = useUserStore();
   const { user, isLoggedIn } = storeToRefs(useUserStore());
 
   const profilePopover = ref(null);
