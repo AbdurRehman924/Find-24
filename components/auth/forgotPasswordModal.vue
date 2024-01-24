@@ -32,7 +32,11 @@
           Enter the email address associated with your account, and
           we’ll email you a link to reset your password.
         </div>
-        <FormKit type="submit" label="Send reset link" />
+        <FormKit
+          input-class="font-bold"
+          type="submit"
+          label="Send reset link"
+        />
       </FormKit>
     </template>
     <template v-if="emailConfirmed">
@@ -43,7 +47,10 @@
         We have sent an email with password reset information to your
         email address.
       </div>
-      <div class="mb-6">
+      <IconsLottie />
+      <div
+        class="mb-6 font-Inter text-sm font-normal leading-5 text-palma"
+      >
         if you don’t see the email, make sure the email address is
         correct and check your spam folder.
       </div>
@@ -67,12 +74,16 @@
             name="resetCode"
             type="text"
             class=""
-            placeholder="x x x x"
+            placeholder="* * * *"
             validation="required|number"
             validation-label="Reset Code"
           />
         </div>
-        <FormKit type="submit" label="Send reset link" />
+        <FormKit
+          input-class="font-bold"
+          type="submit"
+          label="Send reset link"
+        />
       </FormKit>
     </template>
   </div>

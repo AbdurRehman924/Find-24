@@ -65,7 +65,7 @@
                   @click="close"
                 >
                   <!-- @click="$emit('close')" -->
-                  X
+                  <IconsCross />
                 </div>
                 <div class="w-full text-center text-xl font-semibold">
                   {{ props.title }}
