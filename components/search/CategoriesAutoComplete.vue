@@ -65,7 +65,7 @@
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 z-10 max-h-80 overflow-auto bg-white text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
+        class="absolute inset-x-0 top-56 z-10 max-h-80 overflow-auto text-corduroy sm:left-0 sm:right-[60%] sm:top-20 sm:rounded-2xl"
       >
         <ComboboxOption
           v-for="(category, index) in filteredCategories"
@@ -75,10 +75,10 @@
           as="template"
         >
           <li
-            class="cursor-pointer border-b-0.5 border-chinese-white p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
+            class="cursor-pointer p-4 hover:bg-frostee hover:font-medium hover:text-palma focus:bg-frostee focus:font-medium focus:text-palma sm:border-none"
             :class="{
               'bg-frostee font-medium text-palma': selected,
-              'bg-frostee': active,
+              'border-l-2 border-palma bg-frostee text-palma': active,
             }"
           >
             {{ category }}

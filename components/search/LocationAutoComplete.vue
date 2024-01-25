@@ -58,7 +58,7 @@
         <IconsCross />
       </button>
       <ComboboxOptions
-        class="absolute inset-x-0 top-56 z-10 max-h-64 overflow-auto bg-white sm:left-[40%] sm:right-[20%] sm:top-20 sm:max-h-80 sm:rounded-2xl"
+        class="absolute inset-x-0 top-56 z-10 max-h-64 overflow-auto sm:left-[40%] sm:right-[20%] sm:top-20 sm:max-h-80 sm:rounded-2xl"
       >
         <ComboboxOption
           v-for="feature in places?.features"
@@ -68,10 +68,10 @@
           as="template"
         >
           <li
-            class="flex cursor-pointer items-center gap-4 border-b-0.5 border-chinese-white p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma sm:border-none"
+            class="flex cursor-pointer items-center gap-4 p-4 text-corduroy hover:bg-frostee hover:font-medium hover:text-palma sm:border-none"
             :class="{
               'bg-frostee font-medium text-palma': selected,
-              'bg-frostee': active,
+              'border-l-2 border-palma bg-frostee text-palma': active,
             }"
           >
             <IconsPin />

@@ -18,11 +18,9 @@
 </script>
 
 <template>
-  <div
-    class="absolute inset-x-0 z-10 min-h-screen bg-penache px-4 py-6"
-  >
+  <div class="fixed inset-x-0 z-20 min-h-screen bg-penache px-4 py-6">
     <button
-      class="rounded-full border border-chinese-white p-2 shadow-variant2"
+      class="rounded-full border border-chinese-white bg-white p-2 shadow-variant2"
       @click="handleClose"
     >
       <IconsCross class="h-3 w-3" />

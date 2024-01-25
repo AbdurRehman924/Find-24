@@ -34,7 +34,7 @@
     </div>
     <SearchMap :for-full-screen="true" v-else />
     <div
-      class="sticky bottom-3 mt-3 font-medium text-white xl:hidden"
+      class="sticky bottom-3 my-3 font-medium text-white xl:hidden"
     >
       <button
         class="mx-auto flex gap-1 rounded-full bg-dark-jungle-green px-6 py-3"

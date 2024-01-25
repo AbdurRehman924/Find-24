@@ -24,7 +24,7 @@
 
 <template>
   <div
-    class="mx-auto mt-14 flex max-w-fit gap-2 font-medium text-dark_corduroy"
+    class="mx-auto mb-4 mt-14 flex max-w-fit gap-2 font-medium text-dark_corduroy"
     v-if="totalPages > 1"
   >
     <button
