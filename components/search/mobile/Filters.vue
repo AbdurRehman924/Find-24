@@ -24,18 +24,19 @@
     priceRange.value = range;
   }
 
-  async function handleApplyFilters() {
+  function handleApplyFilters() {
     if (priceRange.value.min && priceRange.value.max) {
-      await servicesStore.numericFacet({
-        name: constants.PRICE_FACET,
-        range: priceRange.value,
-      });
+      servicesStore.applyNumericFacet(
+        constants.PRICE_FACET,
+        priceRange.value,
+      );
+      pushPriceQuery(priceRange.value.min, priceRange.value.max);
     }
     emits("close");
   }
 </script>
 <template>
-  <div class="absolute inset-x-0 z-10 min-h-screen bg-penache py-6">
+  <div class="fixed inset-x-0 z-10 min-h-[100dvh] bg-penache pt-6">
     <button class="absolute left-6" @click="handleClose">
       <IconsCross />
     </button>

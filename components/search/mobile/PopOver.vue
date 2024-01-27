@@ -18,9 +18,7 @@
 </script>
 
 <template>
-  <div
-    class="absolute inset-x-0 z-10 min-h-screen bg-penache px-4 py-6"
-  >
+  <div class="fixed inset-0 z-10 min-h-[100dvh] bg-penache px-4 pt-6">
     <button
       class="rounded-full border border-chinese-white p-2 shadow-variant2"
       @click="handleClose"
@@ -38,7 +36,7 @@
       </div>
     </div>
     <div
-      class="absolute inset-x-4 bottom-10 flex items-center justify-between text-sm"
+      class="absolute inset-x-4 bottom-6 flex items-center justify-between text-sm"
     >
       <button
         class="font-medium text-corduroy underline"
