@@ -25,6 +25,11 @@
     }
   }
 
+  function handleResetAll() {
+    removeAllFacets();
+    router.push({ query: {} });
+  }
+
   onMounted(() => {
     if (route.query.category) {
       const categories = route.query.category
@@ -56,12 +61,12 @@
 </script>
 
 <template>
-  <div class="sticky top-2 col-span-2 hidden bg-penache lg:block">
+  <div class="sticky top-2 col-span-2 hidden lg:block">
     <div class="flex items-center justify-between">
       <h3 class="text-center font-semibold md:text-left">Filters</h3>
       <button
         class="text-xs text-dark_corduroy"
-        @click="removeAllFacets"
+        @click="handleResetAll"
       >
         Reset All
       </button>

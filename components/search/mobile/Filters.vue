@@ -8,6 +8,7 @@
   }>();
 
   const servicesStore = useServicesStore();
+  const router = useRouter();
 
   function handleClose() {
     emits("close");
@@ -33,6 +34,11 @@
       pushPriceQuery(priceRange.value.min, priceRange.value.max);
     }
     emits("close");
+  }
+
+  function hanldeResetAll() {
+    servicesStore.removeAllFacets();
+    router.push({ query: {} });
   }
 </script>
 <template>

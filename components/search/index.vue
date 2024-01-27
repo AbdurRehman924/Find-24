@@ -4,7 +4,11 @@
 
   const showMap = ref(false);
 
-  const { services } = storeToRefs(useServicesStore());
+  const router = useRouter();
+  const servicesStore = useServicesStore();
+
+  const { services } = storeToRefs(servicesStore);
+  const { resetCategory, resetLocation } = servicesStore;
 
   const noServicesFound = computed(
     () => services.value?.length === 0,
@@ -12,6 +16,12 @@
 
   function toggleMap() {
     showMap.value = !showMap.value;
+  }
+
+  function handleResetAll() {
+    resetCategory();
+    resetLocation();
+    router.push({ query: {} });
   }
 </script>
 
@@ -53,6 +63,7 @@
       <h2>No Services Found</h2>
       <button
         class="mx-auto block rounded-full bg-palma px-4 py-2 text-lg text-white hover:focus:bg-islamic-green"
+        @click="handleResetAll"
       >
         Reset
       </button>

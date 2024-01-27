@@ -5,7 +5,8 @@
     (e: "close"): void;
   }>();
 
-  const { removeAllFacets, searchServices } = useServicesStore();
+  const { searchServices, resetCategory, resetLocation } =
+    useServicesStore();
 
   function handleClose() {
     emits("close");
@@ -14,6 +15,11 @@
   function handleSearch() {
     searchServices();
     emits("close");
+  }
+
+  function handleClearAll() {
+    resetCategory();
+    resetLocation();
   }
 </script>
 
@@ -40,7 +46,7 @@
     >
       <button
         class="font-medium text-corduroy underline"
-        @click="removeAllFacets"
+        @click="handleClearAll"
       >
         Clear All
       </button>
