@@ -3,6 +3,9 @@
   import constants from "~/constants";
   import { storeToRefs } from "pinia";
 
+  const router = useRouter();
+  const route = useRoute();
+
   const servicesStore = useServicesStore();
   const { toggleFacet, removeFacet } = servicesStore;
   const { categoryFacets } = storeToRefs(servicesStore);
@@ -21,10 +24,25 @@
   }
 
   function handleCategoryFilter(categoryValue: string) {
+    if (route.query.category?.includes(categoryValue)) {
+      const query = route.query.category as string;
+      const newQuery =
+        query
+          ?.split("|")
+          .filter((category) => category !== categoryValue)
+          .join("|") || undefined;
+      pushCategoryQuery(newQuery);
+    } else if (route.query.category) {
+      pushCategoryQuery(`${route.query.category}|${categoryValue}`);
+    } else {
+      pushCategoryQuery(categoryValue);
+    }
+
     toggleFacet(constants.CATEGORY_FACET, categoryValue);
   }
 
   async function handleReset() {
+    pushCategoryQuery(undefined);
     removeFacet(constants.CATEGORY_FACET);
   }
 </script>

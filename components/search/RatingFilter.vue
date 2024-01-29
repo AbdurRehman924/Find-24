@@ -3,16 +3,35 @@
   import constants from "~/constants";
   import { storeToRefs } from "pinia";
 
+  const router = useRouter();
+  const route = useRoute();
+
   const servicesStore = useServicesStore();
 
   const { toggleFacet, removeFacet } = servicesStore;
   const { ratingFacets } = storeToRefs(servicesStore);
 
-  function handleCategoryFilter(rating: string) {
-    toggleFacet(constants.RATING_FACET, rating);
+  function handleCategoryFilter(ratingValue: string) {
+    if (route.query.rating?.includes(ratingValue)) {
+      const query = route.query.rating as string;
+      const newQuery =
+        query
+          ?.split("|")
+          .filter((rating) => rating != ratingValue)
+          .join("|") || undefined;
+
+      pushRatingQuery(newQuery);
+    } else if (route.query.rating) {
+      pushRatingQuery(`${route.query.rating}|${ratingValue}`);
+    } else {
+      pushRatingQuery(ratingValue);
+    }
+
+    toggleFacet(constants.RATING_FACET, ratingValue);
   }
 
   async function handleReset() {
+    pushRatingQuery(undefined);
     removeFacet(constants.RATING_FACET);
   }
 </script>

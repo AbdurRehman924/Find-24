@@ -7,6 +7,10 @@ export default defineStore("services", () => {
   // state
   const { $algoliaHelper } = useNuxtApp();
 
+  const route = useRoute();
+
+  const { locationFromLatLng } = useMapBox();
+
   const services = ref<Service[] | null>(null);
   const categoryFacets = ref<SearchResults.FacetValue[]>([]);
   const ratingFacets = ref<SearchResults.FacetValue[]>([]);
@@ -28,6 +32,9 @@ export default defineStore("services", () => {
 
     if (category.value) {
       filters.push(`category:${category.value}`);
+      $algoliaHelper.removeDisjunctiveFacetRefinement(
+        constants.CATEGORY_FACET,
+      );
     }
 
     if (location.value) {
@@ -48,6 +55,13 @@ export default defineStore("services", () => {
       "filters",
       filters.join(" AND "),
     );
+
+    pushSearchQuery(
+      category.value ? category.value : undefined,
+      location.value ? location.value.center[1] : undefined,
+      location.value ? location.value.center[0] : undefined,
+    );
+
     $algoliaHelper.search();
   }
 
@@ -120,29 +134,17 @@ export default defineStore("services", () => {
 
   // getters
   const minPrice = computed(() => {
-    if (services.value) {
-      return services.value.reduce((min, service) => {
-        if (service.charges < min) {
-          return service.charges;
-        }
-        return min;
-      }, Infinity);
-    } else {
-      return overAllMinPrice.value;
+    if (route.query.price__gte) {
+      return parseInt(route.query.price__gte as string);
     }
+    return overAllMinPrice.value;
   });
 
   const maxPrice = computed(() => {
-    if (services.value) {
-      return services.value.reduce((max, service) => {
-        if (service.charges > max) {
-          return service.charges;
-        }
-        return max;
-      }, 0);
-    } else {
-      return overAllMaxPrice.value;
+    if (route.query.price__lte) {
+      return parseInt(route.query.price__lte as string);
     }
+    return overAllMaxPrice.value;
   });
 
   const coordinates = computed(() => {
@@ -174,8 +176,8 @@ export default defineStore("services", () => {
     }
   });
 
-  onMounted(() => {
-    $algoliaHelper.search();
+  onMounted(async () => {
+    // $algoliaHelper.search();
     $algoliaHelper.on("result", (result) => {
       services.value = result.results.hits;
       categoryFacets.value = result.results.getFacetValues(
@@ -195,6 +197,18 @@ export default defineStore("services", () => {
       page.value = result.results.page;
       totalPages.value = result.results.nbPages;
     });
+
+    if (route.query.lat && route.query.lng) {
+      const res = await locationFromLatLng(
+        route.query.lat as string,
+        route.query.lng as string,
+      );
+      location.value = res.features[0];
+    }
+    if (route.query.category_type) {
+      category.value = route.query.category_type as string;
+    }
+    searchServices();
   });
 
   return {

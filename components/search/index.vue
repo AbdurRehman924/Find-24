@@ -4,7 +4,11 @@
 
   const showMap = ref(false);
 
-  const { services } = storeToRefs(useServicesStore());
+  const router = useRouter();
+  const servicesStore = useServicesStore();
+
+  const { services } = storeToRefs(servicesStore);
+  const { resetCategory, resetLocation } = servicesStore;
 
   const noServicesFound = computed(
     () => services.value?.length === 0,
@@ -13,12 +17,18 @@
   function toggleMap() {
     showMap.value = !showMap.value;
   }
+
+  function handleResetAll() {
+    resetCategory();
+    resetLocation();
+    router.push({ query: {} });
+  }
 </script>
 
 <template>
   <SearchMobileBar />
   <SearchBar />
-  <div class="mt-14 md:px-8 2xl:px-16" v-if="!noServicesFound">
+  <section class="mt-14 md:px-8 2xl:px-16" v-if="!noServicesFound">
     <div
       class="grid grid-cols-4 md:grid-cols-8 xl:grid-cols-12"
       v-if="!showMap"
@@ -45,19 +55,20 @@
         <span> <IconsTilt /> </span>
       </button>
     </div>
-  </div>
-  <div v-else class="flex h-[50dvh] items-center justify-center">
+  </section>
+  <section v-else class="flex h-[50dvh] items-center justify-center">
     <div
       class="rounded-2xl bg-white p-16 text-2xl font-bold text-palma shadow-md sm:text-3xl lg:text-5xl"
     >
       <h2>No Services Found</h2>
       <button
         class="mx-auto block rounded-full bg-palma px-4 py-2 text-lg text-white hover:focus:bg-islamic-green"
+        @click="handleResetAll"
       >
         Reset
       </button>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped></style>

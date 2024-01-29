@@ -7,7 +7,6 @@
   } from "mapbox-gl";
   import "mapbox-gl/dist/mapbox-gl.css";
   import { storeToRefs } from "pinia";
-  import Service from "~/types/service";
   import useServicesStore from "~/stores/services";
   import SearchResultCard from "./ResultCard.vue";
 
