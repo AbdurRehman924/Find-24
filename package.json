@@ -28,6 +28,7 @@
     "@vueuse/nuxt": "^10.3.0",
     "algoliasearch": "^4.19.1",
     "algoliasearch-helper": "^3.14.0",
+    "libphonenumber-js": "^1.10.47",
     "mapbox-gl": "^2.15.0",
     "nuxt-rating": "^0.0.15",
     "pinia": "^2.1.6"

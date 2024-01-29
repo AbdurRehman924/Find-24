@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL,
+      imagesURL: process.env.IMAGES_URL,
       mapbox: {
         token: process.env.MAPBOX_TOKEN,
       },

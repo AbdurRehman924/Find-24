@@ -1,13 +1,21 @@
 <template>
   <div class="auth-input relative w-full">
     <Combobox v-model="selected">
-      <div class="combobox rounded-lg border border-chinese-white">
+      <div
+        class="combobox rounded-lg border border-chinese-white"
+        :class="{
+          'text-dark_corduroy focus-within:border-palma focus-within:text-dark-jungle-green':
+            initialValue,
+        }"
+      >
         <ComboboxInput
-          :displayValue="(country) => country.name"
+          :displayValue="(country: any) => country.name"
           @change="query = $event.target.value"
           placeholder="Country"
+          class="rounded-lg"
+          :class="{ 'bg-saltpan': initialValue }"
         />
-        <ComboboxButton class="combobox_button">
+        <ComboboxButton class="combobox_button" name="dropdown">
           <IconsChevronupdown class="icon" aria-hidden="true" />
         </ComboboxButton>
       </div>
@@ -35,7 +43,7 @@
             <li
               class="country_option"
               :class="{
-                'bg-athens-gray': active,
+                'bg-frostee text-palma': active,
               }"
             >
               <span>
@@ -52,6 +60,7 @@
       :wrapper-class="{ hidden: true }"
       type="text"
       name="country"
+      id="country"
       validation="required"
       :validation-messages="{
         required: 'Please select your country',
@@ -61,7 +70,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
   import {
     Combobox,
     ComboboxInput,
@@ -72,9 +81,24 @@
   } from "@headlessui/vue";
   import countries from "@/data/countries.json";
   //   import Country from "~/types/country";
+
+  const props = defineProps<{
+    initialValue?: string;
+  }>();
+
   const formKitCountry = ref();
   const selected = ref();
   const query = ref("");
+
+  if (props.initialValue) {
+    selected.value = countries.find(
+      (country) =>
+        country.name.toLowerCase() ==
+        props.initialValue?.toLocaleLowerCase(),
+    );
+    formKitCountry.value = props.initialValue;
+  }
+
   const filtererdCountries = computed(() =>
     query.value === ""
       ? countries

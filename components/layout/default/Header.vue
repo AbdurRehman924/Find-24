@@ -108,7 +108,7 @@
           @click="mobileUIOpen = false"
         />
       </div>
-      <template>
+      <div>
         <SharedModal
           title="Log in"
           :controller="useModals().loginModal"
@@ -149,7 +149,22 @@
         >
           <AuthConfirmEmailFailed />
         </SharedModal>
-      </template>
+        <nuxt-link
+          to="/provider/signup"
+          class="mr-4 hidden rounded-full bg-palma px-6 py-3 text-white hover:bg-islamic-green sm:flex"
+        >
+          Provide Services
+        </nuxt-link>
+        <IconsHamburger
+          class="lg:hidden"
+          v-if="!mobileUIOpen"
+          @click="mobileUIOpen = true"
+        />
+        <IconsCross
+          v-if="mobileUIOpen"
+          @click="mobileUIOpen = false"
+        />
+      </div>
       <div
         v-if="mobileUIOpen"
         class="absolute left-0 top-[80px] z-10 h-screen w-full bg-white px-4 py-7"
@@ -191,7 +206,7 @@
             Log In
           </NuxtLink>
           <NuxtLink
-            to="/"
+            to="/provider/signup"
             class="w-full rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green sm:hidden"
           >
             Provide Services
