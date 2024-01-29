@@ -1,11 +1,14 @@
 <template>
   <div class="auth-input relative w-full">
     <Combobox v-model="selected">
-      <div class="combobox rounded-lg border border-chinese-white">
+      <div
+        class="combobox rounded-lg border border-chinese-white p-1"
+      >
         <ComboboxInput
           :displayValue="(country) => country.name"
           @change="query = $event.target.value"
           placeholder="Country"
+          class=""
         />
         <ComboboxButton class="combobox_button">
           <IconsChevronupdown class="icon" aria-hidden="true" />

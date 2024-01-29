@@ -87,9 +87,10 @@
         Password must have 8 characters,numbers or special characters
       </div>
       <div class="mb-4 flex">
-        <div class="w-1/2 pr-2">
+        <div class="w-1/2 bg-white pr-2">
           <div class="mb-2 text-sm font-medium">Gender</div>
           <FormKit
+            input-class="bg-white placeholder: text-[#6A6E6A]"
             type="select"
             name="gender"
             :options="['male', 'female', 'other']"
