@@ -13,7 +13,7 @@
       id="dob"
       type="date"
       name="dob"
-      id="dob"
+    
       :validation="[['required'], ['date_before', maxDOB()]]"
       :validation-messages="{
         required: 'Date of birth is required',

@@ -60,7 +60,7 @@
       :wrapper-class="{ hidden: true }"
       type="text"
       name="country"
-      id="country"
+     
       validation="required"
       :validation-messages="{
         required: 'Please select your country',
