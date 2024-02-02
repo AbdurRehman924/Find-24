@@ -9,7 +9,7 @@
         <h4 class="mb-6 text-sm font-medium text-dark-jungle-green">
           Support
         </h4>
-        <ul class="flex flex-col gap-6 text-corduroy">
+        <ul class="flex cursor-pointer flex-col gap-6 text-corduroy">
           <li>Help Center</li>
           <li>Trust & safety</li>
           <li>Cacellation Options</li>
@@ -20,7 +20,7 @@
         <h4 class="mb-6 text-sm font-medium text-dark-jungle-green">
           Services
         </h4>
-        <ul class="flex flex-col gap-6 text-corduroy">
+        <ul class="flex cursor-pointer flex-col gap-6 text-corduroy">
           <li>Serpvice Categories</li>
           <li>How it works</li>
           <li>Pricing</li>
@@ -32,7 +32,7 @@
         <h4 class="mb-6 text-sm font-medium text-dark-jungle-green">
           Legal
         </h4>
-        <ul class="flex flex-col gap-6 text-corduroy">
+        <ul class="flex cursor-pointer flex-col gap-6 text-corduroy">
           <li>Privacy Policy</li>
           <li>Terms and Conditions</li>
           <li>Copyright Notice</li>
@@ -44,7 +44,7 @@
         <h4 class="mb-6 text-sm font-medium text-dark-jungle-green">
           Resources
         </h4>
-        <ul class="flex flex-col gap-6 text-corduroy">
+        <ul class="flex cursor-pointer flex-col gap-6 text-corduroy">
           <li>Blog</li>
           <li>Guides and Tutorials</li>
           <li>Frequently Asked Questions</li>
@@ -60,8 +60,13 @@
       class="grid grid-cols-2 items-center gap-y-6 sm:grid-cols-3"
     >
       <span class="text-corduroy">&copy; Copyright 2023</span>
-      <IconsFind24 class="justify-self-end sm:justify-self-center" />
-      <div class="flex gap-6 sm:justify-self-end">
+      <NuxtLink
+        to="/"
+        class="justify-self-end sm:justify-self-center"
+      >
+        <IconsFind24 />
+      </NuxtLink>
+      <div class="flex cursor-pointer gap-6 sm:justify-self-end">
         <IconsTwitter />
         <IconsLinkedIn />
         <IconsFacebook />
