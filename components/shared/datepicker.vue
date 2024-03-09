@@ -10,7 +10,6 @@
     />
     <FormKit
       :wrapper-class="{ hidden: true }"
-      id="dob"
       type="date"
       name="dob"
     

@@ -1,6 +1,3 @@
-import { User } from "~~/types/user";
-import { API_Response } from "~~/types/api";
-
 export const useGetUserData = async () => {
   let { data, error } = await useFetchWrapper<API_Response<User>>("/auth/me", {
     method: "GET",

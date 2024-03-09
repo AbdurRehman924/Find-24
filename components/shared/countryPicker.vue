@@ -56,7 +56,6 @@
       </TransitionRoot>
     </Combobox>
     <FormKit
-      id="country"
       :wrapper-class="{ hidden: true }"
       type="text"
       name="country"
