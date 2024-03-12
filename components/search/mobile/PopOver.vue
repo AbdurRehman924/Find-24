@@ -24,9 +24,9 @@
 </script>
 
 <template>
-  <div class="fixed inset-0 z-10 min-h-[100dvh] bg-penache px-4 pt-6">
+  <div class="fixed inset-0 z-20 min-h-[100dvh] bg-penache px-4 pt-6">
     <button
-      class="rounded-full border border-chinese-white p-2 shadow-variant2"
+      class="rounded-full border border-chinese-white bg-white p-2 shadow-variant2"
       @click="handleClose"
     >
       <IconsCross class="h-3 w-3" />
