@@ -41,6 +41,14 @@
           Provide Services
         </NuxtLink>
 
+        <NuxtLink
+          v-if="isLoggedIn"
+          to="/provider/dashboard"
+          class="hidden w-fit rounded-full bg-palma px-6 py-3 text-center text-white hover:bg-islamic-green lg:flex"
+        >
+          Dashboard
+        </NuxtLink>
+
         <IconsHamburger
           class="lg:hidden"
           v-if="!mobileUIOpen"

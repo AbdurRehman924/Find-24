@@ -1,14 +1,14 @@
 <template>
   <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
+    width="21"
+    height="20"
+    viewBox="0 0 21 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M6 3.3335L10.6667 8.00016L6 12.6668"
-      stroke="#11AB20"
+      d="M18 10.0002L13.8333 5.8335M18 10.0002L13.8333 14.1668M18 10.0002H3"
+      stroke="white"
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
