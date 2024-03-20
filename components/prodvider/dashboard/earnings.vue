@@ -1,0 +1,1 @@
+<template>Earnings</template>
