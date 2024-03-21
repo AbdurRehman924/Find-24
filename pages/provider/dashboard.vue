@@ -1,7 +1,7 @@
 <template>
-  <div class="sticky flex">
+  <div class="flex">
     <!-- Control panel -->
-    <div class="w-1/6 bg-white pl-5 shadow-xl">
+    <div class="h-screen w-1/6 bg-white pl-5 shadow-xl">
       <div v-for="option in options" :key="option.heading">
         <p class="mb-4 mt-8 cursor-default text-xs text-palma">
           {{ option.heading }}
@@ -20,23 +20,23 @@
     </div>
     <!-- Content panel -->
     <div class="w-full p-4">
-      <ProdviderDashboardMain v-if="selectComponent == 'Dashboard'" />
-      <ProdviderDashboardMessages
+      <ProviderDashboardMain v-if="selectComponent == 'Dashboard'" />
+      <ProviderDashboardMessages
         v-if="selectComponent == 'Messages'"
       />
-      <ProdviderDashboardMyServices
+      <ProviderDashboardMyServices
         v-if="selectComponent == 'My Services'"
       />
-      <ProdviderDashboardServiceRequests
+      <ProviderDashboardServiceRequests
         v-if="selectComponent == 'Service Requests'"
       />
-      <ProdviderDashboardEarnings
+      <ProviderDashboardEarnings
         v-if="selectComponent == 'Earnings'"
       />
-      <ProdviderDashboardSubscription
+      <ProviderDashboardSubscription
         v-if="selectComponent == 'Subscription'"
       />
-      <ProdviderDashboardServiceHistory
+      <ProviderDashboardServiceHistory
         v-if="selectComponent == 'Service History'"
       />
     </div>

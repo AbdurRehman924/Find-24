@@ -26,24 +26,24 @@
         />
       </div>
       <div class="flex flex-col">
-        <ProdviderSignupProgresBar :current-section="section" />
+        <ProviderSignupProgresBar :current-section="section" />
         <div class="mb-8 h-[0.5px] w-full bg-chinese-white"></div>
         <NuxtErrorBoundary>
-          <ProdviderSignupPersonalInfo
+          <ProviderSignupPersonalInfo
             v-if="section == 0"
             @go-next="section++"
           />
-          <ProdviderSignupProfessionalnfo
+          <ProviderSignupProfessionalnfo
             v-else-if="section == 1"
             @go-back="section--"
             @go-next="section++"
           />
-          <ProdviderSignupUploadDocuments
+          <ProviderSignupUploadDocuments
             v-else-if="section == 2"
             @go-back="section--"
             @go-next="section++"
           />
-          <ProdviderSignupSucess v-else />
+          <ProviderSignupSucess v-else />
           <template #error="{ error }">
             <div class="px-4 sm:px-8 xl:px-16">
               Oops something went wrong. Please try again later.
