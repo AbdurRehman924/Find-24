@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- Content panel -->
-    <div class="w-full p-4">
+    <div class="w-full p-12">
       <ProviderDashboardMain v-if="selectComponent == 'Dashboard'" />
       <ProviderDashboardMessages
         v-if="selectComponent == 'Messages'"
